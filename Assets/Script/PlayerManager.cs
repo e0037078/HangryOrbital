@@ -88,7 +88,7 @@ public class PlayerManager : MonoBehaviour
     {
         if(collision.gameObject.tag == "GROUND")
         {
-            isJumping = false;
+            ButtonMovement.isJumping = false;
             speed = 0;
             anim.SetInteger("State", 1);
         }

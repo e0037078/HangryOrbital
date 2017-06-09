@@ -13,8 +13,8 @@ public class ButtonMovement : TouchManager {
     public GameObject playerObject = null;
     Rigidbody2D playerRigidbody;
     Animator playerAnim;
-    bool facingRight;
-    bool isJumping;
+    static bool facingRight;
+    public static bool isJumping;
     
     public GUITexture buttonTexture = null;
     
@@ -37,9 +37,12 @@ public class ButtonMovement : TouchManager {
         switch (buttonType)
         {
             case type.JumpButton:
-                playerRigidbody.AddForce(Vector2.up * jumpHeight, ForceMode2D.Impulse);
-                playerAnim.SetInteger("State", 2);
-                isJumping = true;
+                if (!isJumping)
+                {
+                    playerRigidbody.AddForce(Vector2.up * jumpHeight, ForceMode2D.Impulse);
+                    playerAnim.SetInteger("State", 2);
+                    isJumping = true;
+                }
                 break;
         }
     }
@@ -49,9 +52,12 @@ public class ButtonMovement : TouchManager {
         switch (buttonType)
         {
             case type.JumpButton:
-                playerRigidbody.AddForce(Vector2.up * jumpHeight, ForceMode2D.Impulse);
-                playerAnim.SetInteger("State", 2);
-                isJumping = true;
+                if (!isJumping)
+                {
+                    playerRigidbody.AddForce(Vector2.up * jumpHeight, ForceMode2D.Impulse);
+                    playerAnim.SetInteger("State", 2);
+                    isJumping = true;
+                }
                 break;
         }
     }
@@ -116,25 +122,27 @@ public class ButtonMovement : TouchManager {
 
     void OnFirstTouchEnded()
     {
-        switch (buttonType)
+       /* switch (buttonType)
         {
             case type.JumpButton:
                 isJumping = false;
                 playerRigidbody.velocity = new Vector2(playerRigidbody.velocity.x, 0);
                 break;
         }
+        */
 
     }
 
     void OnSecondTouchEnded()
     {
-        switch (buttonType)
+        /*switch (buttonType)
         {
             case type.JumpButton:
                 isJumping = false;
                 playerRigidbody.velocity = new Vector2(playerRigidbody.velocity.x, 0);
                 break;
         }
+        */
     }
 
     void Flip()
@@ -145,7 +153,7 @@ public class ButtonMovement : TouchManager {
             playerObject.transform.localScale = temp;
     }
 
-    void OnCollisionEnter2D(Collision2D collision)
+    /*void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "GROUND")
         {
@@ -154,4 +162,5 @@ public class ButtonMovement : TouchManager {
             playerAnim.SetInteger("State", 0);
         }
     }
+    */
 }
