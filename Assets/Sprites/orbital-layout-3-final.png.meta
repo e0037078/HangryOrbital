@@ -1,0 +1,868 @@
+fileFormatVersion: 2
+guid: e68d6295e6a1e754397ac548da833a78
+timeCreated: 1496723832
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: orbital-layout-3-final_0
+    21300002: orbital-layout-3-final_1
+    21300004: orbital-layout-3-final_2
+    21300006: orbital-layout-3-final_3
+    21300008: orbital-layout-3-final_4
+    21300010: orbital-layout-3-final_5
+    21300012: orbital-layout-3-final_6
+    21300014: orbital-layout-3-final_7
+    21300016: orbital-layout-3-final_8
+    21300018: orbital-layout-3-final_9
+    21300020: orbital-layout-3-final_10
+    21300022: orbital-layout-3-final_11
+    21300024: orbital-layout-3-final_12
+    21300026: orbital-layout-3-final_13
+    21300028: orbital-layout-3-final_14
+    21300030: orbital-layout-3-final_15
+    21300032: orbital-layout-3-final_16
+    21300034: orbital-layout-3-final_17
+    21300036: orbital-layout-3-final_18
+    21300038: orbital-layout-3-final_19
+    21300040: orbital-layout-3-final_20
+    21300042: orbital-layout-3-final_21
+    21300044: orbital-layout-3-final_22
+    21300046: orbital-layout-3-final_23
+    21300048: orbital-layout-3-final_24
+    21300050: orbital-layout-3-final_25
+    21300052: orbital-layout-3-final_26
+    21300054: orbital-layout-3-final_27
+    21300056: orbital-layout-3-final_28
+    21300058: orbital-layout-3-final_29
+    21300060: orbital-layout-3-final_30
+    21300062: orbital-layout-3-final_31
+    21300064: orbital-layout-3-final_32
+    21300066: orbital-layout-3-final_33
+    21300068: orbital-layout-3-final_34
+    21300070: orbital-layout-3-final_35
+    21300072: orbital-layout-3-final_36
+    21300074: orbital-layout-3-final_37
+    21300076: orbital-layout-3-final_38
+    21300078: orbital-layout-3-final_39
+    21300080: orbital-layout-3-final_40
+    21300082: orbital-layout-3-final_41
+    21300084: orbital-layout-3-final_42
+    21300086: orbital-layout-3-final_43
+    21300088: orbital-layout-3-final_44
+    21300090: orbital-layout-3-final_45
+    21300092: orbital-layout-3-final_46
+    21300094: orbital-layout-3-final_47
+    21300096: orbital-layout-3-final_48
+    21300098: orbital-layout-3-final_49
+    21300100: orbital-layout-3-final_50
+    21300102: orbital-layout-3-final_51
+    21300104: orbital-layout-3-final_52
+    21300106: orbital-layout-3-final_53
+    21300108: orbital-layout-3-final_54
+    21300110: orbital-layout-3-final_55
+  serializedVersion: 4
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: -1
+    aniso: -1
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: Standalone
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: Android
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: orbital-layout-3-final_0
+      rect:
+        serializedVersion: 2
+        x: 664
+        y: 1656
+        width: 161
+        height: 126
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: orbital-layout-3-final_1
+      rect:
+        serializedVersion: 2
+        x: 850
+        y: 1653
+        width: 160
+        height: 127
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: orbital-layout-3-final_2
+      rect:
+        serializedVersion: 2
+        x: 1058
+        y: 1474
+        width: 149
+        height: 257
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: orbital-layout-3-final_3
+      rect:
+        serializedVersion: 2
+        x: 1240
+        y: 1468
+        width: 149
+        height: 257
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: orbital-layout-3-final_4
+      rect:
+        serializedVersion: 2
+        x: 316
+        y: 1457
+        width: 212
+        height: 188
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: orbital-layout-3-final_5
+      rect:
+        serializedVersion: 2
+        x: 579
+        y: 1457
+        width: 97
+        height: 177
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: orbital-layout-3-final_6
+      rect:
+        serializedVersion: 2
+        x: 730
+        y: 1459
+        width: 97
+        height: 178
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: orbital-layout-3-final_7
+      rect:
+        serializedVersion: 2
+        x: 869
+        y: 1499
+        width: 161
+        height: 127
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: orbital-layout-3-final_8
+      rect:
+        serializedVersion: 2
+        x: 279
+        y: 1291
+        width: 620
+        height: 121
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: orbital-layout-3-final_9
+      rect:
+        serializedVersion: 2
+        x: 981
+        y: 1200
+        width: 149
+        height: 257
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: orbital-layout-3-final_10
+      rect:
+        serializedVersion: 2
+        x: 1186
+        y: 1197
+        width: 149
+        height: 257
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: orbital-layout-3-final_11
+      rect:
+        serializedVersion: 2
+        x: 291
+        y: 1140
+        width: 619
+        height: 121
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: orbital-layout-3-final_12
+      rect:
+        serializedVersion: 2
+        x: 989
+        y: 1114
+        width: 369
+        height: 38
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: orbital-layout-3-final_13
+      rect:
+        serializedVersion: 2
+        x: 382
+        y: 943
+        width: 126
+        height: 87
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: orbital-layout-3-final_14
+      rect:
+        serializedVersion: 2
+        x: 678
+        y: 1012
+        width: 18
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: orbital-layout-3-final_15
+      rect:
+        serializedVersion: 2
+        x: 770
+        y: 1029
+        width: 43
+        height: 75
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: orbital-layout-3-final_16
+      rect:
+        serializedVersion: 2
+        x: 827
+        y: 1029
+        width: 43
+        height: 75
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: orbital-layout-3-final_17
+      rect:
+        serializedVersion: 2
+        x: 881
+        y: 1029
+        width: 43
+        height: 75
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: orbital-layout-3-final_18
+      rect:
+        serializedVersion: 2
+        x: 975
+        y: 989
+        width: 44
+        height: 66
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: orbital-layout-3-final_19
+      rect:
+        serializedVersion: 2
+        x: 1026
+        y: 989
+        width: 44
+        height: 66
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: orbital-layout-3-final_20
+      rect:
+        serializedVersion: 2
+        x: 519
+        y: 946
+        width: 77
+        height: 66
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: orbital-layout-3-final_21
+      rect:
+        serializedVersion: 2
+        x: 638
+        y: 1003
+        width: 21
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: orbital-layout-3-final_22
+      rect:
+        serializedVersion: 2
+        x: 724
+        y: 972
+        width: 44
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: orbital-layout-3-final_23
+      rect:
+        serializedVersion: 2
+        x: 778
+        y: 940
+        width: 49
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: orbital-layout-3-final_24
+      rect:
+        serializedVersion: 2
+        x: 850
+        y: 980
+        width: 49
+        height: 38
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: orbital-layout-3-final_25
+      rect:
+        serializedVersion: 2
+        x: 638
+        y: 952
+        width: 67
+        height: 49
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: orbital-layout-3-final_26
+      rect:
+        serializedVersion: 2
+        x: 850
+        y: 932
+        width: 49
+        height: 38
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: orbital-layout-3-final_27
+      rect:
+        serializedVersion: 2
+        x: 909
+        y: 932
+        width: 50
+        height: 38
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: orbital-layout-3-final_28
+      rect:
+        serializedVersion: 2
+        x: 978
+        y: 915
+        width: 43
+        height: 66
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: orbital-layout-3-final_29
+      rect:
+        serializedVersion: 2
+        x: 405
+        y: 900
+        width: 17
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: orbital-layout-3-final_30
+      rect:
+        serializedVersion: 2
+        x: 425
+        y: 900
+        width: 12
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: orbital-layout-3-final_31
+      rect:
+        serializedVersion: 2
+        x: 442
+        y: 900
+        width: 12
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: orbital-layout-3-final_32
+      rect:
+        serializedVersion: 2
+        x: 459
+        y: 900
+        width: 15
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: orbital-layout-3-final_33
+      rect:
+        serializedVersion: 2
+        x: 550
+        y: 869
+        width: 66
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: orbital-layout-3-final_34
+      rect:
+        serializedVersion: 2
+        x: 636
+        y: 872
+        width: 66
+        height: 58
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: orbital-layout-3-final_35
+      rect:
+        serializedVersion: 2
+        x: 741
+        y: 872
+        width: 66
+        height: 52
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: orbital-layout-3-final_36
+      rect:
+        serializedVersion: 2
+        x: 838
+        y: 872
+        width: 52
+        height: 43
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: orbital-layout-3-final_37
+      rect:
+        serializedVersion: 2
+        x: 279
+        y: 846
+        width: 55
+        height: 52
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: orbital-layout-3-final_38
+      rect:
+        serializedVersion: 2
+        x: 362
+        y: 801
+        width: 66
+        height: 66
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: orbital-layout-3-final_39
+      rect:
+        serializedVersion: 2
+        x: 755
+        y: 786
+        width: 64
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: orbital-layout-3-final_40
+      rect:
+        serializedVersion: 2
+        x: 838
+        y: 784
+        width: 84
+        height: 54
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: orbital-layout-3-final_41
+      rect:
+        serializedVersion: 2
+        x: 191
+        y: 698
+        width: 1101
+        height: 46
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: orbital-layout-3-final_42
+      rect:
+        serializedVersion: 2
+        x: 191
+        y: 638
+        width: 1101
+        height: 46
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: orbital-layout-3-final_43
+      rect:
+        serializedVersion: 2
+        x: 54
+        y: 236
+        width: 49
+        height: 357
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: orbital-layout-3-final_44
+      rect:
+        serializedVersion: 2
+        x: 111
+        y: 236
+        width: 49
+        height: 357
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: orbital-layout-3-final_45
+      rect:
+        serializedVersion: 2
+        x: 191
+        y: 578
+        width: 1101
+        height: 47
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: orbital-layout-3-final_46
+      rect:
+        serializedVersion: 2
+        x: 191
+        y: 518
+        width: 1101
+        height: 47
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: orbital-layout-3-final_47
+      rect:
+        serializedVersion: 2
+        x: 191
+        y: 453
+        width: 1101
+        height: 46
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: orbital-layout-3-final_48
+      rect:
+        serializedVersion: 2
+        x: 191
+        y: 162
+        width: 1101
+        height: 269
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: orbital-layout-3-final_49
+      rect:
+        serializedVersion: 2
+        x: 114
+        y: 31
+        width: 126
+        height: 86
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: orbital-layout-3-final_50
+      rect:
+        serializedVersion: 2
+        x: 271
+        y: 31
+        width: 126
+        height: 86
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: orbital-layout-3-final_51
+      rect:
+        serializedVersion: 2
+        x: 422
+        y: 31
+        width: 126
+        height: 86
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: orbital-layout-3-final_52
+      rect:
+        serializedVersion: 2
+        x: 687
+        y: 51
+        width: 63
+        height: 52
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: orbital-layout-3-final_53
+      rect:
+        serializedVersion: 2
+        x: 784
+        y: 25
+        width: 468
+        height: 103
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: orbital-layout-3-final_54
+      rect:
+        serializedVersion: 2
+        x: 1286
+        y: 45
+        width: 52
+        height: 63
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: orbital-layout-3-final_55
+      rect:
+        serializedVersion: 2
+        x: 1400
+        y: 45
+        width: 52
+        height: 63
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    outline: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
