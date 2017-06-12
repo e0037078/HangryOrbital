@@ -13,7 +13,7 @@ public class cameraFollow2DPlatformer : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        offset = transform.position - target.position;
+        offset = transform.position - target.position; // - new Vector3(0,0.5f,0);
 
         lowY = transform.position.y-10;
 	}
@@ -21,7 +21,7 @@ public class cameraFollow2DPlatformer : MonoBehaviour {
 	// Update is called once per frame
 	void FixedUpdate () {
         Vector3 targetCamPos = target.position + offset;
-
+        
         transform.position = Vector3.Lerp(transform.position, targetCamPos, smoothing * Time.deltaTime);
 
         if (transform.position.y < lowY)
