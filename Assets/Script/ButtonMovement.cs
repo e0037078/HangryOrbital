@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ButtonMovement : TouchManager {
     // drag script to each button, then select accordingly
-    public enum type {LeftButton, RightButton, JumpButton};
+    public enum type {LeftButton, RightButton, JumpButton, SettingToggleButton};
     public type buttonType;
 
     public float jumpHeight = 0.0f; //
@@ -15,7 +15,12 @@ public class ButtonMovement : TouchManager {
     Animator playerAnim;
     static bool facingRight;
     public static bool isJumping;
-    
+
+    public GameObject settingMenu;
+    Animator settingAnim;
+    bool paused = false;
+    static float originalTimeScale;
+
     public GUITexture buttonTexture = null;
     
 	// Use this for initialization
@@ -25,6 +30,8 @@ public class ButtonMovement : TouchManager {
         playerAnim = playerObject.GetComponent<Animator>();
         facingRight = true;
         isJumping = false;
+
+        settingAnim = settingMenu.GetComponent<Animator>();
     }
 	
 	// Update is called once per frame
@@ -39,11 +46,13 @@ public class ButtonMovement : TouchManager {
             case type.JumpButton:
                 if (!isJumping)
                 {
-                    playerRigidbody.AddForce(Vector2.up * jumpHeight, ForceMode2D.Impulse);
-                    playerAnim.SetInteger("State", 2);
-                    isJumping = true;
+                    Jump();
                 }
                 break;
+            case type.SettingToggleButton:
+                toggleSetting();
+                break;
+
         }
     }
 
@@ -54,9 +63,7 @@ public class ButtonMovement : TouchManager {
             case type.JumpButton:
                 if (!isJumping)
                 {
-                    playerRigidbody.AddForce(Vector2.up * jumpHeight, ForceMode2D.Impulse);
-                    playerAnim.SetInteger("State", 2);
-                    isJumping = true;
+                    Jump();
                 }
                 break;
         }
@@ -67,26 +74,10 @@ public class ButtonMovement : TouchManager {
         switch (buttonType)
         {
             case type.LeftButton:
-                if (facingRight)
-                {
-                    Flip();
-                }
-                if (!isJumping)
-                {
-                    playerAnim.SetInteger("State", 1);
-                }
-                playerObject.transform.Translate(-Vector2.right * moveSpeed * Time.deltaTime);
+                Left();
                 break;
             case type.RightButton:
-                if (!facingRight)
-                {
-                    Flip();
-                }
-                if (!isJumping)
-                {
-                    playerAnim.SetInteger("State", 1);
-                }
-                playerObject.transform.Translate(Vector2.right * moveSpeed * Time.deltaTime);
+                Right();
                 break;
         }
     }
@@ -96,26 +87,10 @@ public class ButtonMovement : TouchManager {
         switch (buttonType)
         {
             case type.LeftButton:
-                if (facingRight)
-                {
-                    Flip();
-                }
-                if (!isJumping)
-                {
-                    playerAnim.SetInteger("State", 1);
-                }
-                playerObject.transform.Translate(-Vector2.right * moveSpeed * Time.deltaTime);
+                Left();
                 break;
             case type.RightButton:
-                if (!facingRight)
-                {
-                    Flip();
-                }
-                if (!isJumping)
-                {
-                    playerAnim.SetInteger("State", 1);
-                }
-                playerObject.transform.Translate(Vector2.right * moveSpeed * Time.deltaTime);
+                Right();
                 break;
         }
     }
@@ -145,6 +120,39 @@ public class ButtonMovement : TouchManager {
         */
     }
 
+    void Left()
+    {
+        if (facingRight)
+        {
+            Flip();
+        }
+        if (!isJumping)
+        {
+            playerAnim.SetInteger("State", 1);
+        }
+        playerObject.transform.Translate(-Vector2.right * moveSpeed * Time.deltaTime);
+    }
+
+    void Right()
+    {
+        if (!facingRight)
+        {
+            Flip();
+        }
+        if (!isJumping)
+        {
+            playerAnim.SetInteger("State", 1);
+        }
+        playerObject.transform.Translate(Vector2.right * moveSpeed * Time.deltaTime);
+    }
+    
+    void Jump()
+    {
+        playerRigidbody.AddForce(Vector2.up * jumpHeight, ForceMode2D.Impulse);
+        playerAnim.SetInteger("State", 2);
+        isJumping = true;
+        
+    }
     void Flip()
     {
             facingRight = !facingRight;
@@ -153,14 +161,20 @@ public class ButtonMovement : TouchManager {
             playerObject.transform.localScale = temp;
     }
 
-    /*void OnCollisionEnter2D(Collision2D collision)
+    void toggleSetting()
     {
-        if (collision.gameObject.tag == "GROUND")
+        if (!paused)
         {
-            isJumping = false;
-            playerRigidbody.velocity = new Vector2(playerRigidbody.velocity.x, 0);
-            playerAnim.SetInteger("State", 0);
+            paused = !paused;
+            settingAnim.SetBool("Pause", true);
+            originalTimeScale = Time.timeScale;
+            Time.timeScale = 0f;
+        }
+        else
+        {
+            paused = !paused;
+            settingAnim.SetBool("Pause", false);
+            Time.timeScale = originalTimeScale;
         }
     }
-    */
 }
