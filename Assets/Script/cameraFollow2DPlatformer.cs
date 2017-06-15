@@ -13,7 +13,7 @@ public class cameraFollow2DPlatformer : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        offset = transform.position - target.position; // - new Vector3(0,0.5f,0);
+        offset = transform.position - target.position + new Vector3(0,2.5f,0);
 
         lowY = transform.position.y-10;
 	}
