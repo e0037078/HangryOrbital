@@ -32,6 +32,7 @@ public class Demo : MonoBehaviour {
 	void Start () {
 
 		platform = Application.platform;
+        //Area where gestures are recognized
 		drawArea = new Rect(0, 0, Screen.width - Screen.width / 3, Screen.height);
 
 		//Load pre-made gestures
@@ -97,12 +98,15 @@ public class Demo : MonoBehaviour {
 	}
 
 	void OnGUI() {
-
+        
+        //Draws the Area where user can draw their gesture on
 		GUI.Box(drawArea, "Draw Area");
 
 		GUI.Label(new Rect(10, Screen.height - 40, 500, 50), message);
 
-		if (GUI.Button(new Rect(Screen.width - 100, 10, 100, 30), "Recognize")) {
+        //Use instead of GUI.Button to activate when lift instead of button pressed
+        //if (Input.GetMouseButtonUp(0)) {
+        if (GUI.Button(new Rect(Screen.width - 100, 10, 100, 30), "Recognize")) {
 
 			recognized = true;
 
@@ -112,7 +116,10 @@ public class Demo : MonoBehaviour {
 			message = gestureResult.GestureClass + " " + gestureResult.Score;
 		}
 
-		GUI.Label(new Rect(Screen.width - 200, 150, 70, 30), "Add as: ");
+
+        //Code below is used to add new Gestures
+
+		/*GUI.Label(new Rect(Screen.width - 200, 150, 70, 30), "Add as: ");
 		newGestureName = GUI.TextField(new Rect(Screen.width - 150, 150, 100, 30), newGestureName);
 
 		if (GUI.Button(new Rect(Screen.width - 50, 150, 50, 30), "Add") && points.Count > 0 && newGestureName != "") {
@@ -127,5 +134,6 @@ public class Demo : MonoBehaviour {
 
 			newGestureName = "";
 		}
+        */
 	}
 }

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ButtonMovement : TouchManager {
     // drag script to each button, then select accordingly
-    public enum type {LeftButton, RightButton, JumpButton, SettingToggleButton};
+    public enum type {LeftButton, RightButton, JumpButton};
     public type buttonType;
 
     public float jumpHeight = 0.0f; //
@@ -16,11 +16,6 @@ public class ButtonMovement : TouchManager {
     static bool facingRight;
     public static bool isJumping;
 
-    public GameObject settingMenu;
-    Animator settingAnim;
-    bool paused = false;
-    static float originalTimeScale;
-
     public GUITexture buttonTexture = null;
     
 	// Use this for initialization
@@ -31,7 +26,6 @@ public class ButtonMovement : TouchManager {
         facingRight = true;
         isJumping = false;
 
-        settingAnim = settingMenu.GetComponent<Animator>();
     }
 	
 	// Update is called once per frame
@@ -49,9 +43,6 @@ public class ButtonMovement : TouchManager {
                     Jump();
                 }
                 break;
-            case type.SettingToggleButton:
-                toggleSetting();
-                break;
 
         }
     }
@@ -66,6 +57,8 @@ public class ButtonMovement : TouchManager {
                     Jump();
                 }
                 break;
+
+            
         }
     }
 
@@ -161,20 +154,4 @@ public class ButtonMovement : TouchManager {
             playerObject.transform.localScale = temp;
     }
 
-    void toggleSetting()
-    {
-        if (!paused)
-        {
-            paused = !paused;
-            settingAnim.SetBool("Pause", true);
-            originalTimeScale = Time.timeScale;
-            Time.timeScale = 0f;
-        }
-        else
-        {
-            paused = !paused;
-            settingAnim.SetBool("Pause", false);
-            Time.timeScale = originalTimeScale;
-        }
-    }
 }

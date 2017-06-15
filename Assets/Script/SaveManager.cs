@@ -11,6 +11,8 @@ public class SaveManager : MonoBehaviour {
     public int level;
 
     public int numOfUpgrades = 5;
+    public float increaseDPS;
+    public float increaseHP;
     public float[] costs;
     public int[] upgrades;
     
@@ -48,6 +50,7 @@ public class SaveManager : MonoBehaviour {
 
     public bool buyUpgrade(int index)
     {
+        index--;
         if(gold < costs[index])
         {
             return false;
@@ -58,6 +61,10 @@ public class SaveManager : MonoBehaviour {
             gold -= costs[index];
             upgrades[index]++;  
         }
+        calculateDPS();
+        calculateHP();
+        Debug.Log("DPS"+DPS);
+        Debug.Log("HP"+BaseHP);
         return true;
     }
 
@@ -69,7 +76,7 @@ public class SaveManager : MonoBehaviour {
             //Temp upgrade 1 adds HP
             if(i != 1)
                 //Temp formula for DPS
-                tempDPS += i * upgrades[i]; 
+                tempDPS += (i+1) * upgrades[i]; 
         }
         DPS = tempDPS;
     }

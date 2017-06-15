@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2017
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HangryOrbital", "HangryOrbital.csproj", "{BB6C6B1B-F83A-0664-0C88-5C9C49FF676D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HangryOrbital.Editor", "HangryOrbital.Editor.csproj", "{102D6CC3-1FCC-51A0-F3F0-677C4F85DF80}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -13,6 +15,10 @@ Global
 		{BB6C6B1B-F83A-0664-0C88-5C9C49FF676D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BB6C6B1B-F83A-0664-0C88-5C9C49FF676D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BB6C6B1B-F83A-0664-0C88-5C9C49FF676D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{102D6CC3-1FCC-51A0-F3F0-677C4F85DF80}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{102D6CC3-1FCC-51A0-F3F0-677C4F85DF80}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{102D6CC3-1FCC-51A0-F3F0-677C4F85DF80}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{102D6CC3-1FCC-51A0-F3F0-677C4F85DF80}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
