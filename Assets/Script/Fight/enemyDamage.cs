@@ -8,6 +8,7 @@ public class enemyDamage : MonoBehaviour {
     public float damageRate;
     public float pushBackForce;
 
+    public bool contact = false;
     float nextDamage;
 
 	// Use this for initialization
@@ -31,14 +32,18 @@ public class enemyDamage : MonoBehaviour {
 
 
             pushback(other.transform);
+            contact = true;
         }
     }
     void pushback(Transform pushedObject)
     {
+        //TODO fly top left instead of up
+        /*
         Vector2 pushDirection = new Vector2(0, (pushedObject.position.y - transform.position.y)).normalized;
         pushDirection *= pushBackForce;
         Rigidbody2D pushRB = pushedObject.gameObject.GetComponent<Rigidbody2D>();
         pushRB.velocity = Vector2.zero;
         pushRB.AddForce(pushDirection, ForceMode2D.Impulse);
+        */
     }
 }

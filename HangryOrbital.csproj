@@ -277,7 +277,9 @@
     <Compile Include="Assets\PDollar\Scripts\PDollarGestureRecognizer\PointCloudRecognizer.cs" />
     <Compile Include="Assets\PDollar\Scripts\PDollarGestureRecognizer\Result.cs" />
     <Compile Include="Assets\Script\Fight\AutoMove.cs" />
+    <Compile Include="Assets\Script\Fight\PDollarRecognition.cs" />
     <Compile Include="Assets\Script\Fight\enemyDamage.cs" />
+    <Compile Include="Assets\Script\Fight\enemyHealth.cs" />
     <Compile Include="Assets\Script\Fight\playerHealth.cs" />
     <Compile Include="Assets\Script\Map\ButtonMovement.cs" />
     <Compile Include="Assets\Script\Map\ButtonShop.cs" />
@@ -308,6 +310,9 @@
     <None Include="Assets\PDollar\Resources\GestureSet\10-stylus-MEDIUM\10-stylus-medium-null-01.xml" />
     <None Include="Assets\PDollar\Resources\GestureSet\10-stylus-MEDIUM\10-stylus-medium-pitchfork-01.xml" />
     <None Include="Assets\PDollar\Resources\GestureSet\10-stylus-MEDIUM\10-stylus-medium-six_point_star-01.xml" />
+    <None Include="Assets\PDollar\Resources\GestureSet\10-stylus-MEDIUM\Lightning-131420819066425775.xml" />
+    <None Include="Assets\PDollar\Resources\GestureSet\10-stylus-MEDIUM\Lightning-131420819284593942.xml" />
+    <None Include="Assets\PDollar\Resources\GestureSet\10-stylus-MEDIUM\Lightning-131420820416019878.xml" />
     <None Include="Assets\PlayServicesResolver\Editor\play-services-resolver.txt" />
     <None Include="Assets\PlayServicesResolver\proguard-messaging-workaround.txt" />
     <None Include="Assets\PlayServicesResolver\proguard-unity.txt" />

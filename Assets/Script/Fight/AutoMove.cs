@@ -8,6 +8,7 @@ public class AutoMove : MonoBehaviour {
 
     Animator anim;
     Rigidbody2D RB;
+    public static bool playerContact = false;
 
 	// Use this for initialization
 	void Start () {
@@ -18,7 +19,22 @@ public class AutoMove : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-        anim.SetInteger("State", 1);
+        if(gameObject.tag == "Monster")
+        {
+            enemyDamage getContact = gameObject.GetComponent<enemyDamage>();
+            if (getContact.contact)
+            {
+                playerContact = true;
+                anim.SetInteger("State", 0);
+            }
+            else
+                anim.SetInteger("State", 1);
+
+        }
+        if(playerContact&& gameObject.tag == "Player")
+            anim.SetInteger("State", 0);
+        else
+            anim.SetInteger("State", 1);
 
     }
     void FixedUpdate () {
