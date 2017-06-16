@@ -11,7 +11,7 @@ public class ButtonMovement : TouchManager {
     public float moveSpeed = 0.0f; //
 
     public GameObject playerObject = null;
-    Rigidbody2D playerRigidbody;
+    Rigidbody2D playerRB;
     Animator playerAnim;
     static bool facingRight;
     public static bool isJumping;
@@ -21,7 +21,7 @@ public class ButtonMovement : TouchManager {
 	// Use this for initialization
 	void Start ()
     {
-        playerRigidbody = playerObject.GetComponent<Rigidbody2D>();
+        playerRB = playerObject.GetComponent<Rigidbody2D>();
         playerAnim = playerObject.GetComponent<Animator>();
         facingRight = true;
         isJumping = false;
@@ -123,7 +123,8 @@ public class ButtonMovement : TouchManager {
         {
             playerAnim.SetInteger("State", 1);
         }
-        playerObject.transform.Translate(-Vector2.right * moveSpeed * Time.deltaTime);
+        playerRB.velocity = new Vector2(-moveSpeed, playerRB.velocity.y);
+        //playerObject.transform.Translate(-Vector2.right * moveSpeed * Time.deltaTime);
     }
 
     void Right()
@@ -136,12 +137,13 @@ public class ButtonMovement : TouchManager {
         {
             playerAnim.SetInteger("State", 1);
         }
-        playerObject.transform.Translate(Vector2.right * moveSpeed * Time.deltaTime);
+        playerRB.velocity = new Vector2(moveSpeed, playerRB.velocity.y);
+        //playerObject.transform.Translate(Vector2.right * moveSpeed * Time.deltaTime);
     }
     
     void Jump()
     {
-        playerRigidbody.AddForce(Vector2.up * jumpHeight, ForceMode2D.Impulse);
+        playerRB.AddForce(Vector2.up * jumpHeight, ForceMode2D.Impulse);
         playerAnim.SetInteger("State", 2);
         isJumping = true;
         

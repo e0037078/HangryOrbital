@@ -20,7 +20,7 @@ public class MeetMonster : MonoBehaviour {
         //TODO changing of scene , need ensure that mobs spawn according to what is encoutnered
         //Perhaps can use level in savemanager to determine
 
-        //Application.LoadLevel("Fighting");
+        //Application.LoadLevel("Fight Scene");
          
     }
 }

@@ -8,7 +8,6 @@ public class PlayerManager : MonoBehaviour
     public float jumpSpeedY;
 
     bool facingRight = true;
-    bool isJumping = false;
     float speed;
 
     Animator anim;
@@ -47,7 +46,7 @@ public class PlayerManager : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.UpArrow))
         {
-            isJumping = true;
+            ButtonMovement.isJumping = true;
             rb.AddForce(new Vector2(rb.velocity.x, jumpSpeedY));
             anim.SetInteger("State", 2);
         }
@@ -60,11 +59,11 @@ public class PlayerManager : MonoBehaviour
     // code for player movement and animation
     void MovePlayer(float playerSpeed)
     {
-        if (!isJumping && (playerSpeed < 0 || playerSpeed > 0))
+        if (!ButtonMovement.isJumping && (playerSpeed < 0 || playerSpeed > 0))
         {
             anim.SetInteger("State", 1);
         }
-        if (!isJumping && playerSpeed == 0)
+        if (!ButtonMovement.isJumping && playerSpeed == 0)
         {
             anim.SetInteger("State", 0);
         }

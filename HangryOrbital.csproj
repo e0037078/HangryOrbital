@@ -276,13 +276,17 @@
     <Compile Include="Assets\PDollar\Scripts\PDollarGestureRecognizer\Point.cs" />
     <Compile Include="Assets\PDollar\Scripts\PDollarGestureRecognizer\PointCloudRecognizer.cs" />
     <Compile Include="Assets\PDollar\Scripts\PDollarGestureRecognizer\Result.cs" />
-    <Compile Include="Assets\Script\ButtonMovement.cs" />
-    <Compile Include="Assets\Script\ButtonShop.cs" />
-    <Compile Include="Assets\Script\MeetMonster.cs" />
-    <Compile Include="Assets\Script\PlayerManager.cs" />
-    <Compile Include="Assets\Script\SaveManager.cs" />
-    <Compile Include="Assets\Script\TouchManager.cs" />
-    <Compile Include="Assets\Script\cameraFollow2DPlatformer.cs" />
+    <Compile Include="Assets\Script\Fight\AutoMove.cs" />
+    <Compile Include="Assets\Script\Fight\enemyDamage.cs" />
+    <Compile Include="Assets\Script\Fight\playerHealth.cs" />
+    <Compile Include="Assets\Script\Map\ButtonMovement.cs" />
+    <Compile Include="Assets\Script\Map\ButtonShop.cs" />
+    <Compile Include="Assets\Script\Map\MeetMonster.cs" />
+    <Compile Include="Assets\Script\Map\PlatformCollider.cs" />
+    <Compile Include="Assets\Script\Map\PlayerManager.cs" />
+    <Compile Include="Assets\Script\Map\SaveManager.cs" />
+    <Compile Include="Assets\Script\Map\TouchManager.cs" />
+    <Compile Include="Assets\Script\Map\cameraFollow2DPlatformer.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\GooglePlayGames\Editor\template-AndroidManifest.txt" />
