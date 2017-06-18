@@ -285,7 +285,6 @@
     <Compile Include="Assets\Script\Map\ButtonMovement.cs" />
     <Compile Include="Assets\Script\Map\ButtonShop.cs" />
     <Compile Include="Assets\Script\Map\MeetMonster.cs" />
-    <Compile Include="Assets\Script\Map\PlatformCollider.cs" />
     <Compile Include="Assets\Script\Map\PlayerManager.cs" />
     <Compile Include="Assets\Script\Map\SaveManager.cs" />
     <Compile Include="Assets\Script\Map\TouchManager.cs" />
