@@ -63,19 +63,7 @@ public class PDollarRecognition : MonoBehaviour {
 			if (Input.GetMouseButtonDown(0)) {
 
 				/*if (recognized) {
-
-					recognized = false;
-					strokeId = -1;
-
-					points.Clear();
-
-					foreach (LineRenderer lineRenderer in gestureLinesRenderer) {
-
-						lineRenderer.SetVertexCount(0);
-						Destroy(lineRenderer.gameObject);
-					}
-
-					gestureLinesRenderer.Clear();
+                    clearLines();
 				}*/
 
 				++strokeId;
@@ -118,20 +106,10 @@ public class PDollarRecognition : MonoBehaviour {
 			Result gestureResult = PointCloudRecognizer.Classify(candidate, trainingSet.ToArray());
 			
 			message = gestureResult.GestureClass + " " + gestureResult.Score;
-
+            if(gestureResult.GestureClass == "Lightning")
+                GameObject.FindGameObjectWithTag("Monster").GetComponent<enemyHealth>().addDamage(10f);
             //Code to clear LineRenderer
-            strokeId = -1;
-
-            points.Clear();
-
-            foreach (LineRenderer lineRenderer in gestureLinesRenderer)
-            {
-
-                lineRenderer.SetVertexCount(0);
-                Destroy(lineRenderer.gameObject);
-            }
-
-            gestureLinesRenderer.Clear();
+            clearLines();
         }
 
 
@@ -154,4 +132,22 @@ public class PDollarRecognition : MonoBehaviour {
 		}
         */
 	}
+
+    //This Method clears the lines on the map 
+    void clearLines()
+    {
+        recognized = false;
+        strokeId = -1;
+
+        points.Clear();
+
+        foreach (LineRenderer lineRenderer in gestureLinesRenderer)
+        {
+
+            lineRenderer.SetVertexCount(0);
+            Destroy(lineRenderer.gameObject);
+        }
+
+        gestureLinesRenderer.Clear();
+    }
 }

@@ -25,7 +25,8 @@ public class enemyHealth : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (Input.GetKeyDown(KeyCode.LeftArrow))
+        
+        if (Input.GetKeyDown(KeyCode.LeftArrow)|| Input.GetMouseButtonUp(0))
         {
             addDamage(1f);
         }
@@ -47,7 +48,7 @@ public class enemyHealth : MonoBehaviour {
         //make sound
         //death animation
         AutoMove.playerContact = false;
-        Destroy(gameObject.transform.parent.gameObject);
+       // Destroy(gameObject);
        /* AudioSource.PlayClipAtPoint(deathKnell, transform.position);
         Instantiate(enemyDeathFX, transform.position, transform.rotation);
         if (drops)

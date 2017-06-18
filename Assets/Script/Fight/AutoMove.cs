@@ -9,20 +9,22 @@ public class AutoMove : MonoBehaviour {
     Animator anim;
     Rigidbody2D RB;
     public static bool playerContact = false;
+    enemyDamage enemyDMG;
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start () {
         anim = gameObject.GetComponent<Animator>();
         RB = gameObject.GetComponent<Rigidbody2D>();
-	}
+
+        enemyDMG = gameObject.GetComponent<enemyDamage>();
+    }
 
     // Update is called once per frame
     void Update()
     {
         if(gameObject.tag == "Monster")
         {
-            enemyDamage getContact = gameObject.GetComponent<enemyDamage>();
-            if (getContact.contact)
+            if (enemyDMG.contact)
             {
                 playerContact = true;
                 anim.SetInteger("State", 0);
@@ -39,9 +41,20 @@ public class AutoMove : MonoBehaviour {
     }
     void FixedUpdate () {
         if (gameObject.tag == "Player")
-            RB.velocity = new Vector2(moveSpeed, RB.velocity.y);
+        {
+            if(!playerContact)
+            {
+                RB.velocity = new Vector2(moveSpeed, RB.velocity.y);
+            }
+        }
         else if (gameObject.tag == "Monster")
-            RB.velocity = new Vector2(-moveSpeed, RB.velocity.y);
+        {
+            if (!enemyDMG.contact)
+            {
+                RB.velocity = new Vector2(-moveSpeed, RB.velocity.y);
+
+            }
+        }
     }
 
 
