@@ -35,6 +35,8 @@ public class enemyDamage : MonoBehaviour {
             contact = true;
         }
     }
+
+    // make player fly
     void pushback(Transform pushedObject)
     {
         //TODO fly top left instead of up

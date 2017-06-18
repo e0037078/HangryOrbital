@@ -48,8 +48,8 @@ public class enemyHealth : MonoBehaviour {
         //make sound
         //death animation
         AutoMove.playerContact = false;
-       // Destroy(gameObject);
-       /* AudioSource.PlayClipAtPoint(deathKnell, transform.position);
+        // Destroy(gameObject);
+        /* AudioSource.PlayClipAtPoint(deathKnell, transform.position);
         Instantiate(enemyDeathFX, transform.position, transform.rotation);
         if (drops)
         {

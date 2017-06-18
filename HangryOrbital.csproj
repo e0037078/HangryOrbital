@@ -277,6 +277,7 @@
     <Compile Include="Assets\PDollar\Scripts\PDollarGestureRecognizer\PointCloudRecognizer.cs" />
     <Compile Include="Assets\PDollar\Scripts\PDollarGestureRecognizer\Result.cs" />
     <Compile Include="Assets\Script\Fight\AutoMove.cs" />
+    <Compile Include="Assets\Script\Fight\FightManager.cs" />
     <Compile Include="Assets\Script\Fight\PDollarRecognition.cs" />
     <Compile Include="Assets\Script\Fight\enemyDamage.cs" />
     <Compile Include="Assets\Script\Fight\enemyHealth.cs" />
