@@ -106,8 +106,7 @@ public class PDollarRecognition : MonoBehaviour {
 			Result gestureResult = PointCloudRecognizer.Classify(candidate, trainingSet.ToArray());
 			
 			message = gestureResult.GestureClass + " " + gestureResult.Score;
-            if(gestureResult.GestureClass == "Lightning")
-                GameObject.FindGameObjectWithTag("Monster").GetComponent<enemyHealth>().addDamage(10f);
+            GestureDamage.damage(gestureResult.GestureClass, gestureResult.Score);
             //Code to clear LineRenderer
             clearLines();
         }

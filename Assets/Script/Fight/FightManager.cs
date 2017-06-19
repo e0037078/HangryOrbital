@@ -8,7 +8,7 @@ public class FightManager : MonoBehaviour {
     public Transform[] allPlayers = new Transform[1];
     public float[] playerDamage = new float[5];
 
-    Transform currEnemy = null;
+    public static Transform currEnemy = null;
     public Transform currPlayer;
 
     float nextDamage;
