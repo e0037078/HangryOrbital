@@ -4,34 +4,29 @@ using UnityEngine;
 
 public class FightManager : MonoBehaviour {
 
-    public Transform[] allEnemies = new Transform [5];
-    public Transform[] allPlayers = new Transform[5];
+    public Transform[] allEnemies = new Transform [2];
+    public Transform[] allPlayers = new Transform[1];
     public float[] playerDamage = new float[5];
 
     Transform currEnemy = null;
-    Transform currPlayer = null;
+    public Transform currPlayer;
+
+    float nextDamage;
 
 	// Use this for initialization
 	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-        // player's attacks onto monster
-        currEnemy = GetClosestEnemy();
-        if (currEnemy == null) // no more enemies
-        {
-            // yay end
-        }
-        else // attacks only affect currEnemy and not the rest
-        {
-            float playerDamage = getTotalPlayerDamage();
-            currEnemy.gameObject.GetComponent<enemyHealth>().addDamage(playerDamage);
-        }
+        nextDamage = Time.time;
+    }
 
-        // enemy's attacks onto player
-        currPlayer = GetClosestPlayer();
+    // Update is called once per frame
+    void FixedUpdate () {
+        // player's attacks onto monster
+        currEnemy = GetClosestEnemy(currPlayer);
+        dmgEnemy();
+        
+
+        // enemy's attacks onto player  
+        currPlayer = GetClosestPlayer(currEnemy);
         if (currPlayer == null) // no more players
         {
             // ko
@@ -59,18 +54,48 @@ public class FightManager : MonoBehaviour {
         float sum = 0.0f;
         foreach (Transform t in allEnemies)
         {
+            if (t == null)
+                continue;
             sum += t.gameObject.GetComponent<enemyDamage>().damage;
         }
         return sum;
     }
 
-    Transform GetClosestEnemy()
+    Transform GetClosestEnemy(Transform currPlayer)
     {
         Transform bestTarget = null;
         float closestDistanceSqr = Mathf.Infinity;
-        Vector3 currentPosition = transform.position;
+        Vector3 currentPosition = currPlayer.position;
         foreach (Transform potentialTarget in allEnemies)
         {
+            if (potentialTarget == null)
+            {
+                continue;
+            }
+            Vector3 directionToTarget = potentialTarget.position - currentPosition;
+            float dSqrToTarget = directionToTarget.sqrMagnitude;
+            if (dSqrToTarget < closestDistanceSqr)
+            {
+                closestDistanceSqr = dSqrToTarget;
+                bestTarget = potentialTarget;
+             
+            }
+        }
+        
+        return bestTarget;
+    }
+
+    Transform GetClosestPlayer(Transform currEnemy)
+    {
+        Transform bestTarget = null;
+        float closestDistanceSqr = Mathf.Infinity;
+        Vector3 currentPosition = currEnemy.position;
+        foreach (Transform potentialTarget in allPlayers)
+        {
+            if (potentialTarget == null)
+            {
+                continue;
+            }
             Vector3 directionToTarget = potentialTarget.position - currentPosition;
             float dSqrToTarget = directionToTarget.sqrMagnitude;
             if (dSqrToTarget < closestDistanceSqr)
@@ -82,21 +107,21 @@ public class FightManager : MonoBehaviour {
         return bestTarget;
     }
 
-    Transform GetClosestPlayer()
+    void dmgEnemy()
     {
-        Transform bestTarget = null;
-        float closestDistanceSqr = Mathf.Infinity;
-        Vector3 currentPosition = transform.position;
-        foreach (Transform potentialTarget in allPlayers)
+        if (currEnemy == null) // no more enemies
         {
-            Vector3 directionToTarget = potentialTarget.position - currentPosition;
-            float dSqrToTarget = directionToTarget.sqrMagnitude;
-            if (dSqrToTarget < closestDistanceSqr)
+            // yay end
+            Debug.Log("enemy null");
+        }
+        else // attacks only affect currEnemy and not the rest
+        {
+            if(Time.time > nextDamage)
             {
-                closestDistanceSqr = dSqrToTarget;
-                bestTarget = potentialTarget;
+                float playerDamage = getTotalPlayerDamage();
+                currEnemy.gameObject.GetComponent<enemyHealth>().addDamage(playerDamage);
+                nextDamage = Time.time + 1; //Damage every second
             }
         }
-        return bestTarget;
     }
 }
