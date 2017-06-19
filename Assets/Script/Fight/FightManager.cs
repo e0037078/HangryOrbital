@@ -4,124 +4,199 @@ using UnityEngine;
 
 public class FightManager : MonoBehaviour {
 
-    public Transform[] allEnemies = new Transform [2];
-    public Transform[] allPlayers = new Transform[1];
-    public float[] playerDamage = new float[5];
+    static FightManager Instance;
 
-    public static Transform currEnemy = null;
-    public Transform currPlayer;
+    public GameObject[] allEnemies;
+    public GameObject[] allPlayers ;
 
+    public static GameObject currEnemy = null;
+    public static GameObject currPlayer = null;
+
+    float playerDamage;
     float nextDamage;
+
+    //Enemy Prefab to spawn
+    public GameObject enemy;
+    public GameObject enemyBoss;
+    public static bool spawnBoss = false;
 
 	// Use this for initialization
 	void Start () {
+        ensureSingleton();
+        allEnemies = GameObject.FindGameObjectsWithTag("Monster");
+        allPlayers = GameObject.FindGameObjectsWithTag("Player");
         nextDamage = Time.time;
+
+        //Initialisation to random
+        currEnemy = allEnemies[0];
+        currPlayer = allPlayers[0];
+
+        currEnemy = GetClosestEnemy(currPlayer);
+        currPlayer = GetClosestPlayer(currEnemy);
+
+
+        playerDamage = SaveManager.Instance.DPS;
     }
 
     // Update is called once per frame
-    void FixedUpdate () {
-        // player's attacks onto monster
-        currEnemy = GetClosestEnemy(currPlayer);
-        dmgEnemy();
-        
+    void Update () {
+        //Ensures dmg once per sec
+        if (Time.time > nextDamage)
+        {
 
-        // enemy's attacks onto player  
-        currPlayer = GetClosestPlayer(currEnemy);
-        if (currPlayer == null) // no more players
-        {
-            // ko
-        }
-        else // attacks only affect currPlayer and not the rest
-        {
-            float enemyDamage = getTotalEnemyDamage();
-            currPlayer.gameObject.GetComponent<playerHealth>().addDamage(enemyDamage);
-        }
-       
-	}
+            // player's attacks onto monster
+            dmgEnemy();
 
-    float getTotalPlayerDamage()
-    {
-        float sum = 0.0f;
-        foreach(float f in playerDamage)
-        {
-            sum += f;
+
+            // enemy's attacks onto player  
+
+            dmgPlayer();
         }
-        return sum;
+        if(currEnemy == null)
+        {
+            currEnemy = GetClosestEnemy(currPlayer);
+            if(currEnemy == null)
+            {
+                //if all enemies are dead, spawn more
+                //SpawnManager.spawnEnemy(); 
+                spawnEnemy();
+                currEnemy = GetClosestEnemy(currPlayer);
+
+            }
+        }
+        if (currPlayer == null)
+        {
+            currPlayer = GetClosestPlayer(currEnemy);
+        }
+
+        if (spawnBoss)
+        {
+            foreach (GameObject i in allEnemies)
+            {
+                i.SetActive(false);
+            }
+
+            Instantiate(enemyBoss, (Vector2)currPlayer.transform.position + new Vector2(20f, 1f), currPlayer.transform.rotation);
+        }
+
     }
 
     float getTotalEnemyDamage()
     {
         float sum = 0.0f;
-        foreach (Transform t in allEnemies)
+        foreach (GameObject t in allEnemies)
         {
             if (t == null)
                 continue;
-            sum += t.gameObject.GetComponent<enemyDamage>().damage;
+            sum += t.GetComponent<enemyDamage>().damage;
         }
         return sum;
     }
 
-    Transform GetClosestEnemy(Transform currPlayer)
+
+    GameObject GetClosestEnemy(GameObject currPlayer)
     {
         Transform bestTarget = null;
         float closestDistanceSqr = Mathf.Infinity;
-        Vector3 currentPosition = currPlayer.position;
-        foreach (Transform potentialTarget in allEnemies)
+        Vector3 currentPosition = currPlayer.transform.position;
+        foreach (GameObject potentialTarget in allEnemies)
         {
-            if (potentialTarget == null)
+            if (potentialTarget == null)//added to prevent exception when potentialTarget is null
             {
                 continue;
             }
-            Vector3 directionToTarget = potentialTarget.position - currentPosition;
+            Vector3 directionToTarget = potentialTarget.transform.position - currentPosition;
             float dSqrToTarget = directionToTarget.sqrMagnitude;
             if (dSqrToTarget < closestDistanceSqr)
             {
                 closestDistanceSqr = dSqrToTarget;
-                bestTarget = potentialTarget;
+                bestTarget = potentialTarget.transform;
              
             }
         }
-        
-        return bestTarget;
+        if (bestTarget == null)
+            return null;
+        return bestTarget.gameObject;
     }
 
-    Transform GetClosestPlayer(Transform currEnemy)
+    GameObject GetClosestPlayer(GameObject currEnemy)
     {
         Transform bestTarget = null;
         float closestDistanceSqr = Mathf.Infinity;
-        Vector3 currentPosition = currEnemy.position;
-        foreach (Transform potentialTarget in allPlayers)
+        Vector3 currentPosition = currEnemy.transform.position;
+        foreach (GameObject potentialTarget in allPlayers)
         {
-            if (potentialTarget == null)
+            if (potentialTarget == null)//added to prevent exception when potentialTarget is null
             {
                 continue;
             }
-            Vector3 directionToTarget = potentialTarget.position - currentPosition;
+            Vector3 directionToTarget = potentialTarget.transform.position - currentPosition;
             float dSqrToTarget = directionToTarget.sqrMagnitude;
             if (dSqrToTarget < closestDistanceSqr)
             {
                 closestDistanceSqr = dSqrToTarget;
-                bestTarget = potentialTarget;
+                bestTarget = potentialTarget.transform;
             }
         }
-        return bestTarget;
+
+        if (bestTarget == null)
+            return null;
+        return bestTarget.gameObject;
     }
 
     void dmgEnemy()
     {
+
         if (currEnemy == null) // no more enemies
         {
             // yay end
             Debug.Log("enemy null");
         }
-        else // attacks only affect currEnemy and not the rest
+        // attacks only affect currEnemy in camera view and not the rest
+        else if (currEnemy.GetComponent<SpriteRenderer>().isVisible) 
         {
-            if(Time.time > nextDamage)
-            {
-                float playerDamage = getTotalPlayerDamage();
-                currEnemy.gameObject.GetComponent<enemyHealth>().addDamage(playerDamage);
-                nextDamage = Time.time + 1; //Damage every second
-            }
+            currEnemy.gameObject.GetComponent<enemyHealth>().addDamage(playerDamage);
+            nextDamage = Time.time + 1; //Damage every second
         }
+    }
+
+    void dmgPlayer()
+    {
+        if (currPlayer == null) // no more enemies
+        {
+            // yay end
+            Debug.Log("player null");
+        }
+        else // attacks only affect currPlayer and not the rest
+        {
+            float enemyDamage = getTotalEnemyDamage();
+            currPlayer.gameObject.GetComponent<playerHealth>().addDamage(enemyDamage);
+            nextDamage = Time.time + 1; //Damage every second
+        
+        }
+    }
+
+    void ensureSingleton()
+    {
+        //Basically make sure that there is only one Instance of SaveManager
+        if (Instance != null)
+        {
+            GameObject.Destroy(gameObject);
+        }
+        //Protects SaveManager from Being Destroyed when changing Scene
+        else
+        {
+            GameObject.DontDestroyOnLoad(gameObject);
+            Instance = this;
+        }
+    }
+
+    void spawnEnemy()
+    {
+        Instantiate(enemy, (Vector2)currPlayer.transform.position + new Vector2(20f, 1f), currPlayer.transform.rotation);
+        Instantiate(enemy, (Vector2)currPlayer.transform.position + new Vector2(18f, 1f), currPlayer.transform.rotation);
+
+        allEnemies = GameObject.FindGameObjectsWithTag("Monster");
+
     }
 }

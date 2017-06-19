@@ -14,7 +14,7 @@ public class enemyHealth : MonoBehaviour {
 
     //public AudioClip deathKnell;
 
-    float currentHealth;
+    public float currentHealth;
 
 	// Use this for initialization
 	void Start () {
@@ -28,7 +28,7 @@ public class enemyHealth : MonoBehaviour {
         
         if (Input.GetKeyDown(KeyCode.LeftArrow)|| Input.GetMouseButtonUp(0))
         {
-            addDamage(1f);
+           // addDamage(1f);
         }
     }
     public void addDamage(float damage)
@@ -48,7 +48,7 @@ public class enemyHealth : MonoBehaviour {
         //make sound
         //death animation
         AutoMove.playerContact = false;
-         Destroy(gameObject);
+        Destroy(gameObject);  
         /* AudioSource.PlayClipAtPoint(deathKnell, transform.position);
         Instantiate(enemyDeathFX, transform.position, transform.rotation);
         if (drops)

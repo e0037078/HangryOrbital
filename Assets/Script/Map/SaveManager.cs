@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SaveManager : MonoBehaviour {
 
-    static SaveManager Instance;
+    public static SaveManager Instance;
     public float BaseHP;
     public float DPS;
     public float gold;

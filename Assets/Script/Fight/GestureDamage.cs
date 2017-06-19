@@ -19,15 +19,18 @@ public class GestureDamage : MonoBehaviour {
         switch (gestureClass)
         {
             case "Lightning":
-                FightManager.currEnemy.gameObject.GetComponent<enemyHealth>().addDamage(5f);
+                if (FightManager.currEnemy.GetComponent<SpriteRenderer>().isVisible)
+                    FightManager.currEnemy.gameObject.GetComponent<enemyHealth>().addDamage(5f);
                 Debug.Log(gestureClass + " " + gestureScore);
                 break;
             case "line":
-                FightManager.currEnemy.gameObject.GetComponent<enemyHealth>().addDamage(5f);
+                if (FightManager.currEnemy.GetComponent<SpriteRenderer>().isVisible)
+                    FightManager.currEnemy.gameObject.GetComponent<enemyHealth>().addDamage(5f);
                 Debug.Log(gestureClass + " " + gestureScore);
                 break;
             case "forward slash":
-                FightManager.currEnemy.gameObject.GetComponent<enemyHealth>().addDamage(5f);
+                if (FightManager.currEnemy.GetComponent<SpriteRenderer>().isVisible)
+                    FightManager.currEnemy.gameObject.GetComponent<enemyHealth>().addDamage(5f);
                 Debug.Log(gestureClass + " " + gestureScore);
                 break;
             
