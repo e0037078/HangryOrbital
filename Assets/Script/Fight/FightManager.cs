@@ -20,8 +20,11 @@ public class FightManager : MonoBehaviour {
     public GameObject enemyBoss;
     public static bool spawnBoss = false;
 
-	// Use this for initialization
-	void Start () {
+    public int killsToActivateBoss;
+    public GameObject bossButton;
+
+    // Use this for initialization
+    void Start () {
         ensureSingleton();
         allEnemies = GameObject.FindGameObjectsWithTag("Monster");
         allPlayers = GameObject.FindGameObjectsWithTag("Player");
@@ -69,16 +72,23 @@ public class FightManager : MonoBehaviour {
             currPlayer = GetClosestPlayer(currEnemy);
         }
 
+        if (enemyHealth.deathCounter >= killsToActivateBoss)
+        {
+            bossButton.SetActive(true);
+        }
+
         if (spawnBoss)
         {
             foreach (GameObject i in allEnemies)
             {
-                i.SetActive(false);
+                enemyHealth tempHealth = i.GetComponent<enemyHealth>();
+                tempHealth.addDamage(tempHealth.currentHealth);
             }
-
-            Instantiate(enemyBoss, (Vector2)currPlayer.transform.position + new Vector2(20f, 1f), currPlayer.transform.rotation);
+            currEnemy = Instantiate(enemyBoss, (Vector2)currPlayer.transform.position + new Vector2(20f, 1f), currPlayer.transform.rotation);
+            spawnBoss = false;
         }
 
+        
     }
 
     float getTotalEnemyDamage()

@@ -14,6 +14,8 @@ public class enemyHealth : MonoBehaviour {
 
     //public AudioClip deathKnell;
 
+    public static int deathCounter = 0;
+
     public float currentHealth;
 
 	// Use this for initialization
@@ -47,6 +49,7 @@ public class enemyHealth : MonoBehaviour {
     {
         //make sound
         //death animation
+        deathCounter++;
         AutoMove.playerContact = false;
         Destroy(gameObject);  
         /* AudioSource.PlayClipAtPoint(deathKnell, transform.position);

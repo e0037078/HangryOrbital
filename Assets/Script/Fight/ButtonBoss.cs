@@ -12,7 +12,7 @@ public class ButtonBoss : TouchManager {
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void Update () { 
         touchInput(buttonTexture);
     }
 
