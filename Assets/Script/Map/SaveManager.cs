@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+
 
 public class SaveManager : MonoBehaviour {
 
@@ -13,9 +15,13 @@ public class SaveManager : MonoBehaviour {
     public int numOfUpgrades = 5;
     public float increaseDPS;
     public float increaseHP;
-    public float[] costs;
-    public int[] upgrades;
-    
+    public float[] costs = new float[5];
+    public int[] upgrades = new int[5];
+
+    public float goldDrop;
+
+    Scene currentScene;
+
     //TODO Actual Save
 
 	// Use this for initialization
@@ -32,7 +38,7 @@ public class SaveManager : MonoBehaviour {
             Instance = this;
         }
         //5 is estimated number of upgrades
-        costs =  new float[numOfUpgrades];
+            costs =  new float[numOfUpgrades];
         upgrades = new int[numOfUpgrades]; 
         for(int i = 0; i < numOfUpgrades; i++)
         {
@@ -41,11 +47,22 @@ public class SaveManager : MonoBehaviour {
             //initialised as 1 2 3 4 5.
             costs[i] = i;
         }
-	}
+        currentScene = SceneManager.GetActiveScene();
+
+
+        calculateDPS();
+        calculateHP();
+        calculateGoldDrop();
+    }
 	
 	// Update is called once per frame
 	void Update () {
-		
+        //checks if Scene have Changed
+        if (currentScene != SceneManager.GetActiveScene())
+        {
+            calculateGoldDrop();
+            currentScene = SceneManager.GetActiveScene();
+        }
 	}
 
     public bool buyUpgrade(int index)
@@ -68,6 +85,14 @@ public class SaveManager : MonoBehaviour {
         return true;
     }
 
+    public void addGold()
+    {
+        Debug.Log(gold+" "+goldDrop);
+        gold += goldDrop;
+        Debug.Log(gold);
+
+    }
+
     void calculateDPS()
     {
         float tempDPS = 0;
@@ -78,7 +103,7 @@ public class SaveManager : MonoBehaviour {
                 //Temp formula for DPS
                 tempDPS += (i+1) * upgrades[i]; 
         }
-        DPS = tempDPS;
+        DPS = tempDPS+5;
     }
 
     void calculateHP()
@@ -93,5 +118,11 @@ public class SaveManager : MonoBehaviour {
             }
         }
         BaseHP = tempHP;
+    }
+
+    void calculateGoldDrop()
+    {
+        //Temp formula for goldDrop
+        goldDrop = (float)(10 + level * 0.8 + DPS * 0.5 + BaseHP * 0.5);
     }
 }

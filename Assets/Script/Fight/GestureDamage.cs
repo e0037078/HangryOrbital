@@ -20,19 +20,37 @@ public class GestureDamage : MonoBehaviour {
         {
             case "Lightning":
                 if (FightManager.currEnemy.GetComponent<SpriteRenderer>().isVisible)
-                    FightManager.currEnemy.gameObject.GetComponent<enemyHealth>().addDamage(5f);
+                {
+                    //Temp formula 
+                    float damage =(float) (10 + SaveManager.Instance.upgrades[4] * 1.8);
+                    FightManager.currEnemy.gameObject.GetComponent<enemyHealth>().addDamage(damage);
+
+                }
                 Debug.Log(gestureClass + " " + gestureScore);
                 break;
-            case "line":
-                if (FightManager.currEnemy.GetComponent<SpriteRenderer>().isVisible)
-                    FightManager.currEnemy.gameObject.GetComponent<enemyHealth>().addDamage(5f);
-                Debug.Log(gestureClass + " " + gestureScore);
-                break;
+
             case "forward slash":
                 if (FightManager.currEnemy.GetComponent<SpriteRenderer>().isVisible)
-                    FightManager.currEnemy.gameObject.GetComponent<enemyHealth>().addDamage(5f);
+                {
+                    //Temp formula 
+                    float damage = (float)(8 + SaveManager.Instance.upgrades[3] * 1.8);
+                    FightManager.currEnemy.gameObject.GetComponent<enemyHealth>().addDamage(damage);
+
+                }
                 Debug.Log(gestureClass + " " + gestureScore);
                 break;
+
+            case "line":
+                if (FightManager.currEnemy.GetComponent<SpriteRenderer>().isVisible)
+                {
+                    //Temp formula 
+                    float damage = (float)(6 + SaveManager.Instance.upgrades[2] * 1.6);
+                    FightManager.currEnemy.gameObject.GetComponent<enemyHealth>().addDamage(damage);
+
+                }
+                Debug.Log(gestureClass + " " + gestureScore);
+                break;
+            
             
         }
     }

@@ -51,6 +51,8 @@ public class enemyHealth : MonoBehaviour {
         //death animation
         deathCounter++;
         AutoMove.playerContact = false;
+        SaveManager.Instance.addGold();
+        Debug.Log(SaveManager.Instance.gold);
         Destroy(gameObject);  
         /* AudioSource.PlayClipAtPoint(deathKnell, transform.position);
         Instantiate(enemyDeathFX, transform.position, transform.rotation);
