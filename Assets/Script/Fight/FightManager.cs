@@ -22,6 +22,7 @@ public class FightManager : MonoBehaviour {
 
     public int killsToActivateBoss;
     public GameObject bossButton;
+    public bool winMap;
 
     // Use this for initialization
     void Start () {

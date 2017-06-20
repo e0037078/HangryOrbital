@@ -22,7 +22,7 @@ public class AutoMove : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-        if(gameObject.tag == "Monster")
+        if(gameObject.tag == "Monster"||gameObject.tag == "Boss")
         {
             if (enemyDMG.contact)
             {

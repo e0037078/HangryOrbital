@@ -24,6 +24,7 @@ public class SaveManager : MonoBehaviour {
     public float goldDrop;
 
     Scene currentScene;
+    public float goldBef;
 
     //TODO Actual Save
 
@@ -64,6 +65,7 @@ public class SaveManager : MonoBehaviour {
         if (currentScene != SceneManager.GetActiveScene())
         {
             calculateMonsterStats();
+            goldBef = gold;
             currentScene = SceneManager.GetActiveScene();
         }
 	}
