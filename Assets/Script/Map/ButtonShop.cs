@@ -28,6 +28,11 @@ public class ButtonShop : TouchManager {
         settingAnim = settingMenu.GetComponent<Animator>();
         // shopAnim = shopMenu.GetComponent<Animator>();
         save = SaveManager.Instance;
+
+        if (paused)
+        {
+            togglePause();
+        }
     }
 
     // Update is called once per frame
@@ -171,7 +176,7 @@ public class ButtonShop : TouchManager {
         }
     }
 
-    void togglePause()
+    public static void togglePause()
     {
         if (!paused)
         {
