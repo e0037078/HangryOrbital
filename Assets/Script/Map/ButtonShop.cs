@@ -14,7 +14,8 @@ public class ButtonShop : TouchManager {
     static bool settingOn = false;
 
     public GameObject shopMenu = null;
-    Animator shopAnim;
+
+    // Animator shopAnim;
     static bool shopOn = false;
 
         
@@ -25,7 +26,7 @@ public class ButtonShop : TouchManager {
     // Use this for initialization
     void Start () {
         settingAnim = settingMenu.GetComponent<Animator>();
-        shopAnim = shopMenu.GetComponent<Animator>();
+        // shopAnim = shopMenu.GetComponent<Animator>();
         save = SaveManager.Instance;
     }
 
@@ -108,7 +109,6 @@ public class ButtonShop : TouchManager {
     {
         if (!shopOn&&!settingOn&&!paused)
         {
-            Debug.Log(settingOn);
             settingOn = true;
             settingAnim.SetBool("Pause", true);
             togglePause();
@@ -120,11 +120,12 @@ public class ButtonShop : TouchManager {
             settingOn = true;
 
             settingAnim.SetBool("Pause", true);
-            shopAnim.gameObject.SetActive(false);
+            // shopAnim.gameObject.SetActive(false);
+            shopMenu.GetComponent<Canvas>().enabled = false;
+            
         }
         else if(settingOn&&paused)
         {
-            Debug.Log(settingOn);
             settingOn = false ;
             settingAnim.SetBool("Pause", false);
             togglePause();
@@ -135,13 +136,28 @@ public class ButtonShop : TouchManager {
     
     void toggleShop()
     {
-        if (!settingOn&&!shopOn&&!paused)
+        if (!settingOn)
         {
-            Debug.Log(shopOn);
-            shopOn = true;
-            shopAnim.gameObject.SetActive(true);
-            togglePause();
-            //shopAnim.SetBool("Pause", true);
+            if (!shopOn)
+            {
+                shopOn = true;
+                // shopAnim.gameObject.SetActive(true);
+                shopMenu.GetComponent<Canvas>().enabled = true;
+
+                paused = false;
+                togglePause();
+                //shopAnim.SetBool("Pause", true);
+            }
+            else if (shopOn)
+            {
+                shopOn = false;
+                // shopAnim.gameObject.SetActive(false);
+                shopMenu.GetComponent<Canvas>().enabled = false;
+
+                paused = true;
+                togglePause();
+                //shopAnim.SetBool("Pause", false);
+            }
         }
         else if (settingOn)
         {
@@ -150,15 +166,8 @@ public class ButtonShop : TouchManager {
             settingOn = false;
 
             settingAnim.SetBool("Pause", false);
-            shopAnim.gameObject.SetActive(true);
-        }
-        else if (shopOn&&paused)
-        {
-            Debug.Log(shopOn);  
-            shopOn = false;
-            shopAnim.gameObject.SetActive(false);
-            togglePause();
-            //shopAnim.SetBool("Pause", false);
+            //  shopAnim.gameObject.SetActive(true);
+            shopMenu.GetComponent<Canvas>().enabled = true;
         }
     }
 
