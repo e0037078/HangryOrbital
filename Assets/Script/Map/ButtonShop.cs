@@ -18,7 +18,7 @@ public class ButtonShop : TouchManager {
     static bool shopOn = false;
 
         
-    public SaveManager save;
+    SaveManager save;
 
 
     public GUITexture buttonTexture = null;
@@ -26,6 +26,7 @@ public class ButtonShop : TouchManager {
     void Start () {
         settingAnim = settingMenu.GetComponent<Animator>();
         shopAnim = shopMenu.GetComponent<Animator>();
+        save = SaveManager.Instance;
     }
 
     // Update is called once per frame

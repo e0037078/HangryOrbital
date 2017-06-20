@@ -18,6 +18,9 @@ public class SaveManager : MonoBehaviour {
     public float[] costs = new float[5];
     public int[] upgrades = new int[5];
 
+    public float monsterDPS;
+    public float monsterHP;
+
     public float goldDrop;
 
     Scene currentScene;
@@ -52,7 +55,7 @@ public class SaveManager : MonoBehaviour {
 
         calculateDPS();
         calculateHP();
-        calculateGoldDrop();
+        calculateMonsterStats();
     }
 	
 	// Update is called once per frame
@@ -60,7 +63,7 @@ public class SaveManager : MonoBehaviour {
         //checks if Scene have Changed
         if (currentScene != SceneManager.GetActiveScene())
         {
-            calculateGoldDrop();
+            calculateMonsterStats();
             currentScene = SceneManager.GetActiveScene();
         }
 	}
@@ -120,9 +123,11 @@ public class SaveManager : MonoBehaviour {
         BaseHP = tempHP;
     }
 
-    void calculateGoldDrop()
+    void calculateMonsterStats()
     {
         //Temp formula for goldDrop
         goldDrop = (float)(10 + level * 0.8 + DPS * 0.5 + BaseHP * 0.5);
+        monsterDPS = (float)(5 + level * 0.6 + DPS * 0.6 + BaseHP * 0.6);
+        monsterHP = (float)(10 + level * 0.75 + DPS * 0.6 + BaseHP * 0.6);
     }
 }

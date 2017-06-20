@@ -26,14 +26,14 @@ public class FightManager : MonoBehaviour {
     // Use this for initialization
     void Start () {
         ensureSingleton();
-        allEnemies = GameObject.FindGameObjectsWithTag("Monster");
+
         allPlayers = GameObject.FindGameObjectsWithTag("Player");
         nextDamage = Time.time;
 
         //Initialisation to random
-        currEnemy = allEnemies[0];
         currPlayer = allPlayers[0];
 
+        spawnEnemy();
         currEnemy = GetClosestEnemy(currPlayer);
         currPlayer = GetClosestPlayer(currEnemy);
 
@@ -203,10 +203,15 @@ public class FightManager : MonoBehaviour {
 
     void spawnEnemy()
     {
-        Instantiate(enemy, (Vector2)currPlayer.transform.position + new Vector2(20f, 1f), currPlayer.transform.rotation);
-        Instantiate(enemy, (Vector2)currPlayer.transform.position + new Vector2(18f, 1f), currPlayer.transform.rotation);
+        setEnemyStats(Instantiate(enemy, (Vector2)currPlayer.transform.position + new Vector2(18f, 1f), currPlayer.transform.rotation));
+        setEnemyStats(Instantiate(enemy, (Vector2)currPlayer.transform.position + new Vector2(20f, 1f), currPlayer.transform.rotation));
 
         allEnemies = GameObject.FindGameObjectsWithTag("Monster");
 
+    }
+    void setEnemyStats(GameObject enemy)
+    {
+        enemy.GetComponent<enemyHealth>().enemyMaxHealth = SaveManager.Instance.monsterHP;
+        enemy.GetComponent<enemyDamage>().damage = SaveManager.Instance.monsterDPS;
     }
 }
