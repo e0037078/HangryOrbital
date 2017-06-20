@@ -276,6 +276,16 @@
     <Compile Include="Assets\PDollar\Scripts\PDollarGestureRecognizer\Point.cs" />
     <Compile Include="Assets\PDollar\Scripts\PDollarGestureRecognizer\PointCloudRecognizer.cs" />
     <Compile Include="Assets\PDollar\Scripts\PDollarGestureRecognizer\Result.cs" />
+    <Compile Include="Assets\Script\Fight\AutoMove.cs" />
+    <Compile Include="Assets\Script\Fight\ButtonBoss.cs" />
+    <Compile Include="Assets\Script\Fight\ButtonScore.cs" />
+    <Compile Include="Assets\Script\Fight\FightManager.cs" />
+    <Compile Include="Assets\Script\Fight\GestureDamage.cs" />
+    <Compile Include="Assets\Script\Fight\PDollarRecognition.cs" />
+    <Compile Include="Assets\Script\Fight\RepeatingBackground.cs" />
+    <Compile Include="Assets\Script\Fight\enemyDamage.cs" />
+    <Compile Include="Assets\Script\Fight\enemyHealth.cs" />
+    <Compile Include="Assets\Script\Fight\playerHealth.cs" />
     <Compile Include="Assets\Script\Map\ButtonMovement.cs" />
     <Compile Include="Assets\Script\Map\ButtonShop.cs" />
     <Compile Include="Assets\Script\Map\MeetMonster.cs" />

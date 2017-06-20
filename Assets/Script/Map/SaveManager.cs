@@ -12,11 +12,11 @@ public class SaveManager : MonoBehaviour {
     public float gold;
     public int level;
 
-    public int numOfUpgrades = 5;
+    public int numOfUpgrades = 12;
     public float increaseDPS;
     public float increaseHP;
-    public float[] costs = new float[5];
-    public int[] upgrades = new int[5];
+    public float[] costs = new float[12];
+    public int[] upgrades = new int[12];
 
     public float monsterDPS;
     public float monsterHP;
@@ -26,10 +26,18 @@ public class SaveManager : MonoBehaviour {
     Scene currentScene;
     public float goldBef;
 
+
+    public GameObject enemy;
+    public GameObject enemyBoss;
+
+    public double[] gestureProb = new double[4];
+
+
     //TODO Actual Save
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Awake () {
+
         //Basically make sure that there is only one Instance of SaveManager
         if(Instance != null)
         {
@@ -79,9 +87,9 @@ public class SaveManager : MonoBehaviour {
         }
         else
         {
-            costs[index] *= 1.08f; //8% increase temp value
             gold -= costs[index];
-            upgrades[index]++;  
+            upgrades[index]++;
+            costs[index] *= 1.08f; //exponential 8% increase temp value
         }
         calculateDPS();
         calculateHP();
@@ -131,5 +139,33 @@ public class SaveManager : MonoBehaviour {
         goldDrop = (float)(10 + level * 0.8 + DPS * 0.5 + BaseHP * 0.5);
         monsterDPS = (float)(5 + level * 0.6 + DPS * 0.6 + BaseHP * 0.6);
         monsterHP = (float)(10 + level * 0.75 + DPS * 0.6 + BaseHP * 0.6);
+    }
+
+    void calculateGestureProbability()
+    {
+        for(int i=0; i < gestureProb.Length;i++)
+        {
+            switch (i)
+            {
+                case 1:
+                    //Temp formula
+                    gestureProb[i] = Mathf.Pow(1.07f, (float)upgrades[4]);
+                    break;
+                case 2:
+                    gestureProb[i] = Mathf.Pow(1.07f, (float)upgrades[6]);
+                    break;
+                case 3:
+                    gestureProb[i] = Mathf.Pow(1.07f, (float)upgrades[8]);
+                    break;
+                case 4:
+                    gestureProb[i] = Mathf.Pow(1.07f, (float)upgrades[10]);
+                    break;
+            }
+        }
+    }
+
+    public static double calculateFixedUpdateProbability(double probability)
+    {
+        return Mathf.Pow(10, Mathf.Log10((float)probability) / 3000);
     }
 }
