@@ -35,7 +35,7 @@ public class RepeatingBackground : MonoBehaviour {
     {
         
         //This is how far to the right we will move our background object, in this case, twice its length. This will position it directly to the right of the currently visible background object.
-        Vector2 groundOffSet = new Vector2(groundHorizontalLength * 4f + 4f, 0);// sizeOfBackground = 24f but collider 11f
+        Vector2 groundOffSet = new Vector2(groundHorizontalLength * 4f + 2f, 0);// sizeOfBackground = 24f but collider 11f
 
         //Move this object from it's position offscreen, behind the player, to the new position off-camera in front of the player.
         transform.position = (Vector2)transform.position + groundOffSet;

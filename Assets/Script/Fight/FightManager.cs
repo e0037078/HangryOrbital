@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class FightManager : MonoBehaviour {
 
-    static FightManager Instance;
+    //public static FightManager Instance;
 
-    public GameObject[] allEnemies;
-    public GameObject[] allPlayers ;
+    public static GameObject[] allEnemies;
+    public static GameObject[] allPlayers ;
 
     public static GameObject currEnemy = null;
     public static GameObject currPlayer = null;
@@ -16,17 +16,17 @@ public class FightManager : MonoBehaviour {
     float nextDamage;
 
     //Enemy Prefab to spawn
-    public GameObject enemy;
-    public GameObject enemyBoss;
-    public static bool spawnBoss = false;
-
     public int killsToActivateBoss;
     public GameObject bossButton;
-    public bool winMap;
+    static bool bossSpawned;
+    public static bool winMap;
+    public GameObject scoreScreen;
 
     // Use this for initialization
     void Start () {
-        ensureSingleton();
+
+        winMap = false;
+        bossSpawned = false;
 
         allPlayers = GameObject.FindGameObjectsWithTag("Player");
         nextDamage = Time.time;
@@ -42,26 +42,25 @@ public class FightManager : MonoBehaviour {
         playerDamage = SaveManager.Instance.DPS;
     }
 
+    void FixedUpdate()
+    {
+        // player's attacks onto monster
+        dmgEnemy();
+
+
+        // enemy's attacks onto player 
+        dmgPlayer();
+    }
+
     // Update is called once per frame
     void Update () {
-        //Ensures dmg once per sec
-        if (Time.time > nextDamage)
-        {
 
-            // player's attacks onto monster
-            dmgEnemy();
-
-
-            // enemy's attacks onto player  
-
-            dmgPlayer();
-        }
-        if(currEnemy == null)
+        if (currEnemy == null)
         {
             currEnemy = GetClosestEnemy(currPlayer);
-            if(currEnemy == null)
+            if (currEnemy == null && !winMap && !bossSpawned)
             {
-                //if all enemies are dead, spawn more
+                //if all enemies are dead, spawn more unless won Map
                 //SpawnManager.spawnEnemy(); 
                 spawnEnemy();
                 currEnemy = GetClosestEnemy(currPlayer);
@@ -73,22 +72,19 @@ public class FightManager : MonoBehaviour {
             currPlayer = GetClosestPlayer(currEnemy);
         }
 
-        if (enemyHealth.deathCounter >= killsToActivateBoss)
+        
+
+        if (!bossSpawned && enemyHealth.deathCounter >= killsToActivateBoss)
         {
             bossButton.SetActive(true);
         }
 
-        if (spawnBoss)
-        {
-            foreach (GameObject i in allEnemies)
-            {
-                enemyHealth tempHealth = i.GetComponent<enemyHealth>();
-                tempHealth.addDamage(tempHealth.currentHealth);
-            }
-            currEnemy = Instantiate(enemyBoss, (Vector2)currPlayer.transform.position + new Vector2(20f, 1f), currPlayer.transform.rotation);
-            spawnBoss = false;
-        }
 
+        //Checks whether map won
+        if (winMap && !scoreScreen.activeInHierarchy)
+        {
+            win();
+        }
         
     }
 
@@ -107,6 +103,13 @@ public class FightManager : MonoBehaviour {
 
     GameObject GetClosestEnemy(GameObject currPlayer)
     {
+       /* if(currPlayer == null)
+        {
+            allPlayers = GameObject.FindGameObjectsWithTag("Player");
+            currPlayer = allPlayers[0];
+
+            spawnEnemy();
+        }*/
         Transform bestTarget = null;
         float closestDistanceSqr = Mathf.Infinity;
         Vector3 currentPosition = currPlayer.transform.position;
@@ -166,8 +169,8 @@ public class FightManager : MonoBehaviour {
         // attacks only affect currEnemy in camera view and not the rest
         else if (currEnemy.GetComponent<SpriteRenderer>().isVisible) 
         {
-            currEnemy.gameObject.GetComponent<enemyHealth>().addDamage(playerDamage);
-            nextDamage = Time.time + 1; //Damage every second
+            //Damage every 0.02s i.e. 50/sec
+            currEnemy.gameObject.GetComponent<enemyHealth>().addDamage(playerDamage/50);
         }
     }
 
@@ -187,25 +190,10 @@ public class FightManager : MonoBehaviour {
         }
     }
 
-    void ensureSingleton()
-    {
-        //Basically make sure that there is only one Instance of SaveManager
-        if (Instance != null)
-        {
-            GameObject.Destroy(gameObject);
-        }
-        //Protects SaveManager from Being Destroyed when changing Scene
-        else
-        {
-            GameObject.DontDestroyOnLoad(gameObject);
-            Instance = this;
-        }
-    }
-
     void spawnEnemy()
     {
-        setEnemyStats(Instantiate(enemy, (Vector2)currPlayer.transform.position + new Vector2(18f, 1f), currPlayer.transform.rotation));
-        setEnemyStats(Instantiate(enemy, (Vector2)currPlayer.transform.position + new Vector2(20f, 1f), currPlayer.transform.rotation));
+        setEnemyStats(Instantiate(SaveManager.Instance.enemy, (Vector2)currPlayer.transform.position + new Vector2(18f, 1f), currPlayer.transform.rotation));
+        setEnemyStats(Instantiate(SaveManager.Instance.enemy, (Vector2)currPlayer.transform.position + new Vector2(20f, 1f), currPlayer.transform.rotation));
 
         allEnemies = GameObject.FindGameObjectsWithTag("Monster");
 
@@ -215,4 +203,35 @@ public class FightManager : MonoBehaviour {
         enemy.GetComponent<enemyHealth>().enemyMaxHealth = SaveManager.Instance.monsterHP;
         enemy.GetComponent<enemyDamage>().damage = SaveManager.Instance.monsterDPS;
     }
+
+    void win()
+    {
+        //pause game
+        ButtonShop.togglePause();
+        scoreScreen.SetActive(true);
+        GUIText[] allText = scoreScreen.GetComponentsInChildren<GUIText>();
+        //Find the Text to change to correct amount
+        foreach(GUIText i in allText)
+        {
+            if(i.text == "XXX")
+            {
+                float goldEarned = SaveManager.Instance.gold - SaveManager.Instance.goldBef;
+                i.text = goldEarned.ToString();
+            }
+        }
+    }
+
+    public static void spawnBoss()
+    {
+        foreach (GameObject i in allEnemies)
+        {
+            if (i == null)
+                continue;
+            enemyHealth tempHealth = i.GetComponent<enemyHealth>();
+            tempHealth.addDamage(tempHealth.currentHealth);
+        }
+        currEnemy = Instantiate(SaveManager.Instance.enemyBoss, (Vector2)currPlayer.transform.position + new Vector2(20f, 1f), currPlayer.transform.rotation);
+        bossSpawned = true;
+    }
+    
 }

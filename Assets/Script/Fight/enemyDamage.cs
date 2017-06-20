@@ -8,14 +8,15 @@ public class enemyDamage : MonoBehaviour {
     public float damageRate;
     public float pushBackForce;
 
-    public bool contact = false;
+    public bool contact;
     float nextDamage;
 
 	// Use this for initialization
 	void Start () {
         nextDamage = Time.time;//or Time.time
-        
-	}
+        contact = false;
+
+    }
 	
 	// Update is called once per frame
 	void Update () {

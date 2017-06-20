@@ -8,7 +8,7 @@ public class AutoMove : MonoBehaviour {
 
     Animator anim;
     Rigidbody2D RB;
-    public static bool playerContact = false;
+    public static bool playerContact;
     enemyDamage enemyDMG;
 
     // Use this for initialization
@@ -17,6 +17,8 @@ public class AutoMove : MonoBehaviour {
         RB = gameObject.GetComponent<Rigidbody2D>();
 
         enemyDMG = gameObject.GetComponent<enemyDamage>();
+
+        playerContact = false;
     }
 
     // Update is called once per frame

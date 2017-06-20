@@ -23,7 +23,9 @@ public class enemyHealth : MonoBehaviour {
         currentHealth = enemyMaxHealth;
         enemySlider.maxValue = currentHealth;
         enemySlider.value = currentHealth;
-	}
+
+        deathCounter = 0;
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -53,6 +55,10 @@ public class enemyHealth : MonoBehaviour {
         AutoMove.playerContact = false;
         SaveManager.Instance.addGold();
         Debug.Log(SaveManager.Instance.gold);
+        if(gameObject.tag == "Boss")
+        {
+            FightManager.winMap = true;
+        }
         Destroy(gameObject);  
         /* AudioSource.PlayClipAtPoint(deathKnell, transform.position);
         Instantiate(enemyDeathFX, transform.position, transform.rotation);

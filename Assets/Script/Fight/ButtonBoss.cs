@@ -18,6 +18,7 @@ public class ButtonBoss : TouchManager {
 
     void OnFirstTouchBegan()
     {
-        FightManager.spawnBoss = true;
+        FightManager.spawnBoss();
+        gameObject.SetActive(false);
     }
 }
