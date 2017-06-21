@@ -58,7 +58,7 @@ public class PDollarRecognition : MonoBehaviour {
 			}
 		}
 
-		if (drawArea.Contains(virtualKeyPosition)) {
+		if (drawArea.Contains(virtualKeyPosition) && !ButtonShop.paused) {
 
 			if (Input.GetMouseButtonDown(0)) {
 
