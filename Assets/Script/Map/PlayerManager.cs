@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerManager : MonoBehaviour
 {
@@ -87,9 +88,15 @@ public class PlayerManager : MonoBehaviour
     {
         if(collision.gameObject.tag == "GROUND")
         {
-            ButtonMovement.isJumping = false;
+            ButtonMovement.isJumping = false;  // landed
             speed = 0;
             anim.SetInteger("State", 1);
         }
+        else if (collision.gameObject.tag == "Monster")
+        {
+            // should add some animation like pokemon hahaha
+            SceneManager.LoadScene("Fight scene");
+        }
+        // in future, can add on collision with PORTAL --> change map scene
     }
 }

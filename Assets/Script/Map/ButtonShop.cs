@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ButtonShop : TouchManager {
 
-    public enum type {SettingToggleButton, ShopToggleButton, Candy1 , Candy2, Candy3, Candy4 };
+    public enum type {SettingToggleButton, ShopToggleButton};
     public type buttonType;
 
     public GameObject settingMenu = null;
@@ -51,50 +51,6 @@ public class ButtonShop : TouchManager {
             case type.ShopToggleButton:
                 toggleShop();
                 break;
-
-            case type.Candy1:
-                if (save.buyUpgrade(1))
-                {
-                    //Success Text
-                }
-                else
-                {
-                    //No money
-                }   
-                break;
-
-            case type.Candy2:
-                if (save.buyUpgrade(2))
-                {
-                    //Success Text
-                }
-                else
-                {
-                    //No money
-                }
-                break;
-
-            case type.Candy3:
-                if (save.buyUpgrade(3))
-                {
-                    //Success Text
-                }
-                else
-                {
-                    //No money
-                }
-                break;
-
-            case type.Candy4:
-                if (save.buyUpgrade(4))
-                {
-                    //Success Text
-                }
-                else
-                {
-                    //No money
-                }
-                break;
         } 
     }
 
@@ -115,7 +71,8 @@ public class ButtonShop : TouchManager {
         if (!shopOn&&!settingOn&&!paused)
         {
             settingOn = true;
-            settingAnim.SetBool("Pause", true);
+            // settingAnim.SetBool("Pause", true);
+            settingMenu.GetComponent<Canvas>().enabled = true;
             togglePause();
 
         }
@@ -124,15 +81,17 @@ public class ButtonShop : TouchManager {
             shopOn = false;
             settingOn = true;
 
-            settingAnim.SetBool("Pause", true);
+            // settingAnim.SetBool("Pause", true);
             // shopAnim.gameObject.SetActive(false);
+            settingMenu.GetComponent<Canvas>().enabled = true;
             shopMenu.GetComponent<Canvas>().enabled = false;
             
         }
         else if(settingOn&&paused)
         {
             settingOn = false ;
-            settingAnim.SetBool("Pause", false);
+            // settingAnim.SetBool("Pause", false);
+            settingMenu.GetComponent<Canvas>().enabled = false;
             togglePause();
 
         }
@@ -170,7 +129,8 @@ public class ButtonShop : TouchManager {
             shopOn = true;
             settingOn = false;
 
-            settingAnim.SetBool("Pause", false);
+            // settingAnim.SetBool("Pause", false);
+            settingMenu.GetComponent<Canvas>().enabled = false;
             //  shopAnim.gameObject.SetActive(true);
             shopMenu.GetComponent<Canvas>().enabled = true;
         }
