@@ -9,7 +9,7 @@ public class ButtonShop : TouchManager {
 
     public GameObject settingMenu = null;
     Animator settingAnim;
-    static bool paused = false;
+    public static bool paused = false;
     static float originalTimeScale;
     static bool settingOn = false;
 
