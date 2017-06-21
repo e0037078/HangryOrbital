@@ -286,6 +286,7 @@
     <Compile Include="Assets\Script\Fight\enemyDamage.cs" />
     <Compile Include="Assets\Script\Fight\enemyHealth.cs" />
     <Compile Include="Assets\Script\Fight\playerHealth.cs" />
+    <Compile Include="Assets\Script\Map\AutoMoveMonster.cs" />
     <Compile Include="Assets\Script\Map\ButtonMovement.cs" />
     <Compile Include="Assets\Script\Map\ButtonShop.cs" />
     <Compile Include="Assets\Script\Map\MeetMonster.cs" />

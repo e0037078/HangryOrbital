@@ -24,39 +24,40 @@ public class AutoMove : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-        if(gameObject.tag == "Monster"||gameObject.tag == "Boss")
-        {
-            if (enemyDMG.contact)
+            if (gameObject.tag == "Monster" || gameObject.tag == "Boss")
             {
-                playerContact = true;
-                anim.SetInteger("State", 0);
+                if (enemyDMG.contact)
+                {
+                    playerContact = true;
+                    anim.SetInteger("State", 0);
+                }
+                else
+                    anim.SetInteger("State", 1);
+
             }
+            if (playerContact && gameObject.tag == "Player")
+                anim.SetInteger("State", 0);
             else
                 anim.SetInteger("State", 1);
-
-        }
-        if(playerContact&& gameObject.tag == "Player")
-            anim.SetInteger("State", 0);
-        else
-            anim.SetInteger("State", 1);
-
     }
-    void FixedUpdate () {
-        if (gameObject.tag == "Player")
-        {
-            if(!playerContact)
-            {
-                RB.velocity = new Vector2(moveSpeed, RB.velocity.y);
-            }
-        }
-        else if (gameObject.tag == "Monster")
-        {
-            if (!enemyDMG.contact)
-            {
-                RB.velocity = new Vector2(-moveSpeed, RB.velocity.y);
 
+    void FixedUpdate ()
+    {
+            if (gameObject.tag == "Player")
+            {
+                if (!playerContact)
+                {
+                    RB.velocity = new Vector2(moveSpeed, RB.velocity.y);
+                }
             }
-        }
+            else if (gameObject.tag == "Monster")
+            {
+                if (!enemyDMG.contact)
+                {
+                    RB.velocity = new Vector2(-moveSpeed, RB.velocity.y);
+
+                }
+            }
     }
 
 
