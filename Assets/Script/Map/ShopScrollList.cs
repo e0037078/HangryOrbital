@@ -9,6 +9,8 @@ public class Item
     public string itemName;
     public Sprite icon;
     public float price = 1;
+    public int numOwned = 0;
+    public int index = -1;
 }
 
 public class ShopScrollList : MonoBehaviour
@@ -19,8 +21,6 @@ public class ShopScrollList : MonoBehaviour
     // public ShopScrollList otherShop;
     public Text myGoldDisplay;
     public SimpleObjectPool buttonObjectPool;
-
-    public float gold = 20f;
 
     public GameObject successfulDisplay = null;
     public GameObject unsuccessfulDisplay = null;
@@ -34,9 +34,19 @@ public class ShopScrollList : MonoBehaviour
         RefreshDisplay();
     }
 
+    void Update()
+    {
+        UpdateGold();
+    }
+
+    void UpdateGold()
+    {
+        myGoldDisplay.text = "Gold:" + SaveManager.Instance.gold.ToString(".##");
+    }
+
     void RefreshDisplay()
     {
-        myGoldDisplay.text = "Gold: " + gold.ToString();
+        myGoldDisplay.text = "Gold:" + SaveManager.Instance.gold.ToString();
         RemoveButtons();  
         AddButtons();
     }
@@ -54,6 +64,9 @@ public class ShopScrollList : MonoBehaviour
     {
         for (int i = 0; i < itemList.Count; i++)
         {
+            itemList[i].index = i;
+            itemList[i].price = SaveManager.Instance.costs[i];
+            itemList[i].numOwned = SaveManager.Instance.upgrades[i];
             Item item = itemList[i];
             GameObject newButton = buttonObjectPool.GetObject();
             newButton.transform.SetParent(contentPanel);
@@ -65,17 +78,17 @@ public class ShopScrollList : MonoBehaviour
     // aka buy item
     public void TryTransferItemToOtherShop(Item item)
     {
-        if (gold >= item.price) // can buy
+        if (SaveManager.Instance.buyUpgrade(item.index)) // can buy
         {
             
-            gold -= item.price;
-            
-            RemoveItem(item, this);
+            //RemoveItem(item, this);
 
             RefreshDisplay();
             
             // do successful display && close
             successfulDisplay.SetActive(true);
+
+            StartCoroutine(closeDisplayAfterTime(1f));
             successfulDisplay.GetComponent<Button>().onClick.AddListener(closeSDisplay);
 
             Debug.Log("enough gold");
@@ -85,6 +98,7 @@ public class ShopScrollList : MonoBehaviour
         {
             // do unsuccessful display
             unsuccessfulDisplay.SetActive(true);
+            StartCoroutine(closeDisplayAfterTime(1f));
             unsuccessfulDisplay.GetComponent<Button>().onClick.AddListener(closeUDisplay);
 ;            
         }
@@ -98,6 +112,13 @@ public class ShopScrollList : MonoBehaviour
 
     void closeUDisplay()
     {
+        unsuccessfulDisplay.SetActive(false);
+    }
+
+    IEnumerator closeDisplayAfterTime(float waitTime)
+    {
+        yield return new WaitForSecondsRealtime(waitTime);
+        successfulDisplay.SetActive(false);
         unsuccessfulDisplay.SetActive(false);
     }
 

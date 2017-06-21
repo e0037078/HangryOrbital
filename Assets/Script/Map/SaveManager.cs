@@ -24,16 +24,15 @@ public class SaveManager : MonoBehaviour {
     public float goldDrop;
 
     Scene currentScene;
-    public float goldBef;
+    public float goldEarned;
 
 
     public GameObject enemy;
     public GameObject enemyBoss;
 
     public double[] gestureProb = new double[4];
+    public double[] gestureDMG = new double[4];
 
-
-    //TODO Actual Save
 
     // Use this for initialization
     void Awake () {
@@ -55,15 +54,18 @@ public class SaveManager : MonoBehaviour {
         for(int i = 0; i < numOfUpgrades; i++)
         {
             //Initialization of all values
-            upgrades[i] = 0;
+            upgrades[i] = i;
             //initialised as 1 2 3 4 5.
-            costs[i] = i;
+            costs[i] = i+1;
         }
         currentScene = SceneManager.GetActiveScene();
 
 
         calculateDPS();
         calculateHP();
+
+        calculateGestureProbability();
+        calculateGestureDMG();
         calculateMonsterStats();
     }
 	
@@ -73,14 +75,13 @@ public class SaveManager : MonoBehaviour {
         if (currentScene != SceneManager.GetActiveScene())
         {
             calculateMonsterStats();
-            goldBef = gold;
+            goldEarned = 0;
             currentScene = SceneManager.GetActiveScene();
         }
 	}
 
     public bool buyUpgrade(int index)
     {
-        index--;
         if(gold < costs[index])
         {
             return false;
@@ -93,6 +94,8 @@ public class SaveManager : MonoBehaviour {
         }
         calculateDPS();
         calculateHP();
+        calculateGestureProbability();
+        calculateGestureDMG();
         Debug.Log("DPS"+DPS);
         Debug.Log("HP"+BaseHP);
         return true;
@@ -100,9 +103,10 @@ public class SaveManager : MonoBehaviour {
 
     public void addGold()
     {
-        Debug.Log(gold+" "+goldDrop);
+        //Debug.Log(gold+" "+goldDrop);
         gold += goldDrop;
-        Debug.Log(gold);
+        goldEarned += goldDrop;
+        //Debug.Log(gold);
 
     }
 
@@ -112,7 +116,7 @@ public class SaveManager : MonoBehaviour {
         for(int i = 0; i < numOfUpgrades; i++)
         {
             //Temp upgrade 1 adds HP
-            if(i != 1)
+            if(i == 0)
                 //Temp formula for DPS
                 tempDPS += (i+1) * upgrades[i]; 
         }
@@ -143,22 +147,45 @@ public class SaveManager : MonoBehaviour {
 
     void calculateGestureProbability()
     {
-        for(int i=0; i < gestureProb.Length;i++)
+        for (int i = 0; i < gestureProb.Length; i++)
         {
             switch (i)
             {
                 case 1:
                     //Temp formula
-                    gestureProb[i] = Mathf.Pow(1.07f, (float)upgrades[4]);
+                    gestureProb[i] = 0.5;// 0.07f + (float)upgrades[3] * 0.07;
                     break;
                 case 2:
-                    gestureProb[i] = Mathf.Pow(1.07f, (float)upgrades[6]);
+                    gestureProb[i] = 0.5;//0.07f + (float)upgrades[5] * 0.07;
                     break;
                 case 3:
-                    gestureProb[i] = Mathf.Pow(1.07f, (float)upgrades[8]);
+                    gestureProb[i] = 0.5;//0.07f + (float)upgrades[7] * 0.07;
                     break;
                 case 4:
-                    gestureProb[i] = Mathf.Pow(1.07f, (float)upgrades[10]);
+                    gestureProb[i] = 0.5;//0.07f + (float)upgrades[9] * 0.07;
+                    break;
+            }
+        }
+    }
+
+    void calculateGestureDMG()
+    {
+        for(int i=0; i < gestureDMG.Length;i++)
+        {
+            switch (i)
+            {
+                case 1:
+                    //Temp formula
+                    gestureDMG[i] = 6 + SaveManager.Instance.upgrades[2] * 1.6;
+                    break;
+                case 2:
+                    gestureDMG[i] = 8 + SaveManager.Instance.upgrades[4] * 1.6;
+                    break;
+                case 3:
+                    gestureDMG[i] = 8 + SaveManager.Instance.upgrades[6] * 1.8;
+                    break;
+                case 4:
+                    gestureDMG[i] = 10 + SaveManager.Instance.upgrades[8] * 2.0;
                     break;
             }
         }
@@ -166,6 +193,6 @@ public class SaveManager : MonoBehaviour {
 
     public static double calculateFixedUpdateProbability(double probability)
     {
-        return Mathf.Pow(10, Mathf.Log10((float)probability) / 3000);
+        return 1-System.Math.Pow(10, System.Math.Log10(probability) / 3000);
     }
 }
