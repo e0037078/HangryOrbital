@@ -4,9 +4,17 @@ using UnityEngine;
 
 public class GestureDamage : MonoBehaviour {
 
+    public Transform slash;
+    public Transform lightning;
+
+    Animator slashAnim;
+    Animator lightningAnim;
+
 	// Use this for initialization
-	void Start () {
-		
+	void Start ()
+    {
+        slashAnim = slash.GetComponent<Animator>();
+        lightningAnim = lightning.GetComponent<Animator>();  
 	}
 	
 	// Update is called once per frame
@@ -21,12 +29,16 @@ public class GestureDamage : MonoBehaviour {
                         damage("line", 1);
                         break;
                     case 2:
+                        slash.position = FightManager.currPlayer.transform.position;
+                        slashAnim.SetTrigger("On");
                         damage("forward slash", 1);
                         break;
                     case 3:
                         damage("back slash", 1);
                         break;
                     case 4:
+                        lightning.position = FightManager.currPlayer.transform.position;
+                        lightningAnim.SetTrigger("On");
                         damage("Lightning", 1);
                         break;
                 }
