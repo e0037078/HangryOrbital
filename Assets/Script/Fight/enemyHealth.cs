@@ -54,7 +54,7 @@ public class enemyHealth : MonoBehaviour {
         deathCounter++;
         AutoMove.playerContact = false;
         SaveManager.Instance.addGold();
-        Debug.Log(SaveManager.Instance.gold);
+        //Debug.Log(SaveManager.Instance.gold);
         if(gameObject.tag == "Boss")
         {
             FightManager.winMap = true;

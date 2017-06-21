@@ -213,10 +213,10 @@ public class FightManager : MonoBehaviour {
         //Find the Text to change to correct amount
         foreach(GUIText i in allText)
         {
-            if(i.text == "XXX")
+            if(i.text == "XXX Gold")
             {
-                float goldEarned = SaveManager.Instance.gold - SaveManager.Instance.goldBef;
-                i.text = goldEarned.ToString();
+                float goldEarned = SaveManager.Instance.goldEarned;
+                i.text = goldEarned.ToString(".##") + " Gold";
             }
         }
     }
