@@ -16,11 +16,11 @@ public class GestureDamage : MonoBehaviour {
     // Use this for initialization
     void Start ()
     {
-        
+
     }
-	
-	// Update is called once per frame
-	void FixedUpdate () { 
+
+    // Update is called once per frame
+    void FixedUpdate () { 
         for (int i = 0; i < SaveManager.Instance.gestureProb.Length; i++)
         {
             if (Random.value <= SaveManager.calculateFixedUpdateProbability(SaveManager.Instance.gestureProb[i]))

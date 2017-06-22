@@ -290,6 +290,7 @@
     <Compile Include="Assets\Script\Map\ButtonMovement.cs" />
     <Compile Include="Assets\Script\Map\ButtonShop.cs" />
     <Compile Include="Assets\Script\Map\MeetMonster.cs" />
+    <Compile Include="Assets\Script\Map\PlatformGenerator.cs" />
     <Compile Include="Assets\Script\Map\PlayerManager.cs" />
     <Compile Include="Assets\Script\Map\SampleButton.cs" />
     <Compile Include="Assets\Script\Map\SaveManager.cs" />
