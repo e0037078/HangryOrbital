@@ -8,6 +8,8 @@ using PDollarGestureRecognizer;
 
 public class PDollarRecognition : MonoBehaviour {
 
+    public GestureDamage gestDMG;
+
 	public Transform gestureOnScreenPrefab;
 
 	private List<Gesture> trainingSet = new List<Gesture>();
@@ -106,7 +108,7 @@ public class PDollarRecognition : MonoBehaviour {
 			Result gestureResult = PointCloudRecognizer.Classify(candidate, trainingSet.ToArray());
 			
 			message = gestureResult.GestureClass + " " + gestureResult.Score;
-            GestureDamage.damage(gestureResult.GestureClass, gestureResult.Score);
+            gestDMG.damage(gestureResult.GestureClass, gestureResult.Score);
             //Code to clear LineRenderer
             clearLines();
         }

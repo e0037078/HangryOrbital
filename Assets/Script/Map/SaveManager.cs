@@ -54,9 +54,9 @@ public class SaveManager : MonoBehaviour {
         for(int i = 0; i < numOfUpgrades; i++)
         {
             //Initialization of all values
-            upgrades[i] = i;
+            upgrades[i] = 1;
             //initialised as 1 2 3 4 5.
-            costs[i] = i+1;
+            costs[i] = 1;
         }
         currentScene = SceneManager.GetActiveScene();
 
@@ -142,7 +142,7 @@ public class SaveManager : MonoBehaviour {
         //Temp formula for goldDrop
         goldDrop = (float)(10 + level * 0.8 + DPS * 0.5 + BaseHP * 0.5);
         monsterDPS = (float)(5 + level * 0.6 + DPS * 0.6 + BaseHP * 0.6);
-        monsterHP = (float)(10 + level * 0.75 + DPS * 0.6 + BaseHP * 0.6);
+        monsterHP = (float)(10 + level * 0.75 + DPS * 0.6 + BaseHP * 0.6)+10f;
     }
 
     void calculateGestureProbability()
@@ -153,16 +153,16 @@ public class SaveManager : MonoBehaviour {
             {
                 case 1:
                     //Temp formula
-                    gestureProb[i] = 0.5;// 0.07f + (float)upgrades[3] * 0.07;
+                    gestureProb[i] = 0.07f + (float)upgrades[3] * 0.07;
                     break;
                 case 2:
-                    gestureProb[i] = 0.5;//0.07f + (float)upgrades[5] * 0.07;
+                    gestureProb[i] = 0.07f + (float)upgrades[5] * 0.07;
                     break;
                 case 3:
-                    gestureProb[i] = 0.5;//0.07f + (float)upgrades[7] * 0.07;
+                    gestureProb[i] = 0.07f + (float)upgrades[7] * 0.07;
                     break;
                 case 4:
-                    gestureProb[i] = 0.5;//0.07f + (float)upgrades[9] * 0.07;
+                    gestureProb[i] = 0.07f + (float)upgrades[9] * 0.07;
                     break;
             }
         }
@@ -176,16 +176,16 @@ public class SaveManager : MonoBehaviour {
             {
                 case 1:
                     //Temp formula
-                    gestureDMG[i] = 6 + SaveManager.Instance.upgrades[2] * 1.6;
+                    gestureDMG[i] = 6 + upgrades[2] * 1.6;
                     break;
                 case 2:
-                    gestureDMG[i] = 8 + SaveManager.Instance.upgrades[4] * 1.6;
+                    gestureDMG[i] = 8 + upgrades[4] * 1.6;
                     break;
                 case 3:
-                    gestureDMG[i] = 8 + SaveManager.Instance.upgrades[6] * 1.8;
+                    gestureDMG[i] = 8 + upgrades[6] * 1.8;
                     break;
                 case 4:
-                    gestureDMG[i] = 10 + SaveManager.Instance.upgrades[8] * 2.0;
+                    gestureDMG[i] = 10 + upgrades[8] * 2.0;
                     break;
             }
         }

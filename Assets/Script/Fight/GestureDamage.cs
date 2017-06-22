@@ -4,16 +4,15 @@ using UnityEngine;
 
 public class GestureDamage : MonoBehaviour {
 
-    public Transform slash;
-    public Transform lightning;
+    public GameObject slash;
+    public GameObject lightning;
+
 
     Animator slashAnim;
     Animator lightningAnim;
 	// Use this for initialization
 	void Start () {
-		
-        slashAnim = slash.GetComponent<Animator>();
-        lightningAnim = lightning.GetComponent<Animator>();  
+
 	}
 	
 	// Update is called once per frame
@@ -46,15 +45,23 @@ public class GestureDamage : MonoBehaviour {
 
     }
 
-    public static void damage(string gestureClass, float gestureScore)
+    public void damage(string gestureClass, float gestureScore)
     {
         switch (gestureClass)
         {
             case "Lightning":
                 if (FightManager.currEnemy != null && FightManager.currEnemy.GetComponent<SpriteRenderer>().isVisible)
                 {
-					lightning.position = FightManager.currPlayer.transform.position;
-                    lightningAnim.SetTrigger("On");                        
+                    GameObject tempLightning = Instantiate(lightning, FightManager.currPlayer.transform.position, Quaternion.identity);
+                    float lightningLength = tempLightning.GetComponent<SpriteRenderer>().bounds.size.x / 2;
+                    float dist = -FightManager.currPlayer.transform.position.x + FightManager.currEnemy.transform.position.x;
+                    float toScale = dist / lightningLength;
+                    tempLightning.transform.localScale = new Vector3(toScale/2, tempLightning.transform.localScale.y, tempLightning.transform.localScale.z);
+                    tempLightning.transform.position = FightManager.currPlayer.transform.position + new Vector3(lightningLength * tempLightning.transform.localScale.x, -1f, 0);
+
+                    lightningAnim = tempLightning.GetComponent<Animator>();
+                    lightningAnim.SetTrigger("On");
+                    StartCoroutine(destroyAfterTime(0.5f, tempLightning));
                     //Temp formula 
                     float damage =(float) SaveManager.Instance.gestureDMG[3];
                     FightManager.currEnemy.gameObject.GetComponent<enemyHealth>().addDamage(damage);
@@ -66,8 +73,11 @@ public class GestureDamage : MonoBehaviour {
             case "forward slash":
                 if (FightManager.currEnemy != null && FightManager.currEnemy.GetComponent<SpriteRenderer>().isVisible)
                 {
-					slash.position = FightManager.currPlayer.transform.position;
+                    GameObject tempSlash = Instantiate(slash, FightManager.currEnemy.transform.position, Quaternion.identity);
+
+                    slashAnim = tempSlash.GetComponent<Animator>();
                     slashAnim.SetTrigger("On");
+                    StartCoroutine(destroyAfterTime(0.5f, tempSlash));
                     //Temp formula 
                     float damage = (float)SaveManager.Instance.gestureDMG[2];
                     FightManager.currEnemy.gameObject.GetComponent<enemyHealth>().addDamage(damage);
@@ -80,6 +90,13 @@ public class GestureDamage : MonoBehaviour {
                 if (FightManager.currEnemy != null && FightManager.currEnemy.GetComponent<SpriteRenderer>().isVisible)
                 {
                     //Temp formula 
+
+                    GameObject tempSlash = Instantiate(slash, FightManager.currEnemy.transform.position, Quaternion.identity);
+                    tempSlash.transform.localScale = new Vector3(-tempSlash.transform.localScale.x, tempSlash.transform.localScale.y, tempSlash.transform.localScale.z);
+
+                    slashAnim = tempSlash.GetComponent<Animator>();
+                    slashAnim.SetTrigger("On");
+                    StartCoroutine(destroyAfterTime(0.5f, tempSlash));
                     float damage = (float)SaveManager.Instance.gestureDMG[1];
                     FightManager.currEnemy.gameObject.GetComponent<enemyHealth>().addDamage(damage);
 
@@ -100,5 +117,10 @@ public class GestureDamage : MonoBehaviour {
             
             
         }
+    }
+    IEnumerator destroyAfterTime(float waitTime, GameObject temp)
+    {
+        yield return new WaitForSecondsRealtime(waitTime);
+        Destroy(temp);
     }
 }
