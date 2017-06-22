@@ -80,6 +80,7 @@
   <ItemGroup>
     <Compile Include="Assets\Boomlagoon\JSON\JSONObject.cs" />
     <Compile Include="Assets\Boomlagoon\JSON\TestScene\JSONObjectTester.cs" />
+    <Compile Include="Assets\GPGSIds.cs" />
     <Compile Include="Assets\GooglePlayGames\BasicApi\Achievement.cs" />
     <Compile Include="Assets\GooglePlayGames\BasicApi\CommonStatusCodes.cs" />
     <Compile Include="Assets\GooglePlayGames\BasicApi\CommonTypes.cs" />
