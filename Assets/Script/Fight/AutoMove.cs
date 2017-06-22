@@ -9,6 +9,7 @@ public class AutoMove : MonoBehaviour {
     Animator anim;
     Rigidbody2D RB;
     public static bool playerContact;
+    public static bool damaged;
     enemyDamage enemyDMG;
 
     // Use this for initialization
@@ -17,28 +18,36 @@ public class AutoMove : MonoBehaviour {
         RB = gameObject.GetComponent<Rigidbody2D>();
 
         enemyDMG = gameObject.GetComponent<enemyDamage>();
-
+        damaged = false;
         playerContact = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-            if (gameObject.tag == "Monster" || gameObject.tag == "Boss")
-            {
-                if (enemyDMG.contact)
-                {
-                    playerContact = true;
-                    anim.SetInteger("State", 0);
-                }
-                else
-                    anim.SetInteger("State", 1);
 
+        if (gameObject.tag == "Monster" || gameObject.tag == "Boss")
+        {
+            if (enemyDMG.contact)
+            {
+                playerContact = true;
+                anim.SetInteger("State", 0);
             }
+
+            else
+            {
+                anim.SetInteger("State", 1);
+            }
+
+        }
+
+        if (!damaged)
+        {
             if (playerContact && gameObject.tag == "Player")
                 anim.SetInteger("State", 0);
             else
                 anim.SetInteger("State", 1);
+        }
     }
 
     void FixedUpdate ()
@@ -52,7 +61,7 @@ public class AutoMove : MonoBehaviour {
             }
             else if (gameObject.tag == "Monster")
             {
-                if (!enemyDMG.contact)
+                if (!enemyDMG.contact || !playerContact)
                 {
                     RB.velocity = new Vector2(-moveSpeed, RB.velocity.y);
 

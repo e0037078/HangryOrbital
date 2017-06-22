@@ -10,17 +10,22 @@ public class GestureDamage : MonoBehaviour {
 
     Animator slashAnim;
     Animator lightningAnim;
-	// Use this for initialization
-	void Start () {
 
-	}
+    public GameObject enemy;
+
+    // Use this for initialization
+    void Start ()
+    {
+        
+    }
 	
 	// Update is called once per frame
-	void FixedUpdate () {
+	void FixedUpdate () { 
         for (int i = 0; i < SaveManager.Instance.gestureProb.Length; i++)
         {
             if (Random.value <= SaveManager.calculateFixedUpdateProbability(SaveManager.Instance.gestureProb[i]))
             {
+
                 switch (i)
                 {
                     case 1:
@@ -44,9 +49,21 @@ public class GestureDamage : MonoBehaviour {
         }
 
     }
-
+    
     public void damage(string gestureClass, float gestureScore)
     {
+        // code to make enemy fly back
+        AutoMove.damaged = true;
+        AutoMove.playerContact = false;
+        Animator enemyAnim = FightManager.currEnemy.GetComponent<Animator>();
+        enemyDamage enemyDMG = FightManager.currEnemy.GetComponent<enemyDamage>();
+        // enemyDMG.contact = false;
+        enemyAnim.SetTrigger("IsPushed");
+
+        // code to make player fight
+        Animator playerAnim = FightManager.currPlayer.GetComponent<Animator>();
+        playerAnim.SetTrigger("isFighting");
+
         switch (gestureClass)
         {
             case "Lightning":
@@ -114,10 +131,10 @@ public class GestureDamage : MonoBehaviour {
                 }
                 Debug.Log(gestureClass + " " + gestureScore);
                 break;
-            
-            
         }
+            
     }
+    
     IEnumerator destroyAfterTime(float waitTime, GameObject temp)
     {
         yield return new WaitForSecondsRealtime(waitTime);

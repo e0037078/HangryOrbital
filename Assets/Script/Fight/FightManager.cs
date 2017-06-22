@@ -176,7 +176,7 @@ public class FightManager : MonoBehaviour {
 
     void dmgPlayer()
     {
-        if (currPlayer == null) // no more enemies
+        if (currPlayer == null) // no more players
         {
             // yay end
             Debug.Log("player null");

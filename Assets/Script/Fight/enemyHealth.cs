@@ -18,17 +18,18 @@ public class enemyHealth : MonoBehaviour {
 
     public float currentHealth;
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start () {
         currentHealth = enemyMaxHealth;
         enemySlider.maxValue = currentHealth;
         enemySlider.value = currentHealth;
 
         deathCounter = 0;
+
     }
-	
-	// Update is called once per frame
-	void Update () {
+
+    // Update is called once per frame
+    void Update () {
         
         if (Input.GetKeyDown(KeyCode.LeftArrow)|| Input.GetMouseButtonUp(0))
         {
@@ -46,11 +47,17 @@ public class enemyHealth : MonoBehaviour {
         {
             makeDead();
         }
+        
     }
+
+
+
     void makeDead()
     {
         //make sound
-        //death animation
+
+        this.GetComponent<Animator>(). SetBool("isDead", true); //death animation
+
         deathCounter++;
         AutoMove.playerContact = false;
         SaveManager.Instance.addGold();
@@ -59,7 +66,8 @@ public class enemyHealth : MonoBehaviour {
         {
             FightManager.winMap = true;
         }
-        Destroy(gameObject);  
+        StartCoroutine(destroyAfterTime(1f, gameObject));
+
         /* AudioSource.PlayClipAtPoint(deathKnell, transform.position);
         Instantiate(enemyDeathFX, transform.position, transform.rotation);
         if (drops)
@@ -68,7 +76,13 @@ public class enemyHealth : MonoBehaviour {
         }
         */
     }
-    
-    
+
+    IEnumerator destroyAfterTime(float waitTime, GameObject temp)
+    {
+        yield return new WaitForSecondsRealtime(waitTime);
+        Destroy(temp);
+    }
+
+
 
 }
