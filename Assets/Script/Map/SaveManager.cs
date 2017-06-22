@@ -33,12 +33,18 @@ public class SaveManager : MonoBehaviour {
     public double[] gestureProb = new double[4];
     public double[] gestureDMG = new double[4];
 
+    //SAVE DATA 
+    public float[] SaveArray;
+
+
+    public static int[] SAVE { get; set; } 
 
     // Use this for initialization
     void Awake () {
 
+        SAVE = new int[14];
         //Basically make sure that there is only one Instance of SaveManager
-        if(Instance != null)
+        if (Instance != null)
         {
             GameObject.Destroy(gameObject);
         }
@@ -49,7 +55,7 @@ public class SaveManager : MonoBehaviour {
             Instance = this;
         }
         //5 is estimated number of upgrades
-            costs =  new float[numOfUpgrades];
+        costs =  new float[numOfUpgrades];
         upgrades = new int[numOfUpgrades]; 
         for(int i = 0; i < numOfUpgrades; i++)
         {
@@ -191,8 +197,122 @@ public class SaveManager : MonoBehaviour {
         }
     }
 
+
+    void calculateCost()
+    {
+        for(int i =0;i < numOfUpgrades; i++)
+        {
+            //temporary formula
+            costs[i] = i * Mathf.Pow(1.08f, upgrades[i]);
+        }
+    }
+
     public static double calculateFixedUpdateProbability(double probability)
     {
         return 1-System.Math.Pow(10, System.Math.Log10(probability) / 3000);
+    }
+
+
+    public float[] buildSaveArray()
+    {
+        SaveArray = new float[12];
+        for(int i = 0; i< SaveArray.Length; i++)
+        {
+            switch (i)
+            {
+                case 1:
+                    SaveArray[i] = level;
+                    break;
+                case 2:
+                    SaveArray[i] = gold;
+                    break;
+ 
+                default:
+                    SaveArray[i] = upgrades[i - 2];
+                break;
+            }
+        }
+        return SaveArray;
+    }
+    public void loadSaveArray(float[] SaveArray)
+    {
+        for (int i = 0; i < SaveArray.Length; i++)
+        {
+            switch (i)
+            {
+                case 1:
+                    level = (int)SaveArray[i];
+                    break;
+                case 2:
+                    gold = SaveArray[i];
+                    break;
+
+                default:
+                    upgrades[i - 2] = (int)SaveArray[i];
+                    break;
+            }
+        }
+        calculateDPS();
+        calculateHP();
+        calculateCost();
+
+        calculateGestureProbability();
+        calculateGestureDMG();
+        calculateMonsterStats();
+    }
+
+    public static void updateSave()
+    {
+        for (int i = 0; i < SAVE.Length; i++)
+        {
+            switch (i)
+            {
+                case 12:
+                    SAVE[i] = SaveManager.Instance.level;
+                    break;
+                case 13:
+                    SAVE[i] = (int)SaveManager.Instance.gold;
+                    break;
+
+                default:
+                    SAVE[i] = SaveManager.Instance.upgrades[i];
+                    break;
+            }
+        }
+    }
+    public static void loadSave()
+    {
+        for (int i = 0; i < SAVE.Length; i++)
+        {
+            switch (i)
+            {
+                case 12:
+                    SaveManager.Instance.level = (int)SAVE[i];
+                    break;
+                case 13:
+                    SaveManager.Instance.gold = SAVE[i];
+                    break;
+
+                default:
+                    SaveManager.Instance.upgrades[i] = (int)SAVE[i];
+                    break;
+            }
+        }
+        SaveManager.Instance.calculateDPS();
+        SaveManager.Instance.calculateHP();
+        SaveManager.Instance.calculateCost();
+
+        SaveManager.Instance.calculateGestureProbability();
+        SaveManager.Instance.calculateGestureDMG();
+        SaveManager.Instance.calculateMonsterStats();
+    }
+    public void toFight()
+    {
+        SceneManager.LoadScene("Fight scene");
+
+    }
+    public void toCity()
+    {
+        SceneManager.LoadScene("City map");
     }
 }

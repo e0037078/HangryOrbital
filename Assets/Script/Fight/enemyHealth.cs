@@ -56,7 +56,7 @@ public class enemyHealth : MonoBehaviour {
     {
         //make sound
 
-        this.GetComponent<Animator>().SetBool("isDead", true); //death animation
+        //this.GetComponent<Animator>().SetBool("isDead", true); //death animation
 
         deathCounter++;
         AutoMove.playerContact = false;

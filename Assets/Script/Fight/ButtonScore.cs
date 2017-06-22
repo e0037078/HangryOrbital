@@ -36,10 +36,16 @@ public class ButtonScore : TouchManager {
     }
     void again()
     {
+        SaveManager.updateSave();
+        PlayGamesScript.Instance.SaveData();
+        SaveManager.loadSave();
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
     void backToMap()
     {
+        SaveManager.updateSave();
+        PlayGamesScript.Instance.SaveData();
+        SaveManager.loadSave();
         SceneManager.LoadScene("City map");
     }
 }
