@@ -72,6 +72,7 @@ public class PlayGamesScript : MonoBehaviour
 
             // Show the user's name
             authStatus.text = "Signed in as: " + Social.localUser.userName;
+            LoadData();
         }
         else
         {
@@ -86,7 +87,7 @@ public class PlayGamesScript : MonoBehaviour
     //making a string out of game data (highscores...)
     string GameDataToString()
     {
-        Debug.Log("(Hangry) GAMEDATA TO STRING : \n" + JsonUtil.CollectionToJsonString(SaveManager.SAVE, "myKey"));
+        Debug.Log("(Hangry) GAMEDATA TO STRING : " + JsonUtil.CollectionToJsonString(SaveManager.SAVE, "myKey"));
         return JsonUtil.CollectionToJsonString(SaveManager.SAVE, "myKey");
     }
 
@@ -98,6 +99,7 @@ public class PlayGamesScript : MonoBehaviour
 
         if (cloudData == string.Empty)
         {
+            Debug.Log("(Hangry)" + localData + " chosen instead of " + cloudData);
             StringToGameData(localData);
             isCloudDataLoaded = true;
             return;
@@ -106,7 +108,10 @@ public class PlayGamesScript : MonoBehaviour
 
         if (localData == string.Empty)
         {
+            Debug.Log("(Hangry)" + cloudData + " chosen instead of " + localData);
+            printLoop(cloudArray);
             SaveManager.SAVE = cloudArray;
+            SaveManager.loadSave();
             PlayerPrefs.SetString(SAVE_NAME, cloudData);
             isCloudDataLoaded = true;
             return;
@@ -122,6 +127,7 @@ public class PlayGamesScript : MonoBehaviour
             for (int i = 0; i < cloudArray.Length; i++)
                 if (cloudArray[i] > localArray[i]) //cloud save is more up to date
                 {
+                    Debug.Log("(Hangry) cloudData" + "'s "+ cloudArray[i]+" >" + "localData's " + localArray[i]);
                     //set local save to be equal to the cloud save
                     PlayerPrefs.SetString(SAVE_NAME, cloudData);
                 }
@@ -133,8 +139,10 @@ public class PlayGamesScript : MonoBehaviour
                 //comparing integers, if one int has higher score in it than the other, we update it
                 if (localArray[i] > cloudArray[i])
                 {
+                    Debug.Log("(Hangry) localData" + "'s " + localArray[i] + " >" + "cloudData's " + cloudArray[i]);
                     //update the cloud save, first set CloudVariables to be equal to localSave
                     SaveManager.SAVE = localArray;
+                    SaveManager.loadSave();
                     isCloudDataLoaded = true;
                     //saving the updated CloudVariables to the cloud
                     SaveData();
@@ -143,7 +151,10 @@ public class PlayGamesScript : MonoBehaviour
         }
         //if the code above doesn't trigger return and the code below executes,
         //cloud save and local save are identical, so we can load either one
+        printLoop(cloudArray);
+        Debug.Log("(Hangry) chosen");
         SaveManager.SAVE = cloudArray;
+        SaveManager.loadSave();
         isCloudDataLoaded = true;
     }
 
@@ -151,8 +162,12 @@ public class PlayGamesScript : MonoBehaviour
     void StringToGameData(string localData)
     {
         if (localData != string.Empty)
+        {
             SaveManager.SAVE = JsonUtil.JsonStringToArray(localData, "myKey",
                                                                         str => int.Parse(str));
+            SaveManager.loadSave();
+        }
+        
         Debug.Log("(Hangry) StringTOGameDATA LOCAL");
     }
 
@@ -164,6 +179,7 @@ public class PlayGamesScript : MonoBehaviour
         if (PlayGamesPlatform.Instance.localUser.authenticated)
         {
             isSaving = false;
+
             PlayGamesPlatform.Instance.SavedGame.OpenWithManualConflictResolution(SAVE_NAME,
                 DataSource.ReadCacheOrNetwork, true, ResolveConflict, OnSavedGameOpened);
             SaveManager.loadSave();
@@ -285,6 +301,7 @@ public class PlayGamesScript : MonoBehaviour
             //if we're LOADING game data
             if (!isSaving)
             {
+                Debug.Log("(Hangry) OnSavedGameOpened loading cloud game!");
                 LoadGame(game);
                 Debug.Log("(Hangry) OnSavedGameOpened loaded cloud game!");
 
@@ -351,7 +368,7 @@ public class PlayGamesScript : MonoBehaviour
         //if reading of the data was successful
         if (status == SavedGameRequestStatus.Success)
         {
-            Debug.Log("(Hangry) save read success!\n read : ");
+            Debug.Log("(Hangry) save read success! read : ");
             Debug.Log("(Hangry)"+System.BitConverter.ToString(savedData));
             printLoop(savedData);
             string cloudDataString;
@@ -380,8 +397,8 @@ public class PlayGamesScript : MonoBehaviour
             Debug.Log("(Hangry) Data writting success !");
         else
             Debug.Log("(Hangry) Data writting fail =( !");
-
-
+        //LoadData();
+        /*
         // CALLBACK: Handle the result of a read, which should return metadata
         Action<SavedGameRequestStatus, ISavedGameMetadata> readCallback =
         (SavedGameRequestStatus status2, ISavedGameMetadata game2) => {
@@ -397,6 +414,7 @@ public class PlayGamesScript : MonoBehaviour
         // Read the current data and kick off the callback chain
         Debug.Log("(Hangry) Saved Game: Reading");
         ReadSavedGame(SAVE_NAME, readCallback);
+        */
 
     }
     public void ReadSavedGame(string filename,
