@@ -95,7 +95,6 @@ public class PlayerManager : MonoBehaviour
         else if (collision.gameObject.tag == "Monster")
         {
             // should add some animation like pokemon hahaha
-            SceneManager.LoadScene("Fight scene");
         }
         // in future, can add on collision with PORTAL --> change map scene
     }
