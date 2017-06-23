@@ -66,7 +66,8 @@ public class enemyHealth : MonoBehaviour {
         {
             FightManager.winMap = true;
         }
-        StartCoroutine(destroyAfterTime(1f, gameObject));
+        //Length of animation
+        StartCoroutine(destroyAfterTime(0.6f, gameObject));
 
         /* AudioSource.PlayClipAtPoint(deathKnell, transform.position);
         Instantiate(enemyDeathFX, transform.position, transform.rotation);

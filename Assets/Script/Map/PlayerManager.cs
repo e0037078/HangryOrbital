@@ -92,9 +92,10 @@ public class PlayerManager : MonoBehaviour
             speed = 0;
             anim.SetInteger("State", 1);
         }
-        else if (collision.gameObject.tag == "Monster")
+        else if (collision.gameObject.tag == "City Monster")
         {
             // should add some animation like pokemon hahaha
+            SceneManager.LoadScene("Fight scene");
         }
         // in future, can add on collision with PORTAL --> change map scene
     }
