@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System;
 
 
 public class SaveManager : MonoBehaviour {
@@ -42,7 +43,7 @@ public class SaveManager : MonoBehaviour {
     // Use this for initialization
     void Awake () {
 
-        SAVE = new int[14];
+        SAVE = new int[15];
         //Basically make sure that there is only one Instance of SaveManager
         if (Instance != null)
         {
@@ -273,6 +274,9 @@ public class SaveManager : MonoBehaviour {
                 case 13:
                     SAVE[i] = (int)SaveManager.Instance.gold;
                     break;
+                case 14:
+                    SAVE[i] = getTime();
+                    break;
 
                 default:
                     SAVE[i] = SaveManager.Instance.upgrades[i];
@@ -291,6 +295,9 @@ public class SaveManager : MonoBehaviour {
                     break;
                 case 13:
                     SaveManager.Instance.gold = SAVE[i];
+                    break;
+                case 14:
+                    calculateOfflineProgress(getTime() - SAVE[i]);
                     break;
 
                 default:
@@ -314,5 +321,13 @@ public class SaveManager : MonoBehaviour {
     public void toCity()
     {
         SceneManager.LoadScene("City map");
+    }
+    public static int getTime()
+    {
+        return (int)((DateTime.Now.ToUniversalTime() - new DateTime(2000, 1, 1)).TotalSeconds + 0.5);
+    }
+    void calculateOfflineProgress(int time)
+    {
+        gold = time/60/60;
     }
 }
