@@ -68,32 +68,35 @@ public class ButtonShop : TouchManager {
 
     void toggleSetting()
     {
-        if (!shopOn&&!settingOn&&!paused)
+        if (!shopOn)
         {
-            settingOn = true;
-            // settingAnim.SetBool("Pause", true);
-            settingMenu.GetComponent<Canvas>().enabled = true;
-            togglePause();
+            if (!settingOn)
+            {
+                settingOn = true;
+                settingMenu.GetComponent<Canvas>().enabled = true;
 
+                paused = false;
+                togglePause();
+            }
+            else if (settingOn)
+            {
+                settingOn = false;
+                settingMenu.GetComponent<Canvas>().enabled = false;
+
+                paused = true;
+                togglePause();
+            }
         }
         else if (shopOn)
         {
-            shopOn = false;
+
             settingOn = true;
+            shopOn = false;
 
-            // settingAnim.SetBool("Pause", true);
-            // shopAnim.gameObject.SetActive(false);
-            settingMenu.GetComponent<Canvas>().enabled = true;
-            shopMenu.GetComponent<Canvas>().enabled = false;
-            
-        }
-        else if(settingOn&&paused)
-        {
-            settingOn = false ;
             // settingAnim.SetBool("Pause", false);
-            settingMenu.GetComponent<Canvas>().enabled = false;
-            togglePause();
-
+            shopMenu.GetComponent<Canvas>().enabled = false;
+            //  shopAnim.gameObject.SetActive(true);
+            settingMenu.GetComponent<Canvas>().enabled = true;
         }
     }
 

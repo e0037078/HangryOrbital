@@ -275,7 +275,7 @@ public class SaveManager : MonoBehaviour {
                     SAVE[i] = (int)SaveManager.Instance.gold;
                     break;
                 case 14:
-                    SAVE[i] = getTime();
+                    //SAVE[i] = getTime();
                     break;
 
                 default:
@@ -297,8 +297,8 @@ public class SaveManager : MonoBehaviour {
                     SaveManager.Instance.gold = SAVE[i];
                     break;
                 case 14:
-                    calculateOfflineProgress(getTime() - SAVE[i]);
-                    break;
+                    //calculateOfflineProgress(getTime() - SAVE[i]);
+                    break; 
 
                 default:
                     SaveManager.Instance.upgrades[i] = (int)SAVE[i];
@@ -326,8 +326,9 @@ public class SaveManager : MonoBehaviour {
     {
         return (int)((DateTime.Now.ToUniversalTime() - new DateTime(2000, 1, 1)).TotalSeconds + 0.5);
     }
-    void calculateOfflineProgress(int time)
+ /*   void calculateOfflineProgress(int time)
     {
         gold = time/60/60;
     }
+ */
 }
