@@ -1,11 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ButtonShop : TouchManager {
 
     public enum type {SettingToggleButton, ShopToggleButton};
     public type buttonType;
+    public Button settingResume = null;
 
     public GameObject settingMenu = null;
     Animator settingAnim;
@@ -28,6 +30,7 @@ public class ButtonShop : TouchManager {
         settingAnim = settingMenu.GetComponent<Animator>();
         // shopAnim = shopMenu.GetComponent<Animator>();
         save = SaveManager.Instance;
+        settingResume.onClick.AddListener(ResumeGame);
 
         if (paused)
         {
@@ -38,6 +41,20 @@ public class ButtonShop : TouchManager {
     // Update is called once per frame
     void Update () {
         touchInput(buttonTexture);
+    }
+
+    void ResumeGame()
+    {
+        Debug.Log("resume game");
+
+        if (settingOn)
+        {
+            settingMenu.GetComponent<Canvas>().enabled = false;
+            settingOn = false;
+            paused = true;
+            togglePause();
+            Debug.Log("resume game");
+        }
     }
 
     void OnFirstTouchBegan()
@@ -77,6 +94,7 @@ public class ButtonShop : TouchManager {
 
                 paused = false;
                 togglePause();
+
             }
             else if (settingOn)
             {
@@ -98,9 +116,10 @@ public class ButtonShop : TouchManager {
             //  shopAnim.gameObject.SetActive(true);
             settingMenu.GetComponent<Canvas>().enabled = true;
         }
+
     }
 
-    
+
     void toggleShop()
     {
         if (!settingOn)
@@ -147,11 +166,10 @@ public class ButtonShop : TouchManager {
             originalTimeScale = Time.timeScale;
             Time.timeScale = 0f;
         }
-        else if(paused)
+        else if (paused)
         {
             paused = !paused;
             Time.timeScale = originalTimeScale;
         }
     }
-
 }

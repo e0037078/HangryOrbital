@@ -38,13 +38,23 @@ public class playerHealth : MonoBehaviour {
 
     public void addDamage(float damage)
     {
-        if (damage <= 0) return;
+        if (damage <= 0)
+            return;
 
         healthSlider.gameObject.SetActive(true);
         currentHealth -= damage;
         healthSlider.value = currentHealth;
         damaged = true;
 
+        /*
+        // player damaged animation
+        gameObject.GetComponent<Animator>().SetTrigger("isPushed");
+        
+        if (AutoMove.playerContact == true)
+        {
+            gameObject.GetComponent<Animator>().SetInteger("State", 0);
+        }
+        */
         //playerAS.clip = playerHurt;
         //playerAS.Play();
 
@@ -58,12 +68,10 @@ public class playerHealth : MonoBehaviour {
 
     public void addHealth(float heathAmount)
     {
-     
         currentHealth += heathAmount;
         if (currentHealth > fullHealth)
             currentHealth = fullHealth;
         healthSlider.value = currentHealth;
-
     }
 
     public void makeDead()

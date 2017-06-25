@@ -18,7 +18,7 @@ public class AutoMove : MonoBehaviour {
         RB = gameObject.GetComponent<Rigidbody2D>();
 
         enemyDMG = gameObject.GetComponent<enemyDamage>();
-        damaged = false;
+
         playerContact = false;
     }
 
@@ -41,17 +41,14 @@ public class AutoMove : MonoBehaviour {
             }
 
         }
+        else if (playerContact && gameObject.tag == "Player")
+        { 
+            anim.SetInteger("State", 0);
 
-        if (!damaged)
-        {
-            if (playerContact && gameObject.tag == "Player")
-            {
-                anim.SetInteger("State", 0);
-                Debug.Log("!damaged");
-            }
-            else
-                anim.SetInteger("State", 1);
         }
+        else
+            anim.SetInteger("State", 1);
+
     }
 
     void FixedUpdate ()
