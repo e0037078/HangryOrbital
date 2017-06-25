@@ -26,16 +26,17 @@ public class MusicManager : MonoBehaviour
 
     private void FixedUpdate()
     {
-
-        if (gameObject.scene.name == "Fight scene")
+        if (!muteMusic)
         {
-            PlayBGM("BGM2");
+            if (gameObject.scene.name == "Fight scene")
+            {
+                PlayBGM("BGM2");
+            }
+            else
+            {
+                PlayBGM("BGM1");
+            }
         }
-        else
-        {
-            PlayBGM("BGM1");
-        }
-
     }
 
     public static void PlayBGM(string bgm)

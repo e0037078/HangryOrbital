@@ -63,7 +63,7 @@ public class SaveManager : MonoBehaviour {
             //Initialization of all values
             upgrades[i] = 1;
             //initialised as 1 2 3 4 5.
-            costs[i] = 1;
+            costs[i] = 100;
         }
         currentScene = SceneManager.GetActiveScene();
 
@@ -201,10 +201,13 @@ public class SaveManager : MonoBehaviour {
 
     void calculateCost()
     {
-        for(int i =0;i < numOfUpgrades; i++)
+        for(int i = 0;i < numOfUpgrades; i++)
         {
             //temporary formula
-            costs[i] = i * Mathf.Pow(1.08f, upgrades[i]);
+            if (i == 0)
+                costs[i] = 1.00f;
+            else
+                costs[i] = i * Mathf.Pow(1.08f, upgrades[i]);
         }
     }
 

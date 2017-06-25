@@ -49,7 +49,7 @@ public class ButtonShop : TouchManager {
 
     void ResumeGame()
     {
-        Debug.Log("resume game");
+        SfxManager.PlaySound("Click");
 
         if (settingOn)
         {
@@ -66,10 +66,12 @@ public class ButtonShop : TouchManager {
         switch (buttonType)
         {
             case type.SettingToggleButton:
+                SfxManager.PlaySound("Click");
                 toggleSetting();
                 break;
 
             case type.ShopToggleButton:
+                SfxManager.PlaySound("Click");
                 toggleShop();
                 break;
         } 

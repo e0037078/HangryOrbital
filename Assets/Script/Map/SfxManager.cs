@@ -13,6 +13,7 @@ public class SfxManager : MonoBehaviour
     public static AudioClip forwardSlash;
     public static AudioClip backwardSlash;
     public static AudioClip zap;
+    public static AudioClip click;
 
     public static bool muteSfx;
 
@@ -29,6 +30,7 @@ public class SfxManager : MonoBehaviour
         forwardSlash = Resources.Load<AudioClip>("forwardSlash");
         backwardSlash = Resources.Load<AudioClip>("backwardSlash");
         zap = Resources.Load<AudioClip>("Zap");
+        click = Resources.Load<AudioClip>("Click");
 
         audioSrc = GetComponent<AudioSource>();
 
@@ -36,7 +38,6 @@ public class SfxManager : MonoBehaviour
 
     public static void PlaySound(string clip)
     {
-       
         switch (clip)
         {
             case ("Walking"):
@@ -68,6 +69,9 @@ public class SfxManager : MonoBehaviour
                 if (audioSrc.isPlaying)
                     audioSrc.Stop();
                 audioSrc.PlayOneShot(zap);
+                break;
+            case ("Click"):
+                audioSrc.PlayOneShot(click);
                 break;
         }
     }

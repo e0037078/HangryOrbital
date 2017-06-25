@@ -33,6 +33,7 @@ public class SampleButton : MonoBehaviour
 
     public void HandleClick()
     {
+        SfxManager.PlaySound("Click");
         scrollList.TryTransferItemToOtherShop(item);
     }
 }

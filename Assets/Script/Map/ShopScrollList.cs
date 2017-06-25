@@ -26,11 +26,14 @@ public class ShopScrollList : MonoBehaviour
     public GameObject unsuccessfulDisplay = null;
 
     public GameObject promptBuy = null;
+    public Button yes = null;
+    public Button no = null;
 
 
     // Use this for initialization
     void Start()
     {
+        promptBuy.SetActive(false);
         RefreshDisplay();
     }
 
@@ -100,18 +103,19 @@ public class ShopScrollList : MonoBehaviour
             unsuccessfulDisplay.SetActive(true);
             StartCoroutine(closeDisplayAfterTime(1f));
             unsuccessfulDisplay.GetComponent<Button>().onClick.AddListener(closeUDisplay);
-;            
         }
         Debug.Log("attempted");
     }
 
     void closeSDisplay()
     {
+        SfxManager.PlaySound("Click");
         successfulDisplay.SetActive(false);
     }
 
     void closeUDisplay()
     {
+        SfxManager.PlaySound("Click");
         unsuccessfulDisplay.SetActive(false);
     }
 

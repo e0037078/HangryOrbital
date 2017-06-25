@@ -45,6 +45,7 @@ public class PlayGamesScript : MonoBehaviour
 
     public void SignIn()
     {
+        SfxManager.PlaySound("Click");
         if (!PlayGamesPlatform.Instance.localUser.authenticated)
         {
             // Sign in with Play Game Services, showing the consent dialog

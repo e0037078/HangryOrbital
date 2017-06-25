@@ -292,6 +292,7 @@
     <Compile Include="Assets\Script\Map\AutoMoveMonster.cs" />
     <Compile Include="Assets\Script\Map\ButtonMovement.cs" />
     <Compile Include="Assets\Script\Map\ButtonShop.cs" />
+    <Compile Include="Assets\Script\Map\ExitGame.cs" />
     <Compile Include="Assets\Script\Map\MeetMonster.cs" />
     <Compile Include="Assets\Script\Map\MusicManager.cs" />
     <Compile Include="Assets\Script\Map\PlatformGenerator.cs" />
