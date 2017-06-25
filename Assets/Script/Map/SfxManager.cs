@@ -30,7 +30,7 @@ public class SfxManager : MonoBehaviour
         forwardSlash = Resources.Load<AudioClip>("forwardSlash");
         backwardSlash = Resources.Load<AudioClip>("backwardSlash");
         zap = Resources.Load<AudioClip>("Zap");
-        click = Resources.Load<AudioClip>("Click");
+        click = Resources.Load<AudioClip>("ButtonClick");
 
         audioSrc = GetComponent<AudioSource>();
 

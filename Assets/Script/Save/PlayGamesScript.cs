@@ -72,7 +72,7 @@ public class PlayGamesScript : MonoBehaviour
             signInButtonText.text = "SIGN OUT";
 
             // Show the user's name
-            authStatus.text = "Signed in as: " + Social.localUser.userName;
+            //authStatus.text = "Signed in as: " + Social.localUser.userName;
             LoadData();
         }
         else

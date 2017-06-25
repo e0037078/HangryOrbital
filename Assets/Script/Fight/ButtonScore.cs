@@ -36,6 +36,10 @@ public class ButtonScore : TouchManager {
     }
     void again()
     {
+        if (ButtonShop.paused)
+        {
+            ButtonShop.togglePause();
+        }
         SaveManager.updateSave();
         PlayGamesScript.Instance.SaveData();
         SaveManager.loadSave();
@@ -43,6 +47,10 @@ public class ButtonScore : TouchManager {
     }
     void backToMap()
     {
+        if (ButtonShop.paused)
+        {
+            ButtonShop.togglePause();
+        }
         SaveManager.updateSave();
         PlayGamesScript.Instance.SaveData();
         SaveManager.loadSave();
