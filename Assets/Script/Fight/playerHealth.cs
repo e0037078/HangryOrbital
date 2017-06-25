@@ -108,8 +108,18 @@ public class playerHealth : MonoBehaviour {
 
     void GameOver()
     {
+        MusicManager.StopBGM();
+        SfxManager.PlaySound("GameOver");
+        StartCoroutine(playAfterTime(1f));
+        
         ButtonShop.paused = false;
         ButtonShop.togglePause();
         gameOverScreen.SetActive(true);
+    }
+
+    IEnumerator playAfterTime(float waitTime)
+    {
+        yield return new WaitForSecondsRealtime(waitTime);
+        MusicManager.PlayBGM("BGM2");
     }
 }

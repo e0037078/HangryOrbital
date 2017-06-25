@@ -47,12 +47,12 @@ public class enemyHealth : MonoBehaviour {
         {
             makeDead();
         }
-        
     }
 
     void makeDead()
     {
         //make sound
+        SfxManager.PlaySound("EnemyDie");
 
         this.GetComponent<Animator>().SetBool("isDead", true); //death animation
 
@@ -62,6 +62,9 @@ public class enemyHealth : MonoBehaviour {
         //Debug.Log(SaveManager.Instance.gold);
         if(gameObject.tag == "Boss")
         {
+            MusicManager.StopBGM();
+            SfxManager.PlaySound("PlayerWin");
+            StartCoroutine(playAfterTime(1f));
             FightManager.winMap = true;
         }
         //Length of animation
@@ -82,6 +85,9 @@ public class enemyHealth : MonoBehaviour {
         Destroy(temp);
     }
 
-
-
+    IEnumerator playAfterTime(float waitTime)
+    {
+        yield return new WaitForSecondsRealtime(waitTime);
+        MusicManager.PlayBGM("BGM2");
+    }
 }

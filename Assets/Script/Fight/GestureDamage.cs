@@ -21,7 +21,6 @@ public class GestureDamage : MonoBehaviour {
 
     // Update is called once per frame
     void FixedUpdate () { 
-        /*
         for (int i = 0; i < SaveManager.Instance.gestureProb.Length; i++)
         {
             if (Random.value <= SaveManager.calculateFixedUpdateProbability(SaveManager.Instance.gestureProb[i]))
@@ -48,7 +47,6 @@ public class GestureDamage : MonoBehaviour {
                 }
             }
         }
-        */
     }
     
     public void damage(string gestureClass, float gestureScore)
@@ -70,6 +68,8 @@ public class GestureDamage : MonoBehaviour {
             case "Lightning":
                 if (FightManager.currEnemy != null && FightManager.currEnemy.GetComponent<SpriteRenderer>().isVisible)
                 {
+                    SfxManager.PlaySound("Zap");
+
                     GameObject tempLightning = Instantiate(lightning, FightManager.currPlayer.transform.position, Quaternion.identity);
                     float lightningLength = tempLightning.GetComponent<SpriteRenderer>().bounds.size.x / 2;
                     float dist = -FightManager.currPlayer.transform.position.x + FightManager.currEnemy.transform.position.x;
@@ -93,6 +93,7 @@ public class GestureDamage : MonoBehaviour {
                 {
                     GameObject tempSlash = Instantiate(slash, FightManager.currEnemy.transform.position, Quaternion.identity);
 
+                    SfxManager.PlaySound("ForwardSlash");
                     slashAnim = tempSlash.GetComponent<Animator>();
                     slashAnim.SetTrigger("On");
                     StartCoroutine(destroyAfterTime(0.5f, tempSlash));
@@ -112,6 +113,7 @@ public class GestureDamage : MonoBehaviour {
                     GameObject tempSlash = Instantiate(slash, FightManager.currEnemy.transform.position, Quaternion.identity);
                     tempSlash.transform.localScale = new Vector3(-tempSlash.transform.localScale.x, tempSlash.transform.localScale.y, tempSlash.transform.localScale.z);
 
+                    SfxManager.PlaySound("BackwardSlash");
                     slashAnim = tempSlash.GetComponent<Animator>();
                     slashAnim.SetTrigger("On");
                     StartCoroutine(destroyAfterTime(0.5f, tempSlash));

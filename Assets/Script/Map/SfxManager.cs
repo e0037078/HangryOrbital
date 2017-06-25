@@ -10,6 +10,9 @@ public class SfxManager : MonoBehaviour
     public static AudioClip gameOver;
     public static AudioClip playerWin;
     public static AudioClip enemyDie;
+    public static AudioClip forwardSlash;
+    public static AudioClip backwardSlash;
+    public static AudioClip zap;
 
     public static bool muteSfx;
 
@@ -22,6 +25,10 @@ public class SfxManager : MonoBehaviour
         playerWalk = Resources.Load<AudioClip>("Walking");
         playerJump = Resources.Load<AudioClip>("Jumping");
         gameOver = Resources.Load<AudioClip>("GameOver");
+        enemyDie = Resources.Load<AudioClip>("EnemyDie");
+        forwardSlash = Resources.Load<AudioClip>("forwardSlash");
+        backwardSlash = Resources.Load<AudioClip>("backwardSlash");
+        zap = Resources.Load<AudioClip>("Zap");
 
         audioSrc = GetComponent<AudioSource>();
 
@@ -39,8 +46,28 @@ public class SfxManager : MonoBehaviour
             case ("Jumping"):
                 audioSrc.PlayOneShot(playerJump);
                 break;
-            case ("gameOver"):
+            case ("GameOver"):
                 audioSrc.PlayOneShot(gameOver);
+                break;
+            case ("EnemyDie"):
+                if (audioSrc.isPlaying)
+                    audioSrc.Stop();
+                audioSrc.PlayOneShot(enemyDie);
+                break;
+            case ("ForwardSlash"):
+                if (audioSrc.isPlaying)
+                    audioSrc.Stop();
+                audioSrc.PlayOneShot(forwardSlash);
+                break;
+            case ("BackwardSlash"):
+                if (audioSrc.isPlaying)
+                    audioSrc.Stop();
+                audioSrc.PlayOneShot(backwardSlash);
+                break;
+            case ("Zap"):
+                if (audioSrc.isPlaying)
+                    audioSrc.Stop();
+                audioSrc.PlayOneShot(zap);
                 break;
         }
     }

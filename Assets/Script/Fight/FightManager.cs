@@ -72,8 +72,6 @@ public class FightManager : MonoBehaviour {
             currPlayer = GetClosestPlayer(currEnemy);
         }
 
-        
-
         if (!bossSpawned && enemyHealth.deathCounter >= killsToActivateBoss)
         {
             bossButton.SetActive(true);

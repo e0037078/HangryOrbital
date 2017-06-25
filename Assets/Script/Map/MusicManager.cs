@@ -21,7 +21,7 @@ public class MusicManager : MonoBehaviour
         BGM2 = Resources.Load<AudioClip>("BGM2");
 
         audioSrc = GetComponent<AudioSource>();
-
+        audioSrc.volume = 0.3f;
     }
 
     private void FixedUpdate()
@@ -52,5 +52,10 @@ public class MusicManager : MonoBehaviour
                 break;
                 // can add more bgm for diff themes in future
         }
+    }
+
+    public static void StopBGM()
+    {
+        audioSrc.Stop();
     }
 }
