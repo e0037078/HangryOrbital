@@ -40,8 +40,6 @@ public static class ExtensionMethods
 
     void FixedUpdate()
     {
-        myAnim.SetInteger("State", 1);
-
         //NOTE: This script makes use of the .toVector2() extension method.
         //Be sure you have the following script in your project to avoid errors
         //http://www.devination.com/2015/07/unity-extension-method-tutorial.html

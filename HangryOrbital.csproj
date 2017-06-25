@@ -293,12 +293,15 @@
     <Compile Include="Assets\Script\Map\ButtonMovement.cs" />
     <Compile Include="Assets\Script\Map\ButtonShop.cs" />
     <Compile Include="Assets\Script\Map\MeetMonster.cs" />
+    <Compile Include="Assets\Script\Map\MusicManager.cs" />
     <Compile Include="Assets\Script\Map\PlatformGenerator.cs" />
     <Compile Include="Assets\Script\Map\PlayerManager.cs" />
     <Compile Include="Assets\Script\Map\SampleButton.cs" />
     <Compile Include="Assets\Script\Map\SaveManager.cs" />
+    <Compile Include="Assets\Script\Map\SfxManager.cs" />
     <Compile Include="Assets\Script\Map\ShopScrollList.cs" />
     <Compile Include="Assets\Script\Map\SimpleObjectPool.cs" />
+    <Compile Include="Assets\Script\Map\SoundMusicButton.cs" />
     <Compile Include="Assets\Script\Map\TouchManager.cs" />
     <Compile Include="Assets\Script\Map\cameraFollow2DPlatformer.cs" />
     <Compile Include="Assets\Script\Save\JsonUtil.cs" />

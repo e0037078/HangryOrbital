@@ -115,6 +115,7 @@ public class ButtonMovement : TouchManager {
 
     void Left()
     {
+        SfxManager.PlaySound("Walking");
         if (facingRight)
         {
             Flip();
@@ -129,6 +130,7 @@ public class ButtonMovement : TouchManager {
 
     void Right()
     {
+        SfxManager.PlaySound("Walking");
         if (!facingRight)
         {
             Flip();
@@ -143,6 +145,7 @@ public class ButtonMovement : TouchManager {
     
     void Jump()
     {
+        SfxManager.PlaySound("Jumping");
         playerRB.AddForce(Vector2.up * jumpHeight, ForceMode2D.Impulse);
         playerAnim.SetInteger("State", 2);
         isJumping = true;

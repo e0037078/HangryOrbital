@@ -57,7 +57,7 @@ public class PlayGamesScript : MonoBehaviour
             PlayGamesPlatform.Instance.SignOut();
 
             // Reset UI
-            signInButtonText.text = "Sign In";
+            signInButtonText.text = "SIGN IN";
             authStatus.text = "";
         }
     }
@@ -68,7 +68,7 @@ public class PlayGamesScript : MonoBehaviour
             Debug.Log("(Hangry) Signed in!");
 
             // Change sign-in button text
-            signInButtonText.text = "Sign out";
+            signInButtonText.text = "SIGN OUT";
 
             // Show the user's name
             authStatus.text = "Signed in as: " + Social.localUser.userName;
@@ -79,7 +79,7 @@ public class PlayGamesScript : MonoBehaviour
             Debug.Log("(Hangry) Sign-in failed...");
 
             // Show failure message
-            signInButtonText.text = "Sign in";
+            signInButtonText.text = "SIGN IN";
             authStatus.text = "Sign-in failed";
         }
     }

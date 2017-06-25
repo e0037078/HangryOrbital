@@ -27,8 +27,12 @@ public class ButtonShop : TouchManager {
     public GUITexture buttonTexture = null;
     // Use this for initialization
     void Start () {
-        settingAnim = settingMenu.GetComponent<Animator>();
+        shopMenu.GetComponent<Canvas>().enabled = false;
+        settingMenu.GetComponent<Canvas>().enabled = false;
+
         // shopAnim = shopMenu.GetComponent<Animator>();
+        //settingAnim = settingMenu.GetComponent<Animator>();
+
         save = SaveManager.Instance;
         settingResume.onClick.AddListener(ResumeGame);
 
@@ -118,7 +122,6 @@ public class ButtonShop : TouchManager {
         }
 
     }
-
 
     void toggleShop()
     {
