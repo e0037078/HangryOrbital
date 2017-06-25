@@ -9,6 +9,8 @@ public class playerHealth : MonoBehaviour {
     //public GameObject deathFX;
     //public AudioClip playerHurt;
 
+    public GameObject gameOverScreen = null;
+
     float currentHealth;
 
     //public AudioClip playerDeathSound;
@@ -46,7 +48,7 @@ public class playerHealth : MonoBehaviour {
         healthSlider.value = currentHealth;
         damaged = true;
 
-        /*
+        
         // player damaged animation
         gameObject.GetComponent<Animator>().SetTrigger("isPushed");
         
@@ -54,10 +56,10 @@ public class playerHealth : MonoBehaviour {
         {
             gameObject.GetComponent<Animator>().SetInteger("State", 0);
         }
-        */
+        
         //playerAS.clip = playerHurt;
         //playerAS.Play();
-
+        
  //       playerAS.PlayOneShot(playerHurt); //same
 
         if (currentHealth <= 0)
@@ -81,6 +83,7 @@ public class playerHealth : MonoBehaviour {
             currentHealth -= currentHealth;
             healthSlider.value = currentHealth;
         }
+        GameOver();
         /*
         Instantiate(deathFX, transform.position, transform.rotation);
         Destroy(gameObject);
@@ -101,5 +104,12 @@ public class playerHealth : MonoBehaviour {
         Animator winGameAnimator = winGameScreen.GetComponent<Animator>();
         winGameAnimator.SetTrigger("gameOver");
         */
+    }
+
+    void GameOver()
+    {
+        ButtonShop.paused = false;
+        ButtonShop.togglePause();
+        gameOverScreen.SetActive(true);
     }
 }

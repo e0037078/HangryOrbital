@@ -49,7 +49,7 @@ public class FightManager : MonoBehaviour {
 
 
         // enemy's attacks onto player 
-        dmgPlayer();
+        //dmgPlayer();
     }
 
     // Update is called once per frame
@@ -88,7 +88,7 @@ public class FightManager : MonoBehaviour {
         
     }
 
-    float getTotalEnemyDamage()
+    public static float getTotalEnemyDamage()
     {
         float sum = 0.0f;
         foreach (GameObject t in allEnemies)
@@ -171,22 +171,6 @@ public class FightManager : MonoBehaviour {
         {
             //Damage every 0.02s i.e. 50/sec
             currEnemy.gameObject.GetComponent<enemyHealth>().addDamage(playerDamage/50);
-        }
-    }
-
-    void dmgPlayer()
-    {
-        if (currPlayer == null) // no more players
-        {
-            // yay end
-            Debug.Log("player null");
-        }
-        else // attacks only affect currPlayer and not the rest
-        {
-            float enemyDamage = getTotalEnemyDamage();
-            currPlayer.gameObject.GetComponent<playerHealth>().addDamage(enemyDamage);
-            nextDamage = Time.time + 1; //Damage every second
-        
         }
     }
 

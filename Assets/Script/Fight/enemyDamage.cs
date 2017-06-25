@@ -29,14 +29,33 @@ public class enemyDamage : MonoBehaviour {
         {
             contact = true;
 
-            playerHealth thePlayerHealth = other.gameObject.GetComponent<playerHealth>();
-            thePlayerHealth.addDamage(damage);
+            //playerHealth thePlayerHealth = FightManager.currPlayer.GetComponent<playerHealth>();
+            //thePlayerHealth.addDamage(damage);
+            dmgPlayer();
             nextDamage = Time.time + damageRate;
 
 
             pushback(other.transform);
         }
     }
+
+
+    void dmgPlayer()
+    {
+        if (FightManager.currPlayer == null) // no more players
+        {
+            // yay end
+            Debug.Log("player null");
+        }
+        else // attacks only affect currPlayer and not the rest
+        {
+            float enemyDamage = FightManager.getTotalEnemyDamage();
+            FightManager.currPlayer.gameObject.GetComponent<playerHealth>().addDamage(enemyDamage);
+            nextDamage = Time.time + 1; //Damage every second
+
+        }
+    }
+
 
     // make player fly
     void pushback(Transform pushedObject)
