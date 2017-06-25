@@ -27,13 +27,14 @@ public class enemyDamage : MonoBehaviour {
     {
         if(other.tag == "Player" && nextDamage<Time.time)
         {
+            contact = true;
+
             playerHealth thePlayerHealth = other.gameObject.GetComponent<playerHealth>();
             thePlayerHealth.addDamage(damage);
             nextDamage = Time.time + damageRate;
 
 
             pushback(other.transform);
-            contact = true;
         }
     }
 

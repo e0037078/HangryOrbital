@@ -21,6 +21,7 @@ public class GestureDamage : MonoBehaviour {
 
     // Update is called once per frame
     void FixedUpdate () { 
+        /*
         for (int i = 0; i < SaveManager.Instance.gestureProb.Length; i++)
         {
             if (Random.value <= SaveManager.calculateFixedUpdateProbability(SaveManager.Instance.gestureProb[i]))
@@ -47,7 +48,7 @@ public class GestureDamage : MonoBehaviour {
                 }
             }
         }
-
+        */
     }
     
     public void damage(string gestureClass, float gestureScore)

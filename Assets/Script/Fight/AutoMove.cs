@@ -36,6 +36,7 @@ public class AutoMove : MonoBehaviour {
 
             else
             {
+                playerContact = false;
                 anim.SetInteger("State", 1);
             }
 
@@ -44,7 +45,10 @@ public class AutoMove : MonoBehaviour {
         if (!damaged)
         {
             if (playerContact && gameObject.tag == "Player")
+            {
                 anim.SetInteger("State", 0);
+                Debug.Log("!damaged");
+            }
             else
                 anim.SetInteger("State", 1);
         }
@@ -57,7 +61,7 @@ public class AutoMove : MonoBehaviour {
                 if (!playerContact)
                 {
                     RB.velocity = new Vector2(moveSpeed, RB.velocity.y);
-                }
+               }
             }
             else if (gameObject.tag == "Monster")
             {
@@ -68,6 +72,5 @@ public class AutoMove : MonoBehaviour {
                 }
             }
     }
-
 
 }

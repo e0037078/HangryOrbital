@@ -50,13 +50,11 @@ public class enemyHealth : MonoBehaviour {
         
     }
 
-
-
     void makeDead()
     {
         //make sound
 
-        //this.GetComponent<Animator>().SetBool("isDead", true); //death animation
+        this.GetComponent<Animator>().SetBool("isDead", true); //death animation
 
         deathCounter++;
         AutoMove.playerContact = false;
@@ -67,7 +65,7 @@ public class enemyHealth : MonoBehaviour {
             FightManager.winMap = true;
         }
         //Length of animation
-        StartCoroutine(destroyAfterTime(0.6f, gameObject));
+        StartCoroutine(destroyAfterTime(1f, gameObject));
 
         /* AudioSource.PlayClipAtPoint(deathKnell, transform.position);
         Instantiate(enemyDeathFX, transform.position, transform.rotation);
