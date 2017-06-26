@@ -27,7 +27,7 @@ public class PDollarRecognition : MonoBehaviour {
 	private LineRenderer currentGestureLineRenderer;
 
 	//GUI
-	private string message;
+	//private string message;
 	private bool recognized;
 	private string newGestureName = "";
 
@@ -96,7 +96,7 @@ public class PDollarRecognition : MonoBehaviour {
         //Draws the Area where user can draw their gesture on
 		//GUI.Box(drawArea, "Draw Area");
 
-		GUI.Label(new Rect(10, Screen.height - 40, 500, 50), message);
+		//GUI.Label(new Rect(10, Screen.height - 40, 500, 50), message);
 
         //Use instead of GUI.Button to activate when lift instead of button pressed
         if (Input.GetMouseButtonUp(0)) {
@@ -107,7 +107,7 @@ public class PDollarRecognition : MonoBehaviour {
 			Gesture candidate = new Gesture(points.ToArray());
 			Result gestureResult = PointCloudRecognizer.Classify(candidate, trainingSet.ToArray());
 			
-			message = gestureResult.GestureClass + " " + gestureResult.Score;
+			//message = gestureResult.GestureClass + " " + gestureResult.Score;
             gestDMG.damage(gestureResult.GestureClass, gestureResult.Score);
             //Code to clear LineRenderer
             clearLines();

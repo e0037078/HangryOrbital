@@ -168,7 +168,8 @@ public class ButtonShop : TouchManager {
         if (!paused)
         {
             paused = !paused;
-            originalTimeScale = Time.timeScale;
+            if (Time.timeScale != 0)
+                originalTimeScale = Time.timeScale;
             Time.timeScale = 0f;
         }
         else if (paused)

@@ -10,7 +10,7 @@ public class SaveManager : MonoBehaviour {
     public static SaveManager Instance;
     public float BaseHP;
     public float DPS;
-    public float gold;
+    public float gold = 0;
     public int level;
 
     public int numOfUpgrades = 12;
@@ -43,7 +43,7 @@ public class SaveManager : MonoBehaviour {
     // Use this for initialization
     void Awake () {
 
-        SAVE = new int[15];
+        SAVE = new int[14];
         //Basically make sure that there is only one Instance of SaveManager
         if (Instance != null)
         {
@@ -148,8 +148,8 @@ public class SaveManager : MonoBehaviour {
     {
         //Temp formula for goldDrop
         goldDrop = (float)(10 + level * 0.8 + DPS * 0.5 + BaseHP * 0.5);
-        monsterDPS = (float)(5 + level * 0.6 + DPS * 0.6 + BaseHP * 0.6);
-        monsterHP = (float)(10 + level * 0.75 + DPS * 0.6 + BaseHP * 0.6)+10f;
+        monsterDPS = (float)(15 + level * 0.6 + DPS * 0.6 + BaseHP * 0.75);
+        monsterHP = (float)(20 + level * 0.75 + DPS * 0.6 + BaseHP * 0.6);
     }
 
     void calculateGestureProbability()
@@ -205,9 +205,9 @@ public class SaveManager : MonoBehaviour {
         {
             //temporary formula
             if (i == 0)
-                costs[i] = 1.00f;
+                costs[i] = 100f * Mathf.Pow(1.08f, upgrades[i]);
             else
-                costs[i] = i * Mathf.Pow(1.08f, upgrades[i]);
+                costs[i] = i * i * 100 * Mathf.Pow(1.08f, upgrades[i]);
         }
     }
 
@@ -217,57 +217,57 @@ public class SaveManager : MonoBehaviour {
     }
 
 
-    public float[] buildSaveArray()
-    {
-        SaveArray = new float[12];
-        for(int i = 0; i< SaveArray.Length; i++)
-        {
-            switch (i)
-            {
-                case 1:
-                    SaveArray[i] = level;
-                    break;
-                case 2:
-                    SaveArray[i] = gold;
-                    break;
- 
-                default:
-                    SaveArray[i] = upgrades[i - 2];
-                break;
-            }
-        }
-        return SaveArray;
-    }
-    public void loadSaveArray(float[] SaveArray)
-    {
-        for (int i = 0; i < SaveArray.Length; i++)
-        {
-            switch (i)
-            {
-                case 1:
-                    level = (int)SaveArray[i];
-                    break;
-                case 2:
-                    gold = SaveArray[i];
-                    break;
+    /* public float[] buildSaveArray()
+     {
+         SaveArray = new float[12];
+         for(int i = 0; i< 14; i++)
+         {
+             switch (i)
+             {
+                 case 1:
+                     SaveArray[i] = level;
+                     break;
+                 case 2:
+                     SaveArray[i] = gold;
+                     break;
 
-                default:
-                    upgrades[i - 2] = (int)SaveArray[i];
-                    break;
-            }
-        }
-        calculateDPS();
-        calculateHP();
-        calculateCost();
+                 default:
+                     SaveArray[i] = upgrades[i - 2];
+                 break;
+             }
+         }
+         return SaveArray;
+     }
+     public void loadSaveArray(float[] SaveArray)
+     {
+         for (int i = 0; i < 14; i++)
+         {
+             switch (i)
+             {
+                 case 1:
+                     level = (int)SaveArray[i];
+                     break;
+                 case 2:
+                     gold = SaveArray[i];
+                     break;
 
-        calculateGestureProbability();
-        calculateGestureDMG();
-        calculateMonsterStats();
-    }
+                 default:
+                     upgrades[i - 2] = (int)SaveArray[i];
+                     break;
+             }
+         }
+         calculateDPS();
+         calculateHP();
+         calculateCost();
+
+         calculateGestureProbability();
+         calculateGestureDMG();
+         calculateMonsterStats();
+     }*/
 
     public static void updateSave()
     {
-        for (int i = 0; i < SAVE.Length; i++)
+        for (int i = 0; i < 14; i++)
         {
             switch (i)
             {
@@ -277,19 +277,20 @@ public class SaveManager : MonoBehaviour {
                 case 13:
                     SAVE[i] = (int)SaveManager.Instance.gold;
                     break;
-                case 14:
-                    SAVE[i] = getTime();
-                    break;
+               // case 14:
+                //    SAVE[i] = getTime();
+                 //   break;
 
                 default:
                     SAVE[i] = SaveManager.Instance.upgrades[i];
                     break;
             }
         }
+        printLoop(SAVE);
     }
     public static void loadSave()
     {
-        for (int i = 0; i < SAVE.Length; i++)
+        for (int i = 0; i <14; i++)
         {
             switch (i)
             {
@@ -299,15 +300,17 @@ public class SaveManager : MonoBehaviour {
                 case 13:
                     SaveManager.Instance.gold = SAVE[i];
                     break;
-                case 14:
-                    SaveManager.Instance.calculateOfflineProgress(getTime() - SAVE[i]);
-                    break; 
+                //case 14:
+                 //   SaveManager.Instance.calculateOfflineProgress(getTime() - SAVE[i]);
+                  //  break; 
 
                 default:
                     SaveManager.Instance.upgrades[i] = (int)SAVE[i];
                     break;
             }
         }
+        printLoop(SAVE);
+
         SaveManager.Instance.calculateDPS();
         SaveManager.Instance.calculateHP();
         SaveManager.Instance.calculateCost();
@@ -333,6 +336,16 @@ public class SaveManager : MonoBehaviour {
     {
         Debug.Log("(Hangry) Gained :" + (time / 60 / 60));
         gold += time / 60 / 60;
+        if(time/60/60 > 10000)
+        {
+            gold = 10f;
+        }
     }
- 
+    static void printLoop<T>(T arr) where T : IList
+    {
+        for (int i = 0; i < arr.Count; i++)
+            Debug.Log("(Hangry)" + arr[i].ToString());
+    }
 }
+
+

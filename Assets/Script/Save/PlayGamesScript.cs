@@ -12,7 +12,7 @@ public class PlayGamesScript : MonoBehaviour
 
     public static PlayGamesScript Instance { get; private set; }
 
-    const string SAVE_NAME = "Tutorial3";
+    const string SAVE_NAME = "Tutorialz";
     bool isSaving;
     bool isCloudDataLoaded = false;
     public Text signInButtonText;
@@ -43,6 +43,11 @@ public class PlayGamesScript : MonoBehaviour
         SignIn();
     }
 
+    public void Load()
+    {
+        LoadData();
+        SaveManager.Instance.toCity();
+    }
     public void SignIn()
     {
         SfxManager.PlaySound("Click");
@@ -74,6 +79,7 @@ public class PlayGamesScript : MonoBehaviour
             // Show the user's name
             //authStatus.text = "Signed in as: " + Social.localUser.userName;
             LoadData();
+            
         }
         else
         {
@@ -398,9 +404,10 @@ public class PlayGamesScript : MonoBehaviour
             Debug.Log("(Hangry) Data writting success !");
         else
             Debug.Log("(Hangry) Data writting fail =( !");
-        //LoadData();
-        /*
-        // CALLBACK: Handle the result of a read, which should return metadata
+        LoadData();
+    }
+        
+        /*//CALLBACK: Handle the result of a read, which should return metadata
         Action<SavedGameRequestStatus, ISavedGameMetadata> readCallback =
         (SavedGameRequestStatus status2, ISavedGameMetadata game2) => {
             Debug.Log("(Hangry) Saved Game Read: " + status.ToString());
@@ -415,7 +422,7 @@ public class PlayGamesScript : MonoBehaviour
         // Read the current data and kick off the callback chain
         Debug.Log("(Hangry) Saved Game: Reading");
         ReadSavedGame(SAVE_NAME, readCallback);
-        */
+        
 
     }
     public void ReadSavedGame(string filename,
@@ -427,8 +434,29 @@ public class PlayGamesScript : MonoBehaviour
             DataSource.ReadCacheOrNetwork, true,
             ResolveConflict,
             callback);
-    }
+    }*/
     #endregion /Saved Games
+
+    /*void DeleteSavedGame(string filename)
+    {
+        ISavedGameClient savedGameClient = PlayGamesPlatform.Instance.SavedGame;
+        savedGameClient.OpenWithAutomaticConflictResolution(filename, DataSource.ReadCacheOrNetwork,
+            ConflictResolutionStrategy.UseLongestPlaytime, OnDeleteSavedGame);
+    }
+
+    public void OnDeleteSavedGame(SavedGameRequestStatus status, ISavedGameMetadata game)
+    {
+        ISavedGameClient savedGameClient = PlayGamesPlatform.Instance.SavedGame;
+        if (status == SavedGameRequestStatus.Success)
+        {
+            // delete the game.
+            savedGameClient.Delete(game);
+        }
+        else
+        {
+            // handle error
+        }
+    }*/
 
     void printLoop<T>(T arr) where T : IList
     {

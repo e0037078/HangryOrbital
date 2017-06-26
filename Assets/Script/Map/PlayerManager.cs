@@ -94,6 +94,7 @@ public class PlayerManager : MonoBehaviour
         }
         else if (collision.gameObject.tag == "City Monster")
         {
+            
             // should add some animation like pokemon hahaha
             SceneManager.LoadScene("Fight scene");
         }
