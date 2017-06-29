@@ -305,6 +305,7 @@
     <Compile Include="Assets\Script\Map\SoundMusicButton.cs" />
     <Compile Include="Assets\Script\Map\TouchManager.cs" />
     <Compile Include="Assets\Script\Map\cameraFollow2DPlatformer.cs" />
+    <Compile Include="Assets\Script\Save\CheckIn.cs" />
     <Compile Include="Assets\Script\Save\JsonUtil.cs" />
     <Compile Include="Assets\Script\Save\OfflineProgression.cs" />
     <Compile Include="Assets\Script\Save\PlayGamesScript.cs" />

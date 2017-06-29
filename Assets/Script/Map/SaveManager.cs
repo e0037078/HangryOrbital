@@ -34,6 +34,9 @@ public class SaveManager : MonoBehaviour {
     public double[] gestureProb = new double[4];
     public double[] gestureDMG = new double[4];
 
+    //Overall Multiplier
+    OverallStatsMultiplier multipliers = new OverallStatsMultiplier();
+
     //SAVE DATA 
     public float[] SaveArray;
     public static int[] SAVE { get; set; }
@@ -44,12 +47,15 @@ public class SaveManager : MonoBehaviour {
     public int offlineTime;
 
     //Daily Check-in Reward
-    public bool checkin;
+    public bool checkInAvailable = false;
+    public int numChecked;
+    public int totNumDaily = 6;
+    public GameObject CheckInPanel;
 
     // Use this for initialization
     void Awake () {
 
-        SAVE = new int[15];
+        SAVE = new int[16];
         //Basically make sure that there is only one Instance of SaveManager
         if (Instance != null)
         {
@@ -122,7 +128,7 @@ public class SaveManager : MonoBehaviour {
         //Debug.Log(gold);
 
     }
-
+    #region Calc
     void calculateDPS()
     {
         float tempDPS = 0;
@@ -133,7 +139,7 @@ public class SaveManager : MonoBehaviour {
                 //Temp formula for DPS
                 tempDPS += (i+1) * upgrades[i]; 
         }
-        DPS = tempDPS+5;
+        DPS = tempDPS * multipliers.DPS +5;
     }
 
     void calculateHP()
@@ -147,7 +153,7 @@ public class SaveManager : MonoBehaviour {
                 tempHP += i * upgrades[i];
             }
         }
-        BaseHP = tempHP;
+        BaseHP = tempHP * multipliers.HP;
     }
 
     void calculateMonsterStats()
@@ -166,16 +172,16 @@ public class SaveManager : MonoBehaviour {
             {
                 case 1:
                     //Temp formula
-                    gestureProb[i] = 0.07f + (float)upgrades[3] * 0.07;
+                    gestureProb[i] = 0.07f + (float)upgrades[3] * 0.07 * multipliers.GestureProb;
                     break;
                 case 2:
-                    gestureProb[i] = 0.07f + (float)upgrades[5] * 0.07;
+                    gestureProb[i] = 0.07f + (float)upgrades[5] * 0.07 * multipliers.GestureProb;
                     break;
                 case 3:
-                    gestureProb[i] = 0.07f + (float)upgrades[7] * 0.07;
+                    gestureProb[i] = 0.07f + (float)upgrades[7] * 0.07 * multipliers.GestureProb;
                     break;
                 case 4:
-                    gestureProb[i] = 0.07f + (float)upgrades[9] * 0.07;
+                    gestureProb[i] = 0.07f + (float)upgrades[9] * 0.07 * multipliers.GestureProb;
                     break;
             }
         }
@@ -189,16 +195,16 @@ public class SaveManager : MonoBehaviour {
             {
                 case 1:
                     //Temp formula
-                    gestureDMG[i] = 6 + upgrades[2] * 1.6;
+                    gestureDMG[i] = 6 + upgrades[2] * 1.6 * multipliers.GestureDMG;
                     break;
                 case 2:
-                    gestureDMG[i] = 8 + upgrades[4] * 1.6;
+                    gestureDMG[i] = 8 + upgrades[4] * 1.6 * multipliers.GestureDMG;
                     break;
                 case 3:
-                    gestureDMG[i] = 8 + upgrades[6] * 1.8;
+                    gestureDMG[i] = 8 + upgrades[6] * 1.8 * multipliers.GestureDMG;
                     break;
                 case 4:
-                    gestureDMG[i] = 10 + upgrades[8] * 2.0;
+                    gestureDMG[i] = 10 + upgrades[8] * 2.0 * multipliers.GestureDMG;
                     break;
             }
         }
@@ -217,10 +223,48 @@ public class SaveManager : MonoBehaviour {
         }
     }
 
+    public void calculateDailyBenefits()
+    {
+        for ( int i = 0; i < numChecked; i++)
+        {
+            switch (i)
+            {
+                case 1:
+                    multipliers.DPS += 0.05f;
+                    break;
+                case 2:
+                    multipliers.HP += 0.05f;
+                    break;
+                case 3:
+                    multipliers.DPS += 0.10f;
+                    break;
+                case 4:
+                    multipliers.GestureProb *= 1.10f;
+                    break;
+                case 5:
+                    multipliers.GestureDMG += 0.10f;
+                    break;
+                case 6:
+                    multipliers.GameSpeed += 0.10f;
+                    break;
+            }
+        }
+        SaveManager.Instance.calculateDPS();
+        SaveManager.Instance.calculateHP();
+
+        SaveManager.Instance.calculateGestureProbability();
+        SaveManager.Instance.calculateGestureDMG();
+    }
+
     public static double calculateFixedUpdateProbability(double probability)
     {
         return 1-System.Math.Pow(10, System.Math.Log10(probability) / 3000);
     }
+
+    
+#endregion /Calc
+
+    #region Save
     /* public float[] buildSaveArray()
      {
          SaveArray = new float[12];
@@ -284,6 +328,13 @@ public class SaveManager : MonoBehaviour {
                 case 14:
                     SAVE[i] = getTime();
                     break;
+                case 15:
+                    //Date of Now , DDMM
+                    SAVE[i] = DateTime.Now.Day * 100 + DateTime.Now.Month;
+                    break;
+                case 16:
+                    SAVE[i] = SaveManager.Instance.numChecked;
+                    break;
 
                 default:
                     SAVE[i] = SaveManager.Instance.upgrades[i];
@@ -306,22 +357,43 @@ public class SaveManager : MonoBehaviour {
                     break;
                 case 14:
                     SaveManager.Instance.calculateOfflineProgress(getTime() - SAVE[i]);
-                    break; 
+                    break;
+                case 15:
+                    SaveManager.Instance.checkDaily(SAVE[i]);
+                    break;
+                case 16:
+                    SaveManager.Instance.numChecked = SAVE[i];
+                    break;
 
                 default:
                     SaveManager.Instance.upgrades[i] = (int)SAVE[i];
                     break;
             }
         }
-        printLoop(SAVE);
+        //printLoop(SAVE);
 
-        SaveManager.Instance.calculateDPS();
-        SaveManager.Instance.calculateHP();
+        SaveManager.Instance.calculateDailyBenefits();
+        
         SaveManager.Instance.calculateCost();
 
-        SaveManager.Instance.calculateGestureProbability();
-        SaveManager.Instance.calculateGestureDMG();
         SaveManager.Instance.calculateMonsterStats();
+    }
+    //Checks whether the Date saved and load is different 
+    //if so set check in avaiable to true.
+    public void checkDaily(int daymonth)
+    {
+        //%100 gets the month
+        if(DateTime.Now.Month > daymonth % 100)
+        {
+            checkInAvailable = true;
+            CheckInPanel.SetActive(true);
+        }
+        // Month same, check day
+        else if(DateTime.Now.Day > daymonth / 100)
+        {
+            checkInAvailable = true;
+            CheckInPanel.SetActive(true);
+        }
     }
     public void toFight()
     {
@@ -351,11 +423,20 @@ public class SaveManager : MonoBehaviour {
         offlineGoldEarned = time / 60;
         offlineTime = time / 60;
     }
+    #endregion /Save
     static void printLoop<T>(T arr) where T : IList
     {
         for (int i = 0; i < arr.Count; i++)
             Debug.Log("(Hangry)" + arr[i].ToString());
     }
 }
-
+[System.Serializable]
+public class OverallStatsMultiplier
+{
+    public float DPS = 1;
+    public float HP = 1;
+    public float GameSpeed = 1;
+    public float GestureDMG = 1;
+    public float GestureProb = 1;
+}
 
