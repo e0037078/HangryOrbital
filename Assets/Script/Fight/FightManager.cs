@@ -199,6 +199,7 @@ public class FightManager : MonoBehaviour {
             {
                 float goldEarned = SaveManager.Instance.goldEarned;
                 i.text = goldEarned.ToString(".##") + " Gold";
+                break;
             }
         }
     }

@@ -36,14 +36,20 @@ public class SaveManager : MonoBehaviour {
 
     //SAVE DATA 
     public float[] SaveArray;
+    public static int[] SAVE { get; set; }
 
+    //Offline Progress
+    public bool offlineProgress = false;
+    public float offlineGoldEarned;
+    public int offlineTime;
 
-    public static int[] SAVE { get; set; } 
+    //Daily Check-in Reward
+    public bool checkin;
 
     // Use this for initialization
     void Awake () {
 
-        SAVE = new int[14];
+        SAVE = new int[15];
         //Basically make sure that there is only one Instance of SaveManager
         if (Instance != null)
         {
@@ -61,10 +67,10 @@ public class SaveManager : MonoBehaviour {
         for(int i = 0; i < numOfUpgrades; i++)
         {
             //Initialization of all values
-            upgrades[i] = 1;
-            //initialised as 1 2 3 4 5.
-            costs[i] = 100;
+            upgrades[i] = 0;
         }
+        //Initialise Costs
+        calculateCost();
         currentScene = SceneManager.GetActiveScene();
 
 
@@ -215,8 +221,6 @@ public class SaveManager : MonoBehaviour {
     {
         return 1-System.Math.Pow(10, System.Math.Log10(probability) / 3000);
     }
-
-
     /* public float[] buildSaveArray()
      {
          SaveArray = new float[12];
@@ -267,7 +271,7 @@ public class SaveManager : MonoBehaviour {
 
     public static void updateSave()
     {
-        for (int i = 0; i < 14; i++)
+        for (int i = 0; i < SAVE.Length; i++)
         {
             switch (i)
             {
@@ -277,9 +281,9 @@ public class SaveManager : MonoBehaviour {
                 case 13:
                     SAVE[i] = (int)SaveManager.Instance.gold;
                     break;
-               // case 14:
-                //    SAVE[i] = getTime();
-                 //   break;
+                case 14:
+                    SAVE[i] = getTime();
+                    break;
 
                 default:
                     SAVE[i] = SaveManager.Instance.upgrades[i];
@@ -290,7 +294,7 @@ public class SaveManager : MonoBehaviour {
     }
     public static void loadSave()
     {
-        for (int i = 0; i <14; i++)
+        for (int i = 0; i < SAVE.Length; i++) 
         {
             switch (i)
             {
@@ -300,9 +304,9 @@ public class SaveManager : MonoBehaviour {
                 case 13:
                     SaveManager.Instance.gold = SAVE[i];
                     break;
-                //case 14:
-                 //   SaveManager.Instance.calculateOfflineProgress(getTime() - SAVE[i]);
-                  //  break; 
+                case 14:
+                    SaveManager.Instance.calculateOfflineProgress(getTime() - SAVE[i]);
+                    break; 
 
                 default:
                     SaveManager.Instance.upgrades[i] = (int)SAVE[i];
@@ -334,12 +338,18 @@ public class SaveManager : MonoBehaviour {
     }
     void calculateOfflineProgress(int time)
     {
-        Debug.Log("(Hangry) Gained :" + (time / 60 / 60));
-        gold += time / 60 / 60;
-        if(time/60/60 > 10000)
+        Debug.Log("(Hangry)Gained :" + (time / 60) + " for " + time + "s");
+        gold += time/60;
+        if (time / 60 / 60 > 10000) 
         {
             gold = 10f;
         }
+        //if(time/60 != 0)
+        {
+            offlineProgress = true;
+        }
+        offlineGoldEarned = time / 60;
+        offlineTime = time / 60;
     }
     static void printLoop<T>(T arr) where T : IList
     {
