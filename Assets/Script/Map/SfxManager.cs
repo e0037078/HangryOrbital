@@ -14,7 +14,9 @@ public class SfxManager : MonoBehaviour
     public static AudioClip backwardSlash;
     public static AudioClip zap;
     public static AudioClip click;
-
+    public static AudioClip fireball;
+    public static AudioClip fireballhit;
+    public static AudioClip line;
     public static bool muteSfx;
 
     static AudioSource audioSrc;
@@ -31,7 +33,9 @@ public class SfxManager : MonoBehaviour
         backwardSlash = Resources.Load<AudioClip>("backwardSlash");
         zap = Resources.Load<AudioClip>("Zap");
         click = Resources.Load<AudioClip>("ButtonClick");
-
+        fireball = Resources.Load<AudioClip>("fireball");
+        fireballhit = Resources.Load<AudioClip>("explosion");
+        line = Resources.Load<AudioClip>("Hit");
         audioSrc = GetComponent<AudioSource>();
 
     }
@@ -72,6 +76,21 @@ public class SfxManager : MonoBehaviour
                 break;
             case ("Click"):
                 audioSrc.PlayOneShot(click);
+                break;
+            case ("FireBall"):
+                if (audioSrc.isPlaying)
+                    audioSrc.Stop();
+                audioSrc.PlayOneShot(fireball);
+                break;
+            case ("FireBallHit"):
+                if (audioSrc.isPlaying)
+                    audioSrc.Stop();
+                audioSrc.PlayOneShot(fireballhit);
+                break;
+            case ("Line"):
+                if (audioSrc.isPlaying)
+                    audioSrc.Stop();
+                audioSrc.PlayOneShot(line);
                 break;
         }
     }

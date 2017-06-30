@@ -31,8 +31,8 @@ public class SaveManager : MonoBehaviour {
     public GameObject enemy;
     public GameObject enemyBoss;
 
-    public double[] gestureProb = new double[4];
-    public double[] gestureDMG = new double[4];
+    public double[] gestureProb = new double[5];
+    public double[] gestureDMG = new double[5];
 
     //Overall Multiplier
     OverallStatsMultiplier multipliers = new OverallStatsMultiplier();
@@ -170,18 +170,21 @@ public class SaveManager : MonoBehaviour {
         {
             switch (i)
             {
-                case 1:
+                case 0:
                     //Temp formula
                     gestureProb[i] = 0.07f + (float)upgrades[3] * 0.07 * multipliers.GestureProb;
                     break;
-                case 2:
+                case 1:
                     gestureProb[i] = 0.07f + (float)upgrades[5] * 0.07 * multipliers.GestureProb;
                     break;
-                case 3:
+                case 2:
                     gestureProb[i] = 0.07f + (float)upgrades[7] * 0.07 * multipliers.GestureProb;
                     break;
-                case 4:
+                case 3:
                     gestureProb[i] = 0.07f + (float)upgrades[9] * 0.07 * multipliers.GestureProb;
+                    break;
+                case 4:
+                    gestureProb[i] = 0.07f + (float)upgrades[11] * 0.07 * multipliers.GestureProb;
                     break;
             }
         }
@@ -193,18 +196,21 @@ public class SaveManager : MonoBehaviour {
         {
             switch (i)
             {
-                case 1:
+                case 0:
                     //Temp formula
                     gestureDMG[i] = 6 + upgrades[2] * 1.6 * multipliers.GestureDMG;
                     break;
-                case 2:
+                case 1:
                     gestureDMG[i] = 8 + upgrades[4] * 1.6 * multipliers.GestureDMG;
                     break;
-                case 3:
+                case 2:
                     gestureDMG[i] = 8 + upgrades[6] * 1.8 * multipliers.GestureDMG;
                     break;
-                case 4:
+                case 3:
                     gestureDMG[i] = 10 + upgrades[8] * 2.0 * multipliers.GestureDMG;
+                    break;
+                case 4:
+                    gestureDMG[i] = 12 + upgrades[10] * 2.4 * multipliers.GestureDMG;
                     break;
             }
         }

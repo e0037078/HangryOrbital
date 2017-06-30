@@ -4,12 +4,16 @@ using UnityEngine;
 
 public class GestureDamage : MonoBehaviour {
 
+    public GameObject line;
     public GameObject slash;
     public GameObject lightning;
+    public GameObject pyro;
 
 
+    Animator lineAnim;
     Animator slashAnim;
     Animator lightningAnim;
+    Animator pyroAnim;
 
     public GameObject enemy;
 
@@ -127,8 +131,28 @@ public class GestureDamage : MonoBehaviour {
             case "line":
                 if (FightManager.currEnemy != null && FightManager.currEnemy.GetComponent<SpriteRenderer>().isVisible)
                 {
-                    //Temp formula 
+                    GameObject tempLine = Instantiate(line, FightManager.currEnemy.transform.position, Quaternion.identity);
+                    SfxManager.PlaySound("Line");
+
+                    lineAnim = tempLine.GetComponent<Animator>();
+                    lineAnim.SetTrigger("On");
+                    StartCoroutine(destroyAfterTime(0.2f, tempLine));
                     float damage = (float)SaveManager.Instance.gestureDMG[0];
+                    FightManager.currEnemy.gameObject.GetComponent<enemyHealth>().addDamage(damage);
+
+                }
+                Debug.Log(gestureClass + " " + gestureScore);
+                break;
+            case "pyro":
+                if (FightManager.currEnemy != null && FightManager.currEnemy.GetComponent<SpriteRenderer>().isVisible)
+                {
+
+                    GameObject tempPyro = Instantiate(pyro, FightManager.currPlayer.transform.position, Quaternion.identity);
+                    SfxManager.PlaySound("FireBall");
+
+                    tempPyro.GetComponent<Rigidbody2D>().AddForce(new Vector2(10f, 0), ForceMode2D.Impulse);
+
+                    float damage = (float)SaveManager.Instance.gestureDMG[4];
                     FightManager.currEnemy.gameObject.GetComponent<enemyHealth>().addDamage(damage);
 
                 }
