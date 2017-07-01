@@ -55,6 +55,8 @@ public class GestureDamage : MonoBehaviour {
     
     public void damage(string gestureClass, float gestureScore)
     {
+        if (FightManager.currEnemy == null)
+            return;
         // code to make enemy fly back
         AutoMove.damaged = true;
         AutoMove.playerContact = false;
@@ -152,8 +154,6 @@ public class GestureDamage : MonoBehaviour {
 
                     tempPyro.GetComponent<Rigidbody2D>().AddForce(new Vector2(10f, 0), ForceMode2D.Impulse);
 
-                    float damage = (float)SaveManager.Instance.gestureDMG[4];
-                    FightManager.currEnemy.gameObject.GetComponent<enemyHealth>().addDamage(damage);
 
                 }
                 Debug.Log(gestureClass + " " + gestureScore);

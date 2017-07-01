@@ -9,6 +9,8 @@ public class FireBall : MonoBehaviour {
         if(collision.tag == "Monster" || collision.tag == "Boss")
         {
             this.GetComponent<Rigidbody2D>().velocity = new Vector3(0, 0, 0);
+            float damage = (float)SaveManager.Instance.gestureDMG[4];
+            FightManager.currEnemy.gameObject.GetComponent<enemyHealth>().addDamage(damage);
             SfxManager.PlaySound("FireBallHit");
             this.GetComponent<Animator>().SetTrigger("Hit");
             //duration of animation

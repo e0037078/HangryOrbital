@@ -28,8 +28,8 @@ public class PDollarRecognition : MonoBehaviour {
 
 	//GUI
 	//private string message;
-	private bool recognized;
-	private string newGestureName = "";
+	//private bool recognized;
+	//private string newGestureName = "";
 
 	void Start () {
 
@@ -102,7 +102,7 @@ public class PDollarRecognition : MonoBehaviour {
         if (Input.GetMouseButtonUp(0)) {
         //if (GUI.Button(new Rect(Screen.width - 100, 10, 100, 30), "Recognize")) {
 
-			recognized = true;
+			//recognized = true;
 
 			Gesture candidate = new Gesture(points.ToArray());
 			Result gestureResult = PointCloudRecognizer.Classify(candidate, trainingSet.ToArray());
@@ -137,7 +137,7 @@ public class PDollarRecognition : MonoBehaviour {
     //This Method clears the lines on the map 
     void clearLines()
     {
-        recognized = false;
+        //recognized = false;
         strokeId = -1;
 
         points.Clear();

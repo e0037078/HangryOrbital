@@ -148,6 +148,8 @@ namespace PDollarGestureRecognizer
         /// <returns></returns>
         public Point[] Resample(Point[] points, int n)
         {
+            if (points.Length == 0)
+                return new Point[0];
             Point[] newPoints = new Point[n];
             newPoints[0] = new Point(points[0].X, points[0].Y, points[0].StrokeID);
             int numPoints = 1;

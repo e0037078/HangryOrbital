@@ -18,6 +18,8 @@ public class enemyHealth : MonoBehaviour {
 
     public float currentHealth;
 
+    bool isDead = false;
+
     // Use this for initialization
     void Start () {
         currentHealth = enemyMaxHealth;
@@ -43,7 +45,7 @@ public class enemyHealth : MonoBehaviour {
 
         enemySlider.value = currentHealth;
 
-        if (currentHealth <= 0)
+        if (!isDead && currentHealth <= 0)
         {
             makeDead();
         }
@@ -52,10 +54,12 @@ public class enemyHealth : MonoBehaviour {
     void makeDead()
     {
         //make sound
+        isDead = true;
         SfxManager.PlaySound("EnemyDie");
-
+        Destroy(this.GetComponent<AutoMove>());
+        this.GetComponent<enemyDamage>().isDead = true;
         this.GetComponent<Animator>().SetBool("isDead", true); //death animation
-
+        this.GetComponent<Rigidbody2D>().AddForceAtPosition(new Vector2(5f, 3.75f), this.GetComponent<Transform>().position, ForceMode2D.Impulse);
         deathCounter++;
         AutoMove.playerContact = false;
         SaveManager.Instance.addGold();
@@ -68,7 +72,7 @@ public class enemyHealth : MonoBehaviour {
             FightManager.winMap = true;
         }
         //Length of animation
-        StartCoroutine(destroyAfterTime(0.5f, gameObject));
+        StartCoroutine(destroyAfterTime(0.9f, gameObject));
 
         /* AudioSource.PlayClipAtPoint(deathKnell, transform.position);
         Instantiate(enemyDeathFX, transform.position, transform.rotation);

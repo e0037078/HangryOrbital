@@ -10,7 +10,7 @@ public class AutoMove : MonoBehaviour {
     Rigidbody2D RB;
     public static bool playerContact;
     public static bool damaged;
-    enemyDamage enemyDMG;
+    enemyDamage enemyDMG;   
 
     // Use this for initialization
     void Start () {
@@ -25,7 +25,6 @@ public class AutoMove : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-
         if (gameObject.tag == "Monster" || gameObject.tag == "Boss")
         {
             if (enemyDMG.contact)
@@ -57,6 +56,7 @@ public class AutoMove : MonoBehaviour {
             {
                 if (!playerContact)
                 {
+                
                     RB.velocity = new Vector2(moveSpeed, RB.velocity.y);
                }
             }

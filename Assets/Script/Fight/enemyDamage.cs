@@ -7,6 +7,7 @@ public class enemyDamage : MonoBehaviour {
     public float damage;
     public float damageRate;
     public float pushBackForce;
+    public bool isDead = false;
 
     public bool contact;
     float nextDamage;
@@ -25,7 +26,7 @@ public class enemyDamage : MonoBehaviour {
 
     private void OnTriggerStay2D(Collider2D other)
     {
-        if(other.tag == "Player" && nextDamage<Time.time)
+        if(!isDead && other.tag == "Player" && nextDamage<Time.time)
         {
             contact = true;
 
