@@ -145,11 +145,13 @@ public class GestureDamage : MonoBehaviour {
                 }
                 Debug.Log(gestureClass + " " + gestureScore);
                 break;
+
             case "pyro":
                 if (FightManager.currEnemy != null && FightManager.currEnemy.GetComponent<SpriteRenderer>().isVisible)
                 {
-
-                    GameObject tempPyro = Instantiate(pyro, FightManager.currPlayer.transform.position, Quaternion.identity);
+                    Vector3 offset = new Vector3(0.1f, -0.5f, 0);
+                    Vector3 spawnPos = FightManager.currPlayer.transform.position + offset;
+                    GameObject tempPyro = Instantiate(pyro, spawnPos, Quaternion.identity);
                     SfxManager.PlaySound("FireBall");
 
                     tempPyro.GetComponent<Rigidbody2D>().AddForce(new Vector2(10f, 0), ForceMode2D.Impulse);

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class FireBall : MonoBehaviour {
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerStay2D(Collider2D collision)
     {
         if(collision.tag == "Monster" || collision.tag == "Boss")
         {

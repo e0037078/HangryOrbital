@@ -55,7 +55,7 @@ public class FightManager : MonoBehaviour {
     // Update is called once per frame
     void Update () {
 
-        if (currEnemy == null)
+        if (currEnemy == null || currEnemy.GetComponent<enemyHealth>().currentHealth <= 0  )
         {
             currEnemy = GetClosestEnemy(currPlayer);
             if (currEnemy == null && !winMap && !bossSpawned)
@@ -99,7 +99,7 @@ public class FightManager : MonoBehaviour {
     }
 
 
-    GameObject GetClosestEnemy(GameObject currPlayer)
+    public static GameObject GetClosestEnemy(GameObject currPlayer)
     {
        /* if(currPlayer == null)
         {

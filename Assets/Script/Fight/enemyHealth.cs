@@ -60,6 +60,7 @@ public class enemyHealth : MonoBehaviour {
         this.GetComponent<enemyDamage>().isDead = true;
         this.GetComponent<Animator>().SetBool("isDead", true); //death animation
         this.GetComponent<Rigidbody2D>().AddForceAtPosition(new Vector2(5f, 3.75f), this.GetComponent<Transform>().position, ForceMode2D.Impulse);
+
         deathCounter++;
         AutoMove.playerContact = false;
         SaveManager.Instance.addGold();
