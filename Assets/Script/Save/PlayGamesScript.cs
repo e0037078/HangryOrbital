@@ -48,6 +48,7 @@ public class PlayGamesScript : MonoBehaviour
         DeleteSavedGame(SAVE_NAME);
         PlayerPrefs.SetString(SAVE_NAME, string.Empty);
         SaveManager.Instance.toCity();
+        SaveManager.Instance.checkDaily(0);
     } 
 
 
@@ -102,6 +103,7 @@ public class PlayGamesScript : MonoBehaviour
     //making a string out of game data (highscores...)
     string GameDataToString()
     {
+        SaveManager.updateSave();
         Debug.Log("(Hangry) GAMEDATA TO STRING : " + JsonUtil.CollectionToJsonString(SaveManager.SAVE, "myKey"));
         return JsonUtil.CollectionToJsonString(SaveManager.SAVE, "myKey");
     }
@@ -432,12 +434,14 @@ public class PlayGamesScript : MonoBehaviour
         ISavedGameClient savedGameClient = PlayGamesPlatform.Instance.SavedGame;
         if (status == SavedGameRequestStatus.Success)
         {
+            Debug.Log("(Hangry) Deleting Game");
             // delete the game.
             isCloudDataLoaded = true;
             savedGameClient.Delete(game);
         }
         else
         {
+            Debug.Log("(Hangry) Cannot open Game to  delete");
             // handle error
         }
     }

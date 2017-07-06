@@ -11,6 +11,7 @@ public class Item
     public float price = 1;
     public int numOwned = 0;
     public int index = -1;
+    public string description;
 }
 
 public class ShopScrollList : MonoBehaviour
@@ -28,6 +29,8 @@ public class ShopScrollList : MonoBehaviour
     public GameObject promptBuy = null;
     public Button yes = null;
     public Button no = null;
+
+    public GameObject descriptionPanel;
 
 
     // Use this for initialization
@@ -70,6 +73,7 @@ public class ShopScrollList : MonoBehaviour
             itemList[i].index = i;
             itemList[i].price = SaveManager.Instance.costs[i];
             itemList[i].numOwned = SaveManager.Instance.upgrades[i];
+            itemList[i].description = SaveManager.Instance.upgradesDes[i];
             Item item = itemList[i];
             GameObject newButton = buttonObjectPool.GetObject();
             newButton.transform.SetParent(contentPanel);
@@ -78,6 +82,28 @@ public class ShopScrollList : MonoBehaviour
             sampleButton.Setup(item, this);
         }
     }
+    //open Desciption Panel
+    public void openDescription(string itemName ,string descriptionText)
+    {
+        Text[] texts = descriptionPanel.GetComponentsInChildren<Text>();
+        foreach (Text t in texts)
+        {
+            if(t.name == "ItemName")
+            {
+                t.text = itemName;
+            }
+            else
+            {
+                t.text = descriptionText;
+            }
+        }
+        descriptionPanel.SetActive(true);
+    }
+    public void closeDescription()
+    {
+        descriptionPanel.SetActive(false);
+    }
+
     // aka buy item
     public void TryTransferItemToOtherShop(Item item)
     {

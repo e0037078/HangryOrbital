@@ -18,6 +18,7 @@ public class SaveManager : MonoBehaviour {
     public float increaseHP;
     public float[] costs = new float[12];
     public int[] upgrades = new int[12];
+    public String[] upgradesDes = new string[12];
 
     public float monsterDPS;
     public float monsterHP;
@@ -55,7 +56,7 @@ public class SaveManager : MonoBehaviour {
     // Use this for initialization
     void Awake () {
 
-        SAVE = new int[16];
+        SAVE = new int[17];
         //Basically make sure that there is only one Instance of SaveManager
         if (Instance != null)
         {
@@ -69,11 +70,13 @@ public class SaveManager : MonoBehaviour {
         }
         //5 is estimated number of upgrades
         costs =  new float[numOfUpgrades];
-        upgrades = new int[numOfUpgrades]; 
-        for(int i = 0; i < numOfUpgrades; i++)
+        upgrades = new int[numOfUpgrades];
+        upgradesDes = new string[numOfUpgrades];
+        for (int i = 0; i < numOfUpgrades; i++)
         {
             //Initialization of all values
             upgrades[i] = 0;
+            upgradesDes[i] = desciption(i);
         }
         //Initialise Costs
         calculateCost();
@@ -129,6 +132,37 @@ public class SaveManager : MonoBehaviour {
 
     }
     #region Calc
+    string desciption(int index)
+    {
+        switch (index)
+        {
+            case 0:
+                return "This cake increases the player's health.";
+            case 1:
+                return "This cake increases the player's passive DPS.";
+            case 2:
+                return "This cake increases the player's line gesture Damage.";
+            case 3:
+                return "This cake increases the player's line gesture autocast Probability.";
+            case 4:
+                return "This donut increases the player's backslash gesture Damage.";
+            case 5:
+                return "This donut increases the player's backslash gesture autocast Probability.";
+            case 6:
+                return "This donut increases the player's forward slash gesture Damage.";
+            case 7:
+                return "This drink increases the player's forward slash gesture autocast Probability.";
+            case 8:
+                return "This drink increases the player's Lightning Damage.";
+            case 9:
+                return "This donut increases the player's Lightning autocast Probability.";
+            case 10:
+                return "This donut increases the player's Fireball Damage.";
+            case 11:
+                return "This donut increases the player's Fireball autocast Probability.";
+        }
+        return "Error out of index";
+    }
     void calculateDPS()
     {
         float tempDPS = 0;
@@ -335,12 +369,13 @@ public class SaveManager : MonoBehaviour {
                     SAVE[i] = getTime();
                     break;
                 case 15:
+                    SAVE[i] = SaveManager.Instance.numChecked;
+                    break;
+                case 16:
                     //Date of Now , DDMM
                     SAVE[i] = DateTime.Now.Day * 100 + DateTime.Now.Month;
                     break;
-                case 16:
-                    SAVE[i] = SaveManager.Instance.numChecked;
-                    break;
+                
 
                 default:
                     SAVE[i] = SaveManager.Instance.upgrades[i];
@@ -365,11 +400,12 @@ public class SaveManager : MonoBehaviour {
                     SaveManager.Instance.calculateOfflineProgress(getTime() - SAVE[i]);
                     break;
                 case 15:
-                    SaveManager.Instance.checkDaily(SAVE[i]);
-                    break;
-                case 16:
                     SaveManager.Instance.numChecked = SAVE[i];
                     break;
+                case 16:
+                    SaveManager.Instance.checkDaily(SAVE[i]);
+                    break;
+                
 
                 default:
                     SaveManager.Instance.upgrades[i] = (int)SAVE[i];
@@ -388,6 +424,13 @@ public class SaveManager : MonoBehaviour {
     //if so set check in avaiable to true.
     public void checkDaily(int daymonth)
     {
+        //if new game or havent checked in before
+        if(SaveManager.Instance.numChecked == 0)
+        {
+            checkInAvailable = true;
+            CheckInPanel.SetActive(true);
+            return;
+        }
         //%100 gets the month
         if(DateTime.Now.Month > daymonth % 100)
         {
