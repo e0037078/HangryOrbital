@@ -99,7 +99,7 @@ public class PDollarRecognition : MonoBehaviour {
 		//GUI.Label(new Rect(10, Screen.height - 40, 500, 50), message);
 
         //Use instead of GUI.Button to activate when lift instead of button pressed
-        if (Input.GetMouseButtonUp(0)) {
+        if (Input.GetMouseButtonUp(0) && !ButtonShop.paused) {
         //if (GUI.Button(new Rect(Screen.width - 100, 10, 100, 30), "Recognize")) {
 
 			//recognized = true;

@@ -43,10 +43,9 @@ public class SaveManager : MonoBehaviour {
     public static int[] SAVE { get; set; }
 
     //Offline Progress
-    public bool offlineProgress = false;
+    public bool offlineProgress = true;
     public float offlineGoldEarned;
     public int offlineTime;
-    public bool shownOffline = false;
 
     //Daily Check-in Reward
     public bool checkInAvailable = false;
@@ -460,15 +459,19 @@ public class SaveManager : MonoBehaviour {
     }
     void calculateOfflineProgress(int time)
     {
+        if (!offlineProgress)
+        {
+            return;
+        }
         Debug.Log("(Hangry)Gained :" + (time / 60) + " for " + time + "s");
+        if(time/60 > 0 )
+        {
+            offlineProgress = false;
+        }
         gold += time/60;
         if (time / 60 / 60 > 10000) 
         {
             gold = 10f;
-        }
-        if(time/60 != 0)
-        {
-            offlineProgress = true;
         }
         offlineGoldEarned = time / 60;
         offlineTime = time / 60;

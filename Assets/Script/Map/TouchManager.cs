@@ -5,12 +5,17 @@ public class TouchManager : MonoBehaviour
 {
     public static bool guiTouch = false;
     bool mouseDown = false;
-    
+    private RuntimePlatform platform = Application.platform;
+
+
     private void OnMouseDown()
     {
-        SendMessage("OnFirstTouchBegan", SendMessageOptions.DontRequireReceiver);
-        SendMessage("OnFirstTouch", SendMessageOptions.DontRequireReceiver);
-        mouseDown = true;
+        if (platform != RuntimePlatform.Android && platform != RuntimePlatform.IPhonePlayer && mouseDown)
+        {
+            SendMessage("OnFirstTouchBegan", SendMessageOptions.DontRequireReceiver);
+            SendMessage("OnFirstTouch", SendMessageOptions.DontRequireReceiver);
+            mouseDown = true;
+        }
     }
     /* Somehow this don't work
     private void OnMouseDrag()
@@ -23,7 +28,7 @@ public class TouchManager : MonoBehaviour
     //This called from child to check mouseDown
     public void checkMouseDown()
     {
-        if (mouseDown)
+        if (platform != RuntimePlatform.Android && platform != RuntimePlatform.IPhonePlayer&&mouseDown)
         {
             SendMessage("OnFirstTouchStayed", SendMessageOptions.DontRequireReceiver);
             SendMessage("OnFirstTouch", SendMessageOptions.DontRequireReceiver);
@@ -31,8 +36,11 @@ public class TouchManager : MonoBehaviour
     }
     private void OnMouseUp()
     {
-        SendMessage("OnFirstTouchEnded", SendMessageOptions.DontRequireReceiver);
-        mouseDown = false;
+        if(platform != RuntimePlatform.Android && platform != RuntimePlatform.IPhonePlayer)
+        {
+            SendMessage("OnFirstTouchEnded", SendMessageOptions.DontRequireReceiver);
+            mouseDown = false;
+        }      
     }
     public void touchInput(GUITexture texture)
     {

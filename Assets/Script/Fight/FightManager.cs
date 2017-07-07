@@ -55,7 +55,7 @@ public class FightManager : MonoBehaviour {
     // Update is called once per frame
     void Update () {
 
-        if (currEnemy == null || currEnemy.GetComponent<enemyHealth>().currentHealth <= 0  )
+        if (currEnemy == null || currEnemy.GetComponent<enemyHealth>().currentHealth <= 0 && !bossSpawned)
         {
             currEnemy = GetClosestEnemy(currPlayer);
             if (currEnemy == null && !winMap && !bossSpawned)
@@ -206,6 +206,8 @@ public class FightManager : MonoBehaviour {
 
     public static void spawnBoss()
     {
+        bossSpawned = true;
+
         foreach (GameObject i in allEnemies)
         {
             if (i == null)
@@ -214,7 +216,6 @@ public class FightManager : MonoBehaviour {
             tempHealth.addDamage(tempHealth.currentHealth);
         }
         currEnemy = Instantiate(SaveManager.Instance.enemyBoss, (Vector2)currPlayer.transform.position + new Vector2(20f, 1f), currPlayer.transform.rotation);
-        bossSpawned = true;
     }
     
 }
