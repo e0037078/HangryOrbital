@@ -41,6 +41,7 @@ public class SampleButton : MonoBehaviour
         scrollList.TryTransferItemToOtherShop(item);
         Debug.Log("up");
     }
+    //Taken from https://github.com/AyARL/UnityGUIExamples/blob/master/EventTrigger/Assets/TriggerSetup.cs
     // Use listener with no parameters
     private void AddEventTrigger(UnityAction action, EventTriggerType triggerType)
     {

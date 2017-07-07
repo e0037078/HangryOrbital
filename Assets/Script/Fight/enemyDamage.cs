@@ -14,6 +14,7 @@ public class enemyDamage : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+        damage = SaveManager.Instance.monsterDPS;
         nextDamage = Time.time;//or Time.time
         contact = false;
 
@@ -50,8 +51,7 @@ public class enemyDamage : MonoBehaviour {
         }
         else // attacks only affect currPlayer and not the rest
         {
-            float enemyDamage = FightManager.getTotalEnemyDamage();
-            FightManager.currPlayer.gameObject.GetComponent<playerHealth>().addDamage(enemyDamage);
+            FightManager.currPlayer.gameObject.GetComponent<playerHealth>().addDamage(damage);
             nextDamage = Time.time + 1; //Damage every second
 
         }

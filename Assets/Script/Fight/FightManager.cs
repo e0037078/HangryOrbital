@@ -85,7 +85,7 @@ public class FightManager : MonoBehaviour {
         }
         
     }
-
+    /*
     public static float getTotalEnemyDamage()
     {
         float sum = 0.0f;
@@ -96,7 +96,7 @@ public class FightManager : MonoBehaviour {
             sum += t.GetComponent<enemyDamage>().damage;
         }
         return sum;
-    }
+    }*/
 
 
     public static GameObject GetClosestEnemy(GameObject currPlayer)

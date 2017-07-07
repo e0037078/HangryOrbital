@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class playerHealth : MonoBehaviour {
 
-    public float fullHealth;
+    float fullHealth;
     //public GameObject deathFX;
     //public AudioClip playerHurt;
 
@@ -24,6 +24,7 @@ public class playerHealth : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+        fullHealth = SaveManager.Instance.BaseHP;
         currentHealth = fullHealth;
         
         //HUD initialisation

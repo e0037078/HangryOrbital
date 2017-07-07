@@ -46,6 +46,7 @@ public class SaveManager : MonoBehaviour {
     public bool offlineProgress = false;
     public float offlineGoldEarned;
     public int offlineTime;
+    public bool shownOffline = false;
 
     //Daily Check-in Reward
     public bool checkInAvailable = false;
@@ -184,7 +185,7 @@ public class SaveManager : MonoBehaviour {
             if(i == 1)
             {
                 //Temp formula for HP
-                tempHP += i * upgrades[i];
+                tempHP += 100 + i * upgrades[i];
             }
         }
         BaseHP = tempHP * multipliers.HP;
@@ -194,8 +195,8 @@ public class SaveManager : MonoBehaviour {
     {
         //Temp formula for goldDrop
         goldDrop = (float)(10 + level * 0.8 + DPS * 0.5 + BaseHP * 0.5);
-        monsterDPS = (float)(15 + level * 0.6 + DPS * 0.6 + BaseHP * 0.75);
-        monsterHP = (float)(20 + level * 0.75 + DPS * 0.6 + BaseHP * 0.6);
+        monsterDPS = (float)(15 + level * 0.5 + DPS * 0.2 + BaseHP * 0.075);
+        monsterHP = (float)(20 + level * 0.5 + DPS * 0.2 + BaseHP * 0.25);
     }
 
     void calculateGestureProbability()
@@ -465,7 +466,7 @@ public class SaveManager : MonoBehaviour {
         {
             gold = 10f;
         }
-        //if(time/60 != 0)
+        if(time/60 != 0)
         {
             offlineProgress = true;
         }

@@ -20,6 +20,8 @@ public class ButtonShop : TouchManager {
     // Animator shopAnim;
     static bool shopOn = false;
 
+    //Hiding Check in 
+    public GameObject checkInButton = null;
         
     SaveManager save;
 
@@ -44,6 +46,7 @@ public class ButtonShop : TouchManager {
 
     // Update is called once per frame
     void Update () {
+        checkMouseDown();
         touchInput(buttonTexture);
     }
 
@@ -63,6 +66,17 @@ public class ButtonShop : TouchManager {
 
     void OnFirstTouchBegan()
     {
+        if(checkInButton != null)
+        {
+            if (checkInButton.activeSelf)
+            {
+                checkInButton.SetActive(false);
+            }
+            else
+            {
+                checkInButton.SetActive(true);
+            }
+        }
         switch (buttonType)
         {
             case type.SettingToggleButton:

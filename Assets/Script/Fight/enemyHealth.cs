@@ -22,6 +22,7 @@ public class enemyHealth : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
+        enemyMaxHealth = SaveManager.Instance.monsterHP;
         currentHealth = enemyMaxHealth;
         enemySlider.maxValue = currentHealth;
         enemySlider.value = currentHealth;
