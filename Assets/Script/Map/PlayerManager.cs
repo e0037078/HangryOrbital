@@ -94,7 +94,8 @@ public class PlayerManager : MonoBehaviour
         }
         else if (collision.gameObject.tag == "City Monster")
         {
-            
+            // Check what level monster encountered.
+            MonsterManager.Instance.encounteredMonsterLevel(collision.gameObject);
             // should add some animation like pokemon hahaha
             SceneManager.LoadScene("Fight scene");
         }

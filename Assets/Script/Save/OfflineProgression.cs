@@ -13,7 +13,7 @@ public class OfflineProgression : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (SaveManager.Instance.offlineProgress)
+        if (SaveManager.Instance.offlineProgress&&!SaveManager.Instance.offlineShown)
         {
             offlineScreen.SetActive(true);
             GUIText[] allText = offlineScreen.GetComponentsInChildren<GUIText>();
@@ -35,7 +35,7 @@ public class OfflineProgression : MonoBehaviour {
                     break;
                 }
             }
-            SaveManager.Instance.offlineProgress = false;
+            SaveManager.Instance.offlineShown = true;
         }
     }
 }

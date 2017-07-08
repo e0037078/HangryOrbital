@@ -68,6 +68,7 @@ public class enemyHealth : MonoBehaviour {
         //Debug.Log(SaveManager.Instance.gold);
         if(gameObject.tag == "Boss")
         {
+            SaveManager.Instance.wonLevel();
             MusicManager.StopBGM();
             SfxManager.PlaySound("PlayerWin");
             StartCoroutine(playAfterTime(1f));

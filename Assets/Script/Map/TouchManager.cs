@@ -10,7 +10,8 @@ public class TouchManager : MonoBehaviour
 
     private void OnMouseDown()
     {
-        if (platform != RuntimePlatform.Android && platform != RuntimePlatform.IPhonePlayer && mouseDown)
+
+        if (platform != RuntimePlatform.Android && platform != RuntimePlatform.IPhonePlayer)
         {
             SendMessage("OnFirstTouchBegan", SendMessageOptions.DontRequireReceiver);
             SendMessage("OnFirstTouch", SendMessageOptions.DontRequireReceiver);

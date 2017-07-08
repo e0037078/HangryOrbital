@@ -47,8 +47,8 @@ public class PlayGamesScript : MonoBehaviour
     {
         DeleteSavedGame(SAVE_NAME);
         PlayerPrefs.SetString(SAVE_NAME, string.Empty);
+        SaveManager.Instance.offlineShown = true;
         SaveManager.Instance.toCity();
-        SaveManager.Instance.checkDaily(0);
     } 
 
 

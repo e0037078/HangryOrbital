@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System;
-
+using UnityEngine.UI;
 
 public class SaveManager : MonoBehaviour {
 
@@ -35,6 +35,9 @@ public class SaveManager : MonoBehaviour {
     public double[] gestureProb = new double[5];
     public double[] gestureDMG = new double[5];
 
+    public int monsterCleared = 0;
+    public int monsterLevel = 0;
+
     //Overall Multiplier
     OverallStatsMultiplier multipliers = new OverallStatsMultiplier();
 
@@ -44,6 +47,7 @@ public class SaveManager : MonoBehaviour {
 
     //Offline Progress
     public bool offlineProgress = true;
+    public bool offlineShown = false;
     public float offlineGoldEarned;
     public int offlineTime;
 
@@ -52,11 +56,12 @@ public class SaveManager : MonoBehaviour {
     public int numChecked;
     public int totNumDaily = 6;
     public GameObject CheckInPanel;
+    public Button checkInButton;
 
     // Use this for initialization
     void Awake () {
 
-        SAVE = new int[17];
+        SAVE = new int[18];
         //Basically make sure that there is only one Instance of SaveManager
         if (Instance != null)
         {
@@ -99,6 +104,7 @@ public class SaveManager : MonoBehaviour {
             calculateMonsterStats();
             goldEarned = 0;
             currentScene = SceneManager.GetActiveScene();
+            
         }
 	}
 
@@ -193,9 +199,9 @@ public class SaveManager : MonoBehaviour {
     void calculateMonsterStats()
     {
         //Temp formula for goldDrop
-        goldDrop = (float)(10 + level * 0.8 + DPS * 0.5 + BaseHP * 0.5);
-        monsterDPS = (float)(15 + level * 0.5 + DPS * 0.2 + BaseHP * 0.075);
-        monsterHP = (float)(20 + level * 0.5 + DPS * 0.2 + BaseHP * 0.25);
+        goldDrop = (float)(10 + level * 0.8 + DPS * 0.5 + BaseHP * 0.5) * monsterLevel;
+        monsterDPS = (float)(15 + level * 0.5 + DPS * 0.2 + BaseHP * 0.075) * monsterLevel;
+        monsterHP = (float)(20 + level * 0.5 + DPS * 0.2 + BaseHP * 0.25) * monsterLevel;
     }
 
     void calculateGestureProbability()
@@ -296,6 +302,11 @@ public class SaveManager : MonoBehaviour {
         SaveManager.Instance.calculateGestureDMG();
     }
 
+    public void wonLevel()
+    {
+        monsterCleared += (int)Mathf.Pow(2f, (float)(monsterLevel - 1));
+    } 
+
     public static double calculateFixedUpdateProbability(double probability)
     {
         return 1-System.Math.Pow(10, System.Math.Log10(probability) / 3000);
@@ -366,12 +377,15 @@ public class SaveManager : MonoBehaviour {
                     SAVE[i] = (int)SaveManager.Instance.gold;
                     break;
                 case 14:
-                    SAVE[i] = getTime();
+                    SAVE[i] = SaveManager.Instance.monsterCleared;
                     break;
                 case 15:
-                    SAVE[i] = SaveManager.Instance.numChecked;
+                    SAVE[i] = getTime();
                     break;
                 case 16:
+                    SAVE[i] = SaveManager.Instance.numChecked;
+                    break;
+                case 17:
                     //Date of Now , DDMM
                     SAVE[i] = DateTime.Now.Day * 100 + DateTime.Now.Month;
                     break;
@@ -397,12 +411,16 @@ public class SaveManager : MonoBehaviour {
                     SaveManager.Instance.gold = SAVE[i];
                     break;
                 case 14:
-                    SaveManager.Instance.calculateOfflineProgress(getTime() - SAVE[i]);
+                    SaveManager.Instance.monsterCleared = SAVE[i];
+                    MonsterManager.Instance.updateMonsters();
                     break;
                 case 15:
-                    SaveManager.Instance.numChecked = SAVE[i];
+                    SaveManager.Instance.calculateOfflineProgress(getTime() - SAVE[i]);
                     break;
                 case 16:
+                    SaveManager.Instance.numChecked = SAVE[i];
+                    break;
+                case 17:
                     SaveManager.Instance.checkDaily(SAVE[i]);
                     break;
                 
@@ -428,20 +446,20 @@ public class SaveManager : MonoBehaviour {
         if(SaveManager.Instance.numChecked == 0)
         {
             checkInAvailable = true;
-            CheckInPanel.SetActive(true);
+            checkInButton.onClick.Invoke();
             return;
         }
         //%100 gets the month
         if(DateTime.Now.Month > daymonth % 100)
         {
             checkInAvailable = true;
-            CheckInPanel.SetActive(true);
+            checkInButton.onClick.Invoke();
         }
         // Month same, check day
         else if(DateTime.Now.Day > daymonth / 100)
         {
             checkInAvailable = true;
-            CheckInPanel.SetActive(true);
+            checkInButton.onClick.Invoke();
         }
     }
     public void toFight()
@@ -459,14 +477,14 @@ public class SaveManager : MonoBehaviour {
     }
     void calculateOfflineProgress(int time)
     {
-        if (!offlineProgress)
+        if (offlineShown)
         {
             return;
         }
         Debug.Log("(Hangry)Gained :" + (time / 60) + " for " + time + "s");
         if(time/60 > 0 )
         {
-            offlineProgress = false;
+            offlineProgress = true;
         }
         gold += time/60;
         if (time / 60 / 60 > 10000) 

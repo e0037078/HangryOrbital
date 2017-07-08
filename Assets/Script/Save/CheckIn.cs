@@ -12,9 +12,17 @@ public class CheckIn : MonoBehaviour {
     public GameObject unsuccessfulDisplay;
     public GameObject successfulDisplay;
 
+    public GameObject CheckInPanel;
+    public Button CheckInButton;
+
     // Use this for initialization
     void Start() {
-
+        SaveManager.Instance.CheckInPanel = CheckInPanel;
+        SaveManager.Instance.checkInButton = CheckInButton;
+        if(SaveManager.Instance.numChecked == 0)
+        {
+            SaveManager.Instance.checkDaily(0); 
+        }
     }
 
     // Update is called once per frame
@@ -25,6 +33,16 @@ public class CheckIn : MonoBehaviour {
             for (int i = 0; i < SaveManager.Instance.numChecked; i++)
             {
                 Rewards[i].GetComponent<Image>().color = new Color(1, 1, 1, 0.5f);
+            }
+            int numCheck = SaveManager.Instance.numChecked;
+    
+            for (int i = numCheck; i < SaveManager.Instance.totNumDaily; i++)
+            {
+                Rewards[i].GetComponent<Button>().onClick.AddListener(() => showWaitTomorrow());
+            }
+            for (int i = 0; i < numCheck ; i++)
+            {
+                Rewards[i].GetComponent<Button>().onClick.AddListener(() => showGotten());
             }
 
         }
