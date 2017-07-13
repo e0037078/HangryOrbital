@@ -201,7 +201,7 @@ public class SaveManager : MonoBehaviour {
         //Temp formula for goldDrop
         goldDrop = (float)(10 + level * 0.8 + DPS * 0.5 + BaseHP * 0.5) * monsterLevel;
         monsterDPS = (float)(15 + level * 0.5 + DPS * 0.2 + BaseHP * 0.075) * monsterLevel;
-        monsterHP = (float)(20 + level * 0.5 + DPS * 0.2 + BaseHP * 0.25) * monsterLevel;
+        monsterHP = (float)(20 + level * 0.5 + DPS * 0.2 + BaseHP * 0.25) * monsterLevel + 20;
     }
 
     void calculateGestureProbability()

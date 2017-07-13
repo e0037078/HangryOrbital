@@ -80,12 +80,11 @@ public class SfxManager : MonoBehaviour
             case ("FireBall"):
                 if (audioSrc.isPlaying)
                     audioSrc.Stop();
-                audioSrc.PlayOneShot(fireball);
+                  audioSrc.PlayOneShot(fireball);
                 break;
             case ("FireBallHit"):
-                if (audioSrc.isPlaying)
-                    audioSrc.Stop();
-                audioSrc.PlayOneShot(fireballhit);
+                //if (!audioSrc.isPlaying)
+                    //audioSrc.PlayOneShot(fireballhit);
                 break;
             case ("Line"):
                 if (audioSrc.isPlaying)

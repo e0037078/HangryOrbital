@@ -4,12 +4,19 @@ using UnityEngine;
 
 public class FireBall : MonoBehaviour {
 
+    private bool damageShown = false;
+
     private void OnTriggerStay2D(Collider2D collision)
     {
         if(collision.tag == "Monster" || collision.tag == "Boss")
         {
             this.GetComponent<Rigidbody2D>().velocity = new Vector3(0, 0, 0);
             float damage = (float)SaveManager.Instance.gestureDMG[4];
+            if (!damageShown)
+            {
+                FloatingTextController.CreateFloatingText(damage.ToString(), transform);
+                damageShown = true;
+            }
             FightManager.currEnemy.gameObject.GetComponent<enemyHealth>().addDamage(damage);
             SfxManager.PlaySound("FireBallHit");
             this.GetComponent<Animator>().SetTrigger("Hit");

@@ -89,6 +89,7 @@ public class GestureDamage : MonoBehaviour {
                     //Temp formula 
                     float damage =(float) SaveManager.Instance.gestureDMG[3];
                     FightManager.currEnemy.gameObject.GetComponent<enemyHealth>().addDamage(damage);
+                    FloatingTextController.CreateFloatingText(damage.ToString(), FightManager.currEnemy.transform);
 
                 }
                 Debug.Log(gestureClass + " " + gestureScore);
@@ -106,6 +107,7 @@ public class GestureDamage : MonoBehaviour {
                     //Temp formula 
                     float damage = (float)SaveManager.Instance.gestureDMG[2];
                     FightManager.currEnemy.gameObject.GetComponent<enemyHealth>().addDamage(damage);
+                    FloatingTextController.CreateFloatingText(damage.ToString(), FightManager.currEnemy.transform);
 
                 }
                 Debug.Log(gestureClass + " " + gestureScore);
@@ -125,6 +127,7 @@ public class GestureDamage : MonoBehaviour {
                     StartCoroutine(destroyAfterTime(0.5f, tempSlash));
                     float damage = (float)SaveManager.Instance.gestureDMG[1];
                     FightManager.currEnemy.gameObject.GetComponent<enemyHealth>().addDamage(damage);
+                    FloatingTextController.CreateFloatingText(damage.ToString(), FightManager.currEnemy.transform);
 
                 }
                 Debug.Log(gestureClass + " " + gestureScore);
@@ -141,6 +144,7 @@ public class GestureDamage : MonoBehaviour {
                     StartCoroutine(destroyAfterTime(0.2f, tempLine));
                     float damage = (float)SaveManager.Instance.gestureDMG[0];
                     FightManager.currEnemy.gameObject.GetComponent<enemyHealth>().addDamage(damage);
+                    FloatingTextController.CreateFloatingText(damage.ToString(), FightManager.currEnemy.transform);
 
                 }
                 Debug.Log(gestureClass + " " + gestureScore);
@@ -155,7 +159,6 @@ public class GestureDamage : MonoBehaviour {
                     SfxManager.PlaySound("FireBall");
 
                     tempPyro.GetComponent<Rigidbody2D>().AddForce(new Vector2(10f, 0), ForceMode2D.Impulse);
-
 
                 }
                 Debug.Log(gestureClass + " " + gestureScore);

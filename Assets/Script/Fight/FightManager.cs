@@ -174,8 +174,8 @@ public class FightManager : MonoBehaviour {
 
     void spawnEnemy()
     {
-        setEnemyStats(Instantiate(SaveManager.Instance.enemy, (Vector2)currPlayer.transform.position + new Vector2(18f, 1f), currPlayer.transform.rotation));
-        setEnemyStats(Instantiate(SaveManager.Instance.enemy, (Vector2)currPlayer.transform.position + new Vector2(20f, 1f), currPlayer.transform.rotation));
+        setEnemyStats(Instantiate(SaveManager.Instance.enemy, (Vector2)currPlayer.transform.position + new Vector2(10f, 1f), currPlayer.transform.rotation));
+        setEnemyStats(Instantiate(SaveManager.Instance.enemy, (Vector2)currPlayer.transform.position + new Vector2(15f, 1f), currPlayer.transform.rotation));
 
         allEnemies = GameObject.FindGameObjectsWithTag("Monster");
 

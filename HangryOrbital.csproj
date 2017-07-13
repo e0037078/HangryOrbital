@@ -284,6 +284,8 @@
     <Compile Include="Assets\Script\Fight\ButtonScore.cs" />
     <Compile Include="Assets\Script\Fight\FightManager.cs" />
     <Compile Include="Assets\Script\Fight\FireBall.cs" />
+    <Compile Include="Assets\Script\Fight\FloatingText.cs" />
+    <Compile Include="Assets\Script\Fight\FloatingTextController.cs" />
     <Compile Include="Assets\Script\Fight\GestureDamage.cs" />
     <Compile Include="Assets\Script\Fight\PDollarRecognition.cs" />
     <Compile Include="Assets\Script\Fight\RepeatingBackground.cs" />

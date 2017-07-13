@@ -21,7 +21,8 @@ public class enemyHealth : MonoBehaviour {
     bool isDead = false;
 
     // Use this for initialization
-    void Start () {
+    void Start ()
+    {
         enemyMaxHealth = SaveManager.Instance.monsterHP;
         currentHealth = enemyMaxHealth;
         enemySlider.maxValue = currentHealth;
