@@ -100,5 +100,10 @@ public class PlayerManager : MonoBehaviour
             SceneManager.LoadScene("Fight scene");
         }
         // in future, can add on collision with PORTAL --> change map scene
+        else if (collision.gameObject.tag == "Portal")
+        {
+            // TODO load new scene
+            // or load same level, diff layout (change tempLayout in level generator)
+        }
     }
 }

@@ -18,7 +18,7 @@ public class cameraFollow2DPlatformer : MonoBehaviour {
         offset = transform.position - target.position ;
 
         lowY = transform.position.y-10;
-        left = -2f;
+        left = -5f;
         right = 7f;
 	}
 	

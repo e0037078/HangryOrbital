@@ -29,8 +29,8 @@ public class SaveManager : MonoBehaviour {
     public float goldEarned;
 
 
-    public GameObject enemy;
-    public GameObject enemyBoss;
+    public GameObject[] enemy;
+    public GameObject[] enemyBoss;
 
     public double[] gestureProb = new double[5];
     public double[] gestureDMG = new double[5];
@@ -199,8 +199,8 @@ public class SaveManager : MonoBehaviour {
     void calculateMonsterStats()
     {
         //Temp formula for goldDrop
-        goldDrop = (float)(10 + level * 0.8 + DPS * 0.5 + BaseHP * 0.5) * monsterLevel;
-        monsterDPS = (float)(15 + level * 0.5 + DPS * 0.2 + BaseHP * 0.075) * monsterLevel;
+        goldDrop = (float)(10 + level * 0.8 + DPS * 0.5 + BaseHP * 0.5) * monsterLevel + 20;
+        monsterDPS = (float)(15 + level * 0.5 + DPS * 0.2 + BaseHP * 0.075) * monsterLevel + 20;
         monsterHP = (float)(20 + level * 0.5 + DPS * 0.2 + BaseHP * 0.25) * monsterLevel + 20;
     }
 

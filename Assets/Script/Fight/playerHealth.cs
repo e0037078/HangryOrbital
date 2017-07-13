@@ -46,6 +46,7 @@ public class playerHealth : MonoBehaviour {
 
         healthSlider.gameObject.SetActive(true);
         currentHealth -= damage;
+        FloatingTextController.CreateFloatingText(damage.ToString(), FightManager.currPlayer.transform);
         healthSlider.value = currentHealth;
         damaged = true;
 

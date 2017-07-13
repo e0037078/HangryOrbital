@@ -295,6 +295,7 @@
     <Compile Include="Assets\Script\Map\AutoMoveMonster.cs" />
     <Compile Include="Assets\Script\Map\ButtonMovement.cs" />
     <Compile Include="Assets\Script\Map\ButtonShop.cs" />
+    <Compile Include="Assets\Script\Map\CheckinStatsButtonManager.cs" />
     <Compile Include="Assets\Script\Map\ColorToPrefab.cs" />
     <Compile Include="Assets\Script\Map\ExitGame.cs" />
     <Compile Include="Assets\Script\Map\LevelGenerator.cs" />

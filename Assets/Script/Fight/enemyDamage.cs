@@ -33,6 +33,10 @@ public class enemyDamage : MonoBehaviour {
 
             //playerHealth thePlayerHealth = FightManager.currPlayer.GetComponent<playerHealth>();
             //thePlayerHealth.addDamage(damage);
+            if (gameObject.name == "Cat")
+            {
+                gameObject.GetComponent<Animator>().SetTrigger("isFighting");
+            }
             dmgPlayer();
             nextDamage = Time.time + damageRate;
 

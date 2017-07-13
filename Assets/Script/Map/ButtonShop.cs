@@ -91,18 +91,6 @@ public class ButtonShop : TouchManager {
         } 
     }
 
-    void OnFirstTouch()
-    {
-
-    }
-
-
-    void OnFirstTouchEnded()
-    {
-
-    }
-
-
     void toggleSetting()
     {
         if (!shopOn)
