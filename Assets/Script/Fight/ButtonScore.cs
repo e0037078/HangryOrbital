@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class ButtonScore : TouchManager {
 
@@ -10,6 +11,8 @@ public class ButtonScore : TouchManager {
 
     public GUITexture buttonTexture = null;
 
+    public Image black;
+    public Animator fadeAnim;
 
     // Use this for initialization
     void Start () {
@@ -44,8 +47,16 @@ public class ButtonScore : TouchManager {
         SaveManager.updateSave();
         PlayGamesScript.Instance.SaveData();
         //SaveManager.loadSave();
+        StartCoroutine(FadingIntoFightScene());
+    }
+
+    IEnumerator FadingIntoFightScene()
+    {
+        fadeAnim.SetBool("FadeOut", true);
+        yield return new WaitUntil(() => black.color.a == 1);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
+
     void backToMap()
     {
         if (ButtonShop.paused)
@@ -55,6 +66,13 @@ public class ButtonScore : TouchManager {
         SaveManager.updateSave();
         PlayGamesScript.Instance.SaveData();
         //SaveManager.loadSave();
+        StartCoroutine(FadingIntoCityMap());
+    }
+
+    IEnumerator FadingIntoCityMap()
+    {
+        fadeAnim.SetBool("FadeOut", true);
+        yield return new WaitUntil(() => black.color.a == 1);
         SceneManager.LoadScene("City map");
     }
 }

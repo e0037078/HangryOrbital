@@ -279,7 +279,6 @@
     <Compile Include="Assets\PDollar\Scripts\PDollarGestureRecognizer\Point.cs" />
     <Compile Include="Assets\PDollar\Scripts\PDollarGestureRecognizer\PointCloudRecognizer.cs" />
     <Compile Include="Assets\PDollar\Scripts\PDollarGestureRecognizer\Result.cs" />
-    <Compile Include="Assets\Script\Fading.cs" />
     <Compile Include="Assets\Script\Fight\AutoMove.cs" />
     <Compile Include="Assets\Script\Fight\ButtonBoss.cs" />
     <Compile Include="Assets\Script\Fight\ButtonScore.cs" />
@@ -296,7 +295,6 @@
     <Compile Include="Assets\Script\Map\AutoMoveMonster.cs" />
     <Compile Include="Assets\Script\Map\ButtonMovement.cs" />
     <Compile Include="Assets\Script\Map\ButtonShop.cs" />
-    <Compile Include="Assets\Script\Map\CheckinStatsButtonManager.cs" />
     <Compile Include="Assets\Script\Map\ColorToPrefab.cs" />
     <Compile Include="Assets\Script\Map\ExitGame.cs" />
     <Compile Include="Assets\Script\Map\LevelGenerator.cs" />
@@ -318,6 +316,7 @@
     <Compile Include="Assets\Script\Save\JsonUtil.cs" />
     <Compile Include="Assets\Script\Save\OfflineProgression.cs" />
     <Compile Include="Assets\Script\Save\PlayGamesScript.cs" />
+    <Compile Include="Assets\Script\Tutorial\TutorialManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Boomlagoon\JSON\Readme.txt" />

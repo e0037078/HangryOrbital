@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class PlayerManager : MonoBehaviour
 {
@@ -13,6 +14,9 @@ public class PlayerManager : MonoBehaviour
 
     Animator anim;
     Rigidbody2D rb;
+
+    public Animator fadeAnim;
+    public Image black;
 
 	// Use this for initialization
 	void Start ()
@@ -97,7 +101,7 @@ public class PlayerManager : MonoBehaviour
             // Check what level monster encountered.
             MonsterManager.Instance.encounteredMonsterLevel(collision.gameObject);
             // should add some animation like pokemon hahaha
-            SceneManager.LoadScene("Fight scene");
+            StartCoroutine(FadingIntoFightScene());
         }
         // in future, can add on collision with PORTAL --> change map scene
         else if (collision.gameObject.tag == "Portal")
@@ -105,5 +109,11 @@ public class PlayerManager : MonoBehaviour
             // TODO load new scene
             // or load same level, diff layout (change tempLayout in level generator)
         }
+    }
+    IEnumerator FadingIntoFightScene()
+    {
+        fadeAnim.SetBool("FadeOut", true);
+        yield return new WaitUntil(() => black.color.a == 1);
+        SceneManager.LoadScene("Fight scene");
     }
 }
