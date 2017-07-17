@@ -36,22 +36,26 @@ public class SaveManager : MonoBehaviour {
     public double[] gestureDMG = new double[5];
 
     public int monsterCleared = 0;
+    public int monsterToClear = 0;
     public int monsterLevel = 0;
 
     //Overall Multiplier
     OverallStatsMultiplier multipliers = new OverallStatsMultiplier();
 
     //SAVE DATA 
+    [Header("Save Data")]
     public float[] SaveArray;
     public static int[] SAVE { get; set; }
 
     //Offline Progress
+    [Header("Offline Progress")]
     public bool offlineProgress = true;
     public bool offlineShown = false;
     public float offlineGoldEarned;
     public int offlineTime;
 
     //Daily Check-in Reward
+    [Header("Daily Check-in Reward")]
     public bool checkInAvailable = false;
     public int numChecked;
     public int totNumDaily = 6;
@@ -61,7 +65,7 @@ public class SaveManager : MonoBehaviour {
     // Use this for initialization
     void Awake () {
 
-        SAVE = new int[18];
+        SAVE = new int[19];
         //Basically make sure that there is only one Instance of SaveManager
         if (Instance != null)
         {
@@ -94,6 +98,7 @@ public class SaveManager : MonoBehaviour {
         calculateGestureProbability();
         calculateGestureDMG();
         calculateMonsterStats();
+        calculateMonsterToClear();
     }
 	
 	// Update is called once per frame
@@ -105,6 +110,12 @@ public class SaveManager : MonoBehaviour {
             goldEarned = 0;
             currentScene = SceneManager.GetActiveScene();
             
+        }
+
+        if (monsterToClear - monsterCleared == 0)
+        {
+            // portal unlocked, level ++ if portal unlocked, delete all monsters in map
+            DestroyAllCityMonsters();
         }
 	}
 
@@ -202,6 +213,12 @@ public class SaveManager : MonoBehaviour {
         goldDrop = (float)(10 + level * 0.8 + DPS * 0.5 + BaseHP * 0.5) * monsterLevel + 20;
         monsterDPS = (float)(15 + level * 0.5 + DPS * 0.2 + BaseHP * 0.075) * monsterLevel + 20;
         monsterHP = (float)(20 + level * 0.5 + DPS * 0.2 + BaseHP * 0.25) * monsterLevel + 20;
+    }
+
+    void calculateMonsterToClear()
+    {
+        // temp formula;
+        monsterToClear = level + 3;
     }
 
     void calculateGestureProbability()
@@ -304,8 +321,19 @@ public class SaveManager : MonoBehaviour {
 
     public void wonLevel()
     {
-        monsterCleared += (int)Mathf.Pow(2f, (float)(monsterLevel - 1));
-    } 
+        //monsterCleared += (int)Mathf.Pow(2f, (float)(monsterLevel - 1));
+        monsterCleared++;
+    }
+    void DestroyAllCityMonsters()
+    {
+        GameObject[] gameObjects;
+        gameObjects = GameObject.FindGameObjectsWithTag("City Monster");
+
+        for (int i = 0; i < gameObjects.Length; i++)
+        {
+            Destroy(gameObjects[i]);
+        }
+    }
 
     public static double calculateFixedUpdateProbability(double probability)
     {
@@ -389,6 +417,9 @@ public class SaveManager : MonoBehaviour {
                     //Date of Now , DDMM
                     SAVE[i] = DateTime.Now.Day * 100 + DateTime.Now.Month;
                     break;
+                case 18:
+                    SAVE[i] = SaveManager.Instance.monsterToClear - SaveManager.Instance.monsterCleared;
+                    break;
                 
 
                 default:
@@ -422,6 +453,9 @@ public class SaveManager : MonoBehaviour {
                     break;
                 case 17:
                     SaveManager.Instance.checkDaily(SAVE[i]);
+                    break;
+                case 18:
+                    SaveManager.Instance.monsterToClear = SAVE[i];
                     break;
                 
 

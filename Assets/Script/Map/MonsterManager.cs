@@ -1,10 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class MonsterManager : MonoBehaviour {
     public static MonsterManager Instance;
     public GameObject[] monsters;
+    public Text numMonstersLeft;
+    public Image monsterImage;
+    public GameObject portalPanel;
+    bool unlocked = false;
 
 	// Use this for initialization
 	void Start () {
@@ -18,13 +24,37 @@ public class MonsterManager : MonoBehaviour {
             Instance = this;
         }
 
+        int index = -1;
+        switch (monsterImage.gameObject.scene.name)
+        {
+            case ("City map"):
+                index = 0;
+                break;
+            case ("Forest map"):
+                index = 1;
+                break;
+        }
+        if (index >= 0)
+            monsterImage.sprite = monsters[index].gameObject.GetComponent<SpriteRenderer>().sprite;
+
+        int monstersLeft = SaveManager.Instance.monsterToClear - SaveManager.Instance.monsterCleared;
+        numMonstersLeft.text = monstersLeft.ToString() + " left";
+
         updateMonsters();
 	}
 	
 	// Update is called once per frame
-	void Update () {
-		
-	}
+	void Update ()
+    {
+        int monstersLeft = SaveManager.Instance.monsterToClear - SaveManager.Instance.monsterCleared;
+        numMonstersLeft.text = monstersLeft.ToString() + " left";
+        if (monstersLeft == 0 && !unlocked)
+        {
+            // unlock portal;
+            unlocked = true;
+            portalPanel.SetActive(true);
+        }
+    }
 
     public void encounteredMonsterLevel(GameObject monster)
     {
@@ -42,6 +72,7 @@ public class MonsterManager : MonoBehaviour {
 
     public void updateMonsters()
     {
+        /*
         //Getting the Monsters Cleared 
         int cleared = SaveManager.Instance.monsterCleared;
         int i = 0;
@@ -56,5 +87,6 @@ public class MonsterManager : MonoBehaviour {
             cleared /= 2;
             i++;
         }
+        */
     }
 }
