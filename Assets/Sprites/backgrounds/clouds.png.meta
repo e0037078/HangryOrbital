@@ -1,14 +1,17 @@
 fileFormatVersion: 2
-guid: ae4b76e9186c8764a873a36169397eb6
-timeCreated: 1497447986
+guid: 7e8b5db23ccbe284a9e800db44b602e6
+timeCreated: 1500208450
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
-    21300000: sun_0
-    21300002: sun_1
-    21300004: sun_2
-    21300006: sun_3
-    21300008: sun_4
+    21300000: Capture_0
+    21300002: Capture_1
+    21300004: Capture_2
+    21300006: Capture_3
+    21300008: clouds_0
+    21300010: clouds_1
+    21300012: clouds_2
+    21300014: clouds_3
   serializedVersion: 4
   mipmaps:
     mipMapMode: 0
@@ -79,77 +82,56 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
-  - buildTarget: WebGL
-    maxTextureSize: 2048
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: sun_0
+      name: clouds_0
       rect:
         serializedVersion: 2
-        x: 118
-        y: 270
-        width: 434
-        height: 434
+        x: 14
+        y: 176
+        width: 283
+        height: 142
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: sun_1
+      name: clouds_1
       rect:
         serializedVersion: 2
-        x: 768
-        y: 512
-        width: 70
-        height: 75
+        x: 348
+        y: 186
+        width: 207
+        height: 96
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: sun_2
+      name: clouds_2
       rect:
         serializedVersion: 2
-        x: 855
-        y: 512
-        width: 70
-        height: 75
+        x: 26
+        y: 29
+        width: 228
+        height: 97
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: sun_3
+      name: clouds_3
       rect:
         serializedVersion: 2
-        x: 791
-        y: 340
-        width: 107
-        height: 108
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: sun_4
-      rect:
-        serializedVersion: 2
-        x: 56
-        y: 64
-        width: 1088
-        height: 188
+        x: 315
+        y: 36
+        width: 196
+        height: 93
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
