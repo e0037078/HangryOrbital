@@ -303,6 +303,7 @@
     <Compile Include="Assets\Script\Map\MusicManager.cs" />
     <Compile Include="Assets\Script\Map\PlatformGenerator.cs" />
     <Compile Include="Assets\Script\Map\PlayerManager.cs" />
+    <Compile Include="Assets\Script\Map\PortalManager.cs" />
     <Compile Include="Assets\Script\Map\SampleButton.cs" />
     <Compile Include="Assets\Script\Map\SaveManager.cs" />
     <Compile Include="Assets\Script\Map\SfxManager.cs" />
@@ -312,6 +313,7 @@
     <Compile Include="Assets\Script\Map\TouchManager.cs" />
     <Compile Include="Assets\Script\Map\cameraFollow2DPlatformer.cs" />
     <Compile Include="Assets\Script\Map\updateStats.cs" />
+    <Compile Include="Assets\Script\PauseTemp.cs" />
     <Compile Include="Assets\Script\Save\CheckIn.cs" />
     <Compile Include="Assets\Script\Save\JsonUtil.cs" />
     <Compile Include="Assets\Script\Save\OfflineProgression.cs" />

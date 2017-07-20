@@ -146,11 +146,13 @@ public class ButtonMovement : TouchManager {
     
     void Jump()
     {
-        SfxManager.PlaySound("Jumping");
-        playerRB.AddForce(Vector2.up * jumpHeight, ForceMode2D.Impulse);
-        playerAnim.SetInteger("State", 2);
-        isJumping = true;
-        
+        if (!isJumping)
+        {
+            SfxManager.PlaySound("Jumping");
+            playerRB.AddForce(Vector2.up * jumpHeight, ForceMode2D.Impulse);
+            playerAnim.SetInteger("State", 2);
+            isJumping = true;
+        }
     }
     void Flip()
     {

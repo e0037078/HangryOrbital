@@ -62,6 +62,10 @@ public class SaveManager : MonoBehaviour {
     public GameObject CheckInPanel;
     public Button checkInButton;
 
+    [Header("Music")]
+    public static bool muteSfx;
+    public static bool muteBGM;
+
     // Use this for initialization
     void Awake () {
 
@@ -99,6 +103,9 @@ public class SaveManager : MonoBehaviour {
         calculateGestureDMG();
         calculateMonsterStats();
         calculateMonsterToClear();
+
+        muteSfx = SfxManager.muteSfx;
+        muteBGM = MusicManager.muteMusic;
     }
 	
 	// Update is called once per frame
@@ -117,7 +124,9 @@ public class SaveManager : MonoBehaviour {
             // portal unlocked, level ++ if portal unlocked, delete all monsters in map
             DestroyAllCityMonsters();
         }
-	}
+        muteSfx = SfxManager.muteSfx;
+        muteBGM = MusicManager.muteMusic;
+    }
 
     public bool buyUpgrade(int index)
     {

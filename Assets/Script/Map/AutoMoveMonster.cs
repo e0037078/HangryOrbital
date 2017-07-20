@@ -25,7 +25,7 @@ public static class ExtensionMethods
     Rigidbody2D myBody;
     Transform myTrans;
     Animator myAnim;
-    float myWidth, myHeight;
+    public float myWidth, myHeight;
 
 
     void Start()
@@ -34,8 +34,8 @@ public static class ExtensionMethods
         myBody = this.GetComponent<Rigidbody2D>();
         myAnim = this.GetComponent<Animator>();
         SpriteRenderer mySprite = this.GetComponent<SpriteRenderer>();
-        myWidth = mySprite.bounds.extents.x;
-        myHeight = mySprite.bounds.extents.y;
+        //myWidth = mySprite.bounds.extents.x;
+        //myHeight = mySprite.bounds.extents.y;
     }
 
     void FixedUpdate()
@@ -45,7 +45,7 @@ public static class ExtensionMethods
         //http://www.devination.com/2015/07/unity-extension-method-tutorial.html
 
         //Use this position to cast the isGrounded/isBlocked lines from
-        Vector2 lineCastPos = myTrans.position.toVector2() - myTrans.right.toVector2() * myWidth + Vector2.up * (myHeight/2);
+        Vector2 lineCastPos = myTrans.position.toVector2() - myTrans.right.toVector2() * myWidth - Vector2.up * (myHeight/2);
         //Check to see if there's ground in front of us before moving forward
         //NOTE: Unity 4.6 and below use "- Vector2.up" instead of "+ Vector2.down"
         Debug.DrawLine(lineCastPos, lineCastPos + Vector2.down);

@@ -7,9 +7,12 @@ using UnityEngine.SceneManagement;
 public class MonsterManager : MonoBehaviour {
     public static MonsterManager Instance;
     public GameObject[] monsters;
+    public Sprite[] monsterPic;
     public Text numMonstersLeft;
     public Image monsterImage;
     public GameObject portalPanel;
+    public GameObject offlineScreen;
+
     bool unlocked = false;
 
 	// Use this for initialization
@@ -35,7 +38,7 @@ public class MonsterManager : MonoBehaviour {
                 break;
         }
         if (index >= 0)
-            monsterImage.sprite = monsters[index].gameObject.GetComponent<SpriteRenderer>().sprite;
+            monsterImage.sprite = monsterPic[index];
 
         int monstersLeft = SaveManager.Instance.monsterToClear - SaveManager.Instance.monsterCleared;
         numMonstersLeft.text = monstersLeft.ToString() + " left";
@@ -48,7 +51,7 @@ public class MonsterManager : MonoBehaviour {
     {
         int monstersLeft = SaveManager.Instance.monsterToClear - SaveManager.Instance.monsterCleared;
         numMonstersLeft.text = monstersLeft.ToString() + " left";
-        if (monstersLeft == 0 && !unlocked)
+        if (monstersLeft == 0 && !unlocked && !offlineScreen.activeSelf)
         {
             // unlock portal;
             unlocked = true;

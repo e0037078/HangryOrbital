@@ -21,7 +21,7 @@ public class MusicManager : MonoBehaviour
         BGM2 = Resources.Load<AudioClip>("BGM2");
 
         audioSrc = GetComponent<AudioSource>();
-        audioSrc.volume = 0.3f;
+        audioSrc.volume = 0.5f;
     }
 
     private void FixedUpdate()

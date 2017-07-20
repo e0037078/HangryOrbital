@@ -190,6 +190,7 @@ public class FightManager : MonoBehaviour {
     {
         //pause game
         ButtonShop.togglePause();
+        FloatingTextController.pause = true;
         scoreScreen.SetActive(true);
         GUIText[] allText = scoreScreen.GetComponentsInChildren<GUIText>();
         //Find the Text to change to correct amount

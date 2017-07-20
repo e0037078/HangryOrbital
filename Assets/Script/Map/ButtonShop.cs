@@ -66,6 +66,7 @@ public class ButtonShop : TouchManager {
 
     void OnFirstTouchBegan()
     {
+        
         if(checkInButton != null)
         {
             if (checkInButton.activeSelf)
@@ -77,6 +78,7 @@ public class ButtonShop : TouchManager {
                 checkInButton.SetActive(true);
             }
         }
+        
         switch (buttonType)
         {
             case type.SettingToggleButton:

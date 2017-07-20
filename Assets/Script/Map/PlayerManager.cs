@@ -101,16 +101,19 @@ public class PlayerManager : MonoBehaviour
             // Check what level monster encountered.
             MonsterManager.Instance.encounteredMonsterLevel(collision.gameObject);
             // should add some animation like pokemon hahaha
-            StartCoroutine(FadingIntoFightScene());
+            StartCoroutine(FadingIntoFightMap());
         }
         // in future, can add on collision with PORTAL --> change map scene
         else if (collision.gameObject.tag == "Portal")
         {
             // TODO load new scene
             // or load same level, diff layout (change tempLayout in level generator)
+            // PortalManager script in portal prefab
+
         }
     }
-    IEnumerator FadingIntoFightScene()
+
+    IEnumerator FadingIntoFightMap()
     {
         fadeAnim.SetBool("FadeOut", true);
         yield return new WaitUntil(() => black.color.a == 1);

@@ -6,15 +6,20 @@ public class FloatingTextController : MonoBehaviour
 {
     private static FloatingText popupText;
     private static GameObject canvas;
+    public static bool pause;
 
     public static void Initialize()
     {
+        pause = false;
         canvas = GameObject.Find("myCanvas");
         popupText = Resources.Load<FloatingText>("PopupText/PopupTextParent");
     }
 
     public static void CreateFloatingText(string text, Transform location)
     {
+        if (pause)
+            return;
+
         if (popupText == null)
         {
             Initialize();

@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 58fedb88c488abc47b6384dd61967d42
-timeCreated: 1500221598
+timeCreated: 1500284134
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -154,7 +154,7 @@ TextureImporter:
       name: orbital layout 2_5
       rect:
         serializedVersion: 2
-        x: 114
+        x: 108
         y: 84
         width: 86
         height: 87
