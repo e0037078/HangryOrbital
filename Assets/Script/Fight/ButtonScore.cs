@@ -54,7 +54,11 @@ public class ButtonScore : TouchManager {
     {
         fadeAnim.SetBool("FadeOut", true);
         yield return new WaitUntil(() => black.color.a == 1);
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        //SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        if (gameObject.scene.name == "Fight scene")
+            SceneManager.LoadScene("Fight scene");
+        else if (gameObject.scene.name == "Fight scene 1")
+            SceneManager.LoadScene("Fight scene 1");
     }
 
     void backToMap()

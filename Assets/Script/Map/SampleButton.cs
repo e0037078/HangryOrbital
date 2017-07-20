@@ -14,6 +14,7 @@ public class SampleButton : MonoBehaviour
     public Text numOwned;
     public GameObject DescriptionPanel;
 
+    private Vector3 pos;
 
     private Item item;
     private ShopScrollList scrollList;
@@ -33,12 +34,14 @@ public class SampleButton : MonoBehaviour
     private void OnPointerDown()
     {
         scrollList.openDescription(item.itemName, item.description);
+        pos = transform.position;
         Debug.Log("down");
     }
     private void OnPointerUp()
     {
         scrollList.closeDescription();
-        scrollList.TryTransferItemToOtherShop(item);
+        if (Input.mousePosition == pos)
+         scrollList.TryTransferItemToOtherShop(item);
         Debug.Log("up");
     }
     //Taken from https://github.com/AyARL/UnityGUIExamples/blob/master/EventTrigger/Assets/TriggerSetup.cs

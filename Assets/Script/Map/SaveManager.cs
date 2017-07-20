@@ -129,6 +129,7 @@ public class SaveManager : MonoBehaviour {
         {
             monsterCleared = 0;
             calculateMonsterToClear(); // level+1
+            PortalManager.passed = false;
         }
         muteSfx = SfxManager.muteSfx;
         muteBGM = MusicManager.muteMusic;
