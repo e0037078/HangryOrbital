@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class FightManager : MonoBehaviour {
 
@@ -174,8 +175,17 @@ public class FightManager : MonoBehaviour {
 
     void spawnEnemy()
     {
-        setEnemyStats(Instantiate(SaveManager.Instance.enemy[0], (Vector2)currPlayer.transform.position + new Vector2(10f, 1f), currPlayer.transform.rotation));
-        setEnemyStats(Instantiate(SaveManager.Instance.enemy[0], (Vector2)currPlayer.transform.position + new Vector2(15f, 1f), currPlayer.transform.rotation));
+        int index = 0;
+        switch (gameObject.scene.name)
+        {
+            case ("Fight scene"):
+                break;
+            case ("Fight scene 1"):
+                index = 1;
+                break;
+        }
+        setEnemyStats(Instantiate(SaveManager.Instance.enemy[index], (Vector2)currPlayer.transform.position + new Vector2(10f, 1f), currPlayer.transform.rotation));
+        setEnemyStats(Instantiate(SaveManager.Instance.enemy[index], (Vector2)currPlayer.transform.position + new Vector2(15f, 1f), currPlayer.transform.rotation));
 
         allEnemies = GameObject.FindGameObjectsWithTag("Monster");
 
@@ -216,7 +226,17 @@ public class FightManager : MonoBehaviour {
             enemyHealth tempHealth = i.GetComponent<enemyHealth>();
             tempHealth.addDamage(tempHealth.currentHealth);
         }
-        currEnemy = Instantiate(SaveManager.Instance.enemyBoss[0], (Vector2)currPlayer.transform.position + new Vector2(10f, 1f), currPlayer.transform.rotation);
+
+        int index = 0;
+        switch (currPlayer.scene.name)
+        {
+            case ("Fight scene"):
+                break;
+            case ("Fight scene 1"):
+                index = 1;
+                break;
+        }
+        currEnemy = Instantiate(SaveManager.Instance.enemyBoss[index], (Vector2)currPlayer.transform.position + new Vector2(10f, 1f), currPlayer.transform.rotation);
     }
     
 }

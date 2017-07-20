@@ -21,21 +21,20 @@ public class MusicManager : MonoBehaviour
         BGM2 = Resources.Load<AudioClip>("BGM2");
 
         audioSrc = GetComponent<AudioSource>();
-        audioSrc.volume = 0.5f;
+        audioSrc.volume = 0.3f;
     }
 
     private void FixedUpdate()
     {
-        if (!muteMusic)
+        switch (gameObject.scene.name)
         {
-            if (gameObject.scene.name == "Fight scene")
-            {
-                PlayBGM("BGM2");
-            }
-            else
-            {
-                PlayBGM("BGM1");
-            }
+            case ("Fight scene"):
+            case ("Fight scene 1"):
+                MusicManager.PlayBGM("BGM2");
+                break;
+            default:
+                MusicManager.PlayBGM("BGM1");
+                break;
         }
     }
 

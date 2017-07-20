@@ -124,6 +124,12 @@ public class SaveManager : MonoBehaviour {
             // portal unlocked, level ++ if portal unlocked, delete all monsters in map
             DestroyAllCityMonsters();
         }
+
+        if (PortalManager.passed == true)
+        {
+            monsterCleared = 0;
+            calculateMonsterToClear(); // level+1
+        }
         muteSfx = SfxManager.muteSfx;
         muteBGM = MusicManager.muteMusic;
     }

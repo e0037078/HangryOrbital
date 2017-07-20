@@ -32,10 +32,17 @@ public class SoundMusicButton : MonoBehaviour {
             MusicManager.muteMusic = true;
             ToggleMusic();
 
-            if (musicOn.gameObject.scene.name == "Fight scene")
-                MusicManager.PlayBGM("BGM2");
-            else
-                MusicManager.PlayBGM("BGM1");
+
+            switch (musicOn.gameObject.scene.name)
+            {
+                case ("Fight scene"):
+                case ("Fight scene 1"):
+                    MusicManager.PlayBGM("BGM2");
+                    break;
+                default:
+                    MusicManager.PlayBGM("BGM1");
+                    break;
+            }
         }
 
         if (SaveManager.muteSfx)
@@ -64,8 +71,6 @@ public class SoundMusicButton : MonoBehaviour {
 
     public void ToggleMusic()
     {
-        if (!SfxManager.muteSfx)
-            SfxManager.PlaySound("Click");
         MusicManager.muteMusic = !MusicManager.muteMusic;
         if (MusicManager.muteMusic)
         {
@@ -81,12 +86,19 @@ public class SoundMusicButton : MonoBehaviour {
         {
             musicSrc.mute = false;
             SaveManager.muteBGM = false;
-            musicSrc.volume = 0.5f;
-            
-            if (gameObject.scene.name == "Fight scene")
-                MusicManager.PlayBGM("BGM2");
-            else
-                MusicManager.PlayBGM("BGM1");
+            musicSrc.volume = 0.3f;
+
+            switch (gameObject.scene.name)
+            {
+                case ("Fight scene"):
+                case ("Fight scene 1"):
+                    MusicManager.PlayBGM("BGM2");
+                    break;
+                default:
+                    MusicManager.PlayBGM("BGM1");
+                    break;
+            }
+
             musicOn.gameObject.SetActive(true);
             musicOff.gameObject.SetActive(false);
         }
@@ -94,13 +106,12 @@ public class SoundMusicButton : MonoBehaviour {
 
     public void ToggleSfx()
     {
-        if (!SfxManager.muteSfx)
-            SfxManager.PlaySound("Click");
         SfxManager.muteSfx = !SfxManager.muteSfx;
         if (SfxManager.muteSfx)
         {
             sfxSrc.Stop();
             sfxSrc.mute = true;
+            sfxSrc.volume = 0f;
             SaveManager.muteSfx = true;
 
             sfxOff.gameObject.SetActive(true);
@@ -109,6 +120,7 @@ public class SoundMusicButton : MonoBehaviour {
         else
         {
             sfxSrc.mute = false;
+            sfxSrc.volume = 1f;
             SaveManager.muteSfx = false;
             sfxOn.gameObject.SetActive(true);
             sfxOff.gameObject.SetActive(false);

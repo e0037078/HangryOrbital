@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class PortalManager : MonoBehaviour {
+    public static bool passed = false;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -13,6 +14,7 @@ public class PortalManager : MonoBehaviour {
             {
                 case ("City map"):
                     SceneManager.LoadScene("Forest map");
+                    passed = true;
                     break;
                 case ("Forest map"):
                     // SceneManager.LoadScene("Forest map"); // should be one more level

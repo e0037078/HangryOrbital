@@ -94,4 +94,9 @@ public class SfxManager : MonoBehaviour
         }
     }
 
+    public void playClick()
+    {
+        audioSrc.PlayOneShot(click);
+    }
+
 }

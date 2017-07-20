@@ -117,6 +117,9 @@ public class PlayerManager : MonoBehaviour
     {
         fadeAnim.SetBool("FadeOut", true);
         yield return new WaitUntil(() => black.color.a == 1);
-        SceneManager.LoadScene("Fight scene");
+        if (gameObject.scene.name == "City map")
+            SceneManager.LoadScene("Fight scene");
+        else if (gameObject.scene.name == "Forest map")
+            SceneManager.LoadScene("Fight scene 1");
     }
 }

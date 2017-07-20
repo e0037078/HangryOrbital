@@ -52,8 +52,6 @@ public class ButtonShop : TouchManager {
 
     void ResumeGame()
     {
-        SfxManager.PlaySound("Click");
-
         if (settingOn)
         {
             settingMenu.GetComponent<Canvas>().enabled = false;
@@ -82,12 +80,10 @@ public class ButtonShop : TouchManager {
         switch (buttonType)
         {
             case type.SettingToggleButton:
-                SfxManager.PlaySound("Click");
                 toggleSetting();
                 break;
 
             case type.ShopToggleButton:
-                SfxManager.PlaySound("Click");
                 toggleShop();
                 break;
         } 
