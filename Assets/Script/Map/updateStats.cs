@@ -28,7 +28,7 @@ public class updateStats : MonoBehaviour {
     {
         HP.text = "HP  : " +  SaveManager.Instance.BaseHP;
         DPS.text = "DPS : " + SaveManager.Instance.DPS;
-        Level.text = "LEVEL:\n" + SaveManager.Instance.level;
+        Level.text = "LEVEL: " + SaveManager.Instance.level;
 
         LineDMG.text = "DMG :" + SaveManager.Instance.gestureDMG[0];
         LineProb.text = "Prob:" + SaveManager.Instance.gestureProb[0].ToString("0.##");
