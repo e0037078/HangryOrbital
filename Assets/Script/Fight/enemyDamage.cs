@@ -33,7 +33,7 @@ public class enemyDamage : MonoBehaviour {
 
             //playerHealth thePlayerHealth = FightManager.currPlayer.GetComponent<playerHealth>();
             //thePlayerHealth.addDamage(damage);
-            if (gameObject.name == "Cat")
+            if (gameObject.name == "Cat" || gameObject.name == "Cat(Clone)")
             {
                 gameObject.GetComponent<Animator>().SetTrigger("isFighting");
             }

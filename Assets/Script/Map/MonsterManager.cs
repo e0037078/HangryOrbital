@@ -14,6 +14,7 @@ public class MonsterManager : MonoBehaviour {
     public GameObject offlineScreen;
 
     bool unlocked = false;
+    bool notified = false;
 
 	// Use this for initialization
 	void Start () {
@@ -50,13 +51,26 @@ public class MonsterManager : MonoBehaviour {
 	void Update ()
     {
         int monstersLeft = SaveManager.Instance.monsterToClear - SaveManager.Instance.monsterCleared;
+
+        if (unlocked || monstersLeft <= 0)
+        {
+            monstersLeft = 0;
+        }
+
         numMonstersLeft.text = monstersLeft.ToString() + " left";
-        if (monstersLeft == 0 && !unlocked && !offlineScreen.activeSelf)
+        if (monstersLeft == 0 && !unlocked)
         {
             // unlock portal;
             unlocked = true;
-            portalPanel.SetActive(true);
+            PortalManager.unlocked = true;
         }
+
+        if (unlocked && !offlineScreen.activeSelf && !notified)
+        {
+            portalPanel.SetActive(true);
+            notified = true;
+        }
+
     }
 
     public void encounteredMonsterLevel(GameObject monster)

@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class PortalManager : MonoBehaviour {
     public static bool passed = false;
+    public static bool unlocked = false;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {

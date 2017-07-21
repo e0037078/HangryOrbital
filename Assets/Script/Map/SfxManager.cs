@@ -10,6 +10,7 @@ public class SfxManager : MonoBehaviour
     public static AudioClip gameOver;
     public static AudioClip playerWin;
     public static AudioClip enemyDie;
+    public static AudioClip enemyDie2;
     public static AudioClip forwardSlash;
     public static AudioClip backwardSlash;
     public static AudioClip zap;
@@ -29,6 +30,7 @@ public class SfxManager : MonoBehaviour
         playerJump = Resources.Load<AudioClip>("Jumping");
         gameOver = Resources.Load<AudioClip>("GameOver");
         enemyDie = Resources.Load<AudioClip>("EnemyDie");
+        enemyDie2 = Resources.Load<AudioClip>("Meow");
         forwardSlash = Resources.Load<AudioClip>("forwardSlash");
         backwardSlash = Resources.Load<AudioClip>("backwardSlash");
         zap = Resources.Load<AudioClip>("Zap");
@@ -58,6 +60,11 @@ public class SfxManager : MonoBehaviour
                 if (audioSrc.isPlaying)
                     audioSrc.Stop();
                 audioSrc.PlayOneShot(enemyDie);
+                break;
+            case ("EnemyDie2"):
+                if (audioSrc.isPlaying)
+                    audioSrc.Stop();
+                audioSrc.PlayOneShot(enemyDie2);
                 break;
             case ("ForwardSlash"):
                 if (audioSrc.isPlaying)

@@ -27,6 +27,8 @@ public class ButtonScore : TouchManager {
 
     void OnFirstTouchBegan()
     {
+        FloatingTextController.pause = false;
+        Debug.Log("floating text controller pause = false");
         switch (buttonType)
         {
             case type.Again:
@@ -37,13 +39,17 @@ public class ButtonScore : TouchManager {
                 backToMap();
                 break;
         }
+        
+
     }
     void again()
     {
+        
         if (ButtonShop.paused)
         {
             ButtonShop.togglePause();
         }
+        
         SaveManager.updateSave();
         PlayGamesScript.Instance.SaveData();
         //SaveManager.loadSave();
@@ -56,9 +62,13 @@ public class ButtonScore : TouchManager {
         yield return new WaitUntil(() => black.color.a == 1);
         //SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         if (gameObject.scene.name == "Fight scene")
+        {
             SceneManager.LoadScene("Fight scene");
+        }
         else if (gameObject.scene.name == "Fight scene 1")
+        {
             SceneManager.LoadScene("Fight scene 1");
+        }
     }
 
     void backToMap()

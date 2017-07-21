@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class enemyHealth : MonoBehaviour {
 
@@ -57,7 +58,10 @@ public class enemyHealth : MonoBehaviour {
     {
         //make sound
         isDead = true;
-        SfxManager.PlaySound("EnemyDie");
+        if (gameObject.scene.name == "Fight scene")
+            SfxManager.PlaySound("EnemyDie2");
+        else
+            SfxManager.PlaySound("EnemyDie");
         Destroy(this.GetComponent<AutoMove>());
         this.GetComponent<enemyDamage>().isDead = true;
         this.GetComponent<Animator>().SetBool("isDead", true); //death animation

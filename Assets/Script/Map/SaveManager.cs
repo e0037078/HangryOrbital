@@ -118,18 +118,21 @@ public class SaveManager : MonoBehaviour {
             currentScene = SceneManager.GetActiveScene();
             
         }
-
+        /*
+         * don't need, see monstermanager
         if (monsterToClear - monsterCleared == 0)
         {
             // portal unlocked, level ++ if portal unlocked, delete all monsters in map
             DestroyAllCityMonsters();
         }
+        */
 
-        if (PortalManager.passed == true)
+        if (PortalManager.passed)
         {
             monsterCleared = 0;
             calculateMonsterToClear(); // level+1
             PortalManager.passed = false;
+            PortalManager.unlocked = false;
         }
         muteSfx = SfxManager.muteSfx;
         muteBGM = MusicManager.muteMusic;

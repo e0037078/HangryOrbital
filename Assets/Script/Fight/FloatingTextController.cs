@@ -10,6 +10,7 @@ public class FloatingTextController : MonoBehaviour
 
     public static void Initialize()
     {
+        return;
         pause = false;
         canvas = GameObject.Find("myCanvas");
         popupText = Resources.Load<FloatingText>("PopupText/PopupTextParent");
@@ -17,6 +18,7 @@ public class FloatingTextController : MonoBehaviour
 
     public static void CreateFloatingText(string text, Transform location)
     {
+        return;
         if (pause)
             return;
 
@@ -24,10 +26,12 @@ public class FloatingTextController : MonoBehaviour
         {
             Initialize();
         }
+
         FloatingText instance = Instantiate(popupText);
+        instance.transform.SetParent(canvas.transform, false);
+
         Vector2 screenPosition = Camera.main.WorldToScreenPoint(new Vector2(location.position.x + Random.Range(-.5f,.5f), location.position.y + Random.Range(-.5f, .5f)));
 
-        instance.transform.SetParent(canvas.transform, false);
         instance.transform.position = screenPosition;
         instance.GetComponent<FloatingText>().SetText(text);
     }
