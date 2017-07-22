@@ -86,7 +86,7 @@ public class SoundMusicButton : MonoBehaviour {
         {
             musicSrc.mute = false;
             SaveManager.muteBGM = false;
-            musicSrc.volume = 0.3f;
+            musicSrc.volume = 0.5f;
 
             switch (gameObject.scene.name)
             {
