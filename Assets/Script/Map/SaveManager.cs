@@ -115,7 +115,7 @@ public class SaveManager : MonoBehaviour {
         //checks if Scene have Changed
         if (currentScene != SceneManager.GetActiveScene())
         {
-            if(SceneManager.GetActiveScene().name == "City map" || SceneManager.GetActiveScene().name == "Forest map")
+            if((SceneManager.GetActiveScene().name == "City map" || SceneManager.GetActiveScene().name == "Forest map")&&(currentScene.name != "City map"))
             {
                 playerSpawnPos(playerPos);
             }
@@ -132,14 +132,7 @@ public class SaveManager : MonoBehaviour {
             DestroyAllCityMonsters();
         }
         */
-
-        if (PortalManager.passed)
-        {
-            monsterCleared = 0;
-            calculateMonsterToClear(); // level+1
-            PortalManager.passed = false;
-            PortalManager.unlocked = false;
-        }
+        
         muteSfx = SfxManager.muteSfx;
         muteBGM = MusicManager.muteMusic;
     }
@@ -473,6 +466,7 @@ public class SaveManager : MonoBehaviour {
             {
                 case 12:
                     SaveManager.Instance.level = (int)SAVE[i];
+                    SaveManager.Instance.updateMap();
                     break;
                 case 13:
                     SaveManager.Instance.gold = SAVE[i];
@@ -585,7 +579,7 @@ public class SaveManager : MonoBehaviour {
     void playerSpawnPos(Vector3 pos)
     {
         if (pos.x == 0 || pos.y == 0)
-        {
+        {   
             return;
         }
         GameObject player = GameObject.FindGameObjectWithTag("Player");
@@ -597,6 +591,17 @@ public class SaveManager : MonoBehaviour {
         GameObject player = GameObject.FindGameObjectWithTag("Player");
         playerPos = player.transform.localPosition; 
     }
+    void updateMap()
+    {
+        switch (level)
+        {
+            case 0:
+                break;
+            case 1:
+                SceneManager.LoadScene("Forest map");
+                break;
+        }
+    }
 
     #endregion /Save
     static void printLoop<T>(T arr) where T : IList
@@ -604,7 +609,16 @@ public class SaveManager : MonoBehaviour {
         for (int i = 0; i < arr.Count; i++)
             Debug.Log("(Hangry)" + arr[i].ToString());
     }
-    
+
+    //Called in PortalManager
+    public void resetMap()
+    {
+        monsterCleared = 0;
+        calculateMonsterToClear(); // level+1
+        PortalManager.passed = false;
+        PortalManager.unlocked = false;
+        playerPos = Vector3.zero;
+    }
 }
 
 [System.Serializable]

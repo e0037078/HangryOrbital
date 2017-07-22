@@ -14,8 +14,9 @@ public class PortalManager : MonoBehaviour {
             switch (gameObject.scene.name)
             {
                 case ("City map"):
+                    SaveManager.Instance.resetMap();
+                    SaveManager.Instance.level++;
                     SceneManager.LoadScene("Forest map");
-                    passed = true;
                     break;
                 case ("Forest map"):
                     // SceneManager.LoadScene("Forest map"); // should be one more level
