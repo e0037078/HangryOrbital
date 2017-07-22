@@ -13,6 +13,7 @@ public class SampleButton : MonoBehaviour
     public Text priceText;
     public Text numOwned;
     public GameObject DescriptionPanel;
+    public static bool buyMode;
 
     private Vector3 pos;
 
@@ -25,6 +26,7 @@ public class SampleButton : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        buyMode = false;
         buttonComponent.onClick.AddListener(HandleClick);
         eventTrigger = gameObject.GetComponent<EventTrigger>();
         AddEventTrigger(OnPointerDown, EventTriggerType.PointerDown);
@@ -33,15 +35,17 @@ public class SampleButton : MonoBehaviour
     }
     private void OnPointerDown()
     {
-        scrollList.openDescription(item.itemName, item.description);
+        if (!buyMode)
+            scrollList.openDescription(item.itemName, item.description);
         pos = transform.position;
         Debug.Log("down");
     }
     private void OnPointerUp()
     {
-        scrollList.closeDescription();
-        if (Input.mousePosition == pos)
-         scrollList.TryTransferItemToOtherShop(item);
+        
+        // scrollList.closeDescription();
+        if (buyMode)
+            scrollList.TryTransferItemToOtherShop(item);
         Debug.Log("up");
     }
     //Taken from https://github.com/AyARL/UnityGUIExamples/blob/master/EventTrigger/Assets/TriggerSetup.cs
@@ -73,6 +77,11 @@ public class SampleButton : MonoBehaviour
     public void HandleClick()
     {
         SfxManager.PlaySound("Click");
-        scrollList.TryTransferItemToOtherShop(item);
+        //scrollList.TryTransferItemToOtherShop(item);
+    }
+    
+    public void toggleBuyMode()
+    {
+        buyMode = !buyMode;
     }
 }

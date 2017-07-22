@@ -92,6 +92,10 @@ public class ShopScrollList : MonoBehaviour
             {
                 t.text = itemName;
             }
+            else if (t.name == "Text")
+            {
+                t.text = "OK";
+            }
             else
             {
                 t.text = descriptionText;
