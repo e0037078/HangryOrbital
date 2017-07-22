@@ -466,7 +466,7 @@ public class SaveManager : MonoBehaviour {
             {
                 case 12:
                     SaveManager.Instance.level = (int)SAVE[i];
-                    SaveManager.Instance.updateMap();
+                    SaveManager.Instance.StartCoroutine(SaveManager.Instance.updateMap());
                     break;
                 case 13:
                     SaveManager.Instance.gold = SAVE[i];
@@ -484,7 +484,7 @@ public class SaveManager : MonoBehaviour {
                     break;
                 case 19:
                     //Since Stored as int need convert back to float
-                    SaveManager.Instance.playerSpawnPos(SAVE[16] + (float)(SAVE[17] / 1000), SAVE[18] + (float)(SAVE[19] / 1000));
+                    SaveManager.Instance.playerSpawnPos((float)(SAVE[16] + (float)(SAVE[17] / 1000)), (float)(SAVE[18] + (float)(SAVE[19] / 1000)));
                     break;
                 case 20:
                     SaveManager.Instance.numChecked = SAVE[i];
@@ -537,7 +537,6 @@ public class SaveManager : MonoBehaviour {
     public void toFight()
     {
         SceneManager.LoadScene("Fight scene");
-
     }
     public void toCity()
     {
@@ -591,14 +590,24 @@ public class SaveManager : MonoBehaviour {
         GameObject player = GameObject.FindGameObjectWithTag("Player");
         playerPos = player.transform.localPosition; 
     }
-    void updateMap()
+    IEnumerator updateMap()
     {
         switch (level)
         {
             case 0:
                 break;
             case 1:
-                SceneManager.LoadScene("Forest map");
+                if(currentScene.name == "City map")
+                {
+                    offlineShown = false;
+                    SceneManager.LoadScene("Forest map");
+                    yield return new WaitForSecondsRealtime(1f);
+                    SaveManager.Instance.playerSpawnPos((float)(SAVE[16] + (float)(SAVE[17] / 1000)), (float)(SAVE[18] + (float)(SAVE[19] / 1000)));
+                    SaveManager.Instance.checkDaily(SAVE[21]);
+                    SaveManager.Instance.calculateOfflineProgress(getTime() - SAVE[22]);
+
+
+                }
                 break;
         }
     }

@@ -1,4 +1,1 @@
-sceneSetups:
-- path: Assets/Scenes/Forest map.unity
-  isLoaded: 1
-  isActive: 1
+sceneSetups: []
