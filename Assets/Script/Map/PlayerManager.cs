@@ -116,6 +116,7 @@ public class PlayerManager : MonoBehaviour
     IEnumerator FadingIntoFightMap()
     {
         fadeAnim.SetBool("FadeOut", true);
+        SaveManager.Instance.savePlayerPos();
         ButtonShop.togglePause();
         yield return new WaitUntil(() => black.color.a == 1);
         if (gameObject.scene.name == "City map")

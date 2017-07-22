@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using System;
 
 public class MonsterManager : MonoBehaviour {
     public static MonsterManager Instance;
@@ -92,6 +93,17 @@ public class MonsterManager : MonoBehaviour {
         //monsterToClear here is already after the deduction of monstersCleared
         int monstersLeft = SaveManager.Instance.monsterToClear;
         numMonstersLeft.text = monstersLeft.ToString() + " left";
+
+        GameObject[] monsters = GameObject.FindGameObjectsWithTag("City Monster");
+        int numToDestroy = monsters.Length - monstersLeft;
+
+        IComparer myComparer = new myMonsterSorter();
+        Array.Sort(monsters, myComparer);
+
+        for (int i = 0; i < numToDestroy; i++)
+        {
+            Destroy(monsters[i] );
+        }
         /*
         //Getting the Monsters Cleared 
         int cleared = SaveManager.Instance.monsterCleared;
@@ -110,3 +122,12 @@ public class MonsterManager : MonoBehaviour {
         */
     }
 }
+
+public class myMonsterSorter : IComparer  {
+ 
+      // Calls CaseInsensitiveComparer.Compare on the monster name string.
+      int IComparer.Compare( System.Object x, System.Object y )  {
+      return( (new CaseInsensitiveComparer()).Compare( ((GameObject)x).transform.localPosition.y, ((GameObject)y).transform.localPosition.y) );
+      }
+ 
+   }

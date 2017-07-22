@@ -39,6 +39,8 @@ public class SaveManager : MonoBehaviour {
     public int monsterToClear = 0;
     public int monsterLevel = 0;
 
+    public Vector3 playerPos;
+
     //Overall Multiplier
     public OverallStatsMultiplier multipliers = new OverallStatsMultiplier();
 
@@ -69,7 +71,7 @@ public class SaveManager : MonoBehaviour {
     // Use this for initialization
     void Awake () {
 
-        SAVE = new int[19];
+        SAVE = new int[23];
         //Basically make sure that there is only one Instance of SaveManager
         if (Instance != null)
         {
@@ -113,6 +115,10 @@ public class SaveManager : MonoBehaviour {
         //checks if Scene have Changed
         if (currentScene != SceneManager.GetActiveScene())
         {
+            if(SceneManager.GetActiveScene().name == "City map" || SceneManager.GetActiveScene().name == "Forest map")
+            {
+                playerSpawnPos(playerPos);
+            }
             calculateMonsterStats();
             goldEarned = 0;
             currentScene = SceneManager.GetActiveScene();
@@ -427,19 +433,30 @@ public class SaveManager : MonoBehaviour {
                     SAVE[i] = SaveManager.Instance.monsterCleared;
                     break;
                 case 15:
-                    SAVE[i] = getTime();
+                    SAVE[i] = SaveManager.Instance.monsterToClear;
                     break;
                 case 16:
-                    SAVE[i] = SaveManager.Instance.numChecked;
+                    SAVE[i] = (int)SaveManager.Instance.playerPos.x;
                     break;
                 case 17:
+                    SAVE[i] = (int)(SaveManager.Instance.playerPos.x * 1000 % 1000);
+                    break;
+                case 18:    
+                    SAVE[i] = (int)SaveManager.Instance.playerPos.y;
+                    break;
+                case 19:
+                    SAVE[i] = (int)(SaveManager.Instance.playerPos.y * 1000 % 1000);
+                    break;
+                case 20:
+                    SAVE[i] = SaveManager.Instance.numChecked;
+                    break;
+                case 21:
                     //Date of Now , DDMM
                     SAVE[i] = DateTime.Now.Day * 100 + DateTime.Now.Month;
                     break;
-                case 18:
-                    SAVE[i] = SaveManager.Instance.monsterToClear;
+                case 22:
+                    SAVE[i] = getTime();
                     break;
-                
 
                 default:
                     SAVE[i] = SaveManager.Instance.upgrades[i];
@@ -464,17 +481,25 @@ public class SaveManager : MonoBehaviour {
                     SaveManager.Instance.monsterCleared = SAVE[i];
                     break;
                 case 15:
-                    SaveManager.Instance.calculateOfflineProgress(getTime() - SAVE[i]);
-                    break;
-                case 16:
-                    SaveManager.Instance.numChecked = SAVE[i];
-                    break;
-                case 17:
-                    SaveManager.Instance.checkDaily(SAVE[i]);
-                    break;
-                case 18:
                     SaveManager.Instance.monsterToClear = SAVE[i];
                     MonsterManager.Instance.updateMonsters();
+                    break;
+                case 16:
+                case 17:
+                case 18:
+                    break;
+                case 19:
+                    //Since Stored as int need convert back to float
+                    SaveManager.Instance.playerSpawnPos(SAVE[16] + (float)(SAVE[17] / 1000), SAVE[18] + (float)(SAVE[19] / 1000));
+                    break;
+                case 20:
+                    SaveManager.Instance.numChecked = SAVE[i];
+                    break;
+                case 21:
+                    SaveManager.Instance.checkDaily(SAVE[i]);
+                    break;
+                case 22:                    
+                    SaveManager.Instance.calculateOfflineProgress(getTime() - SAVE[i]);
                     break;
                 
 
@@ -547,13 +572,41 @@ public class SaveManager : MonoBehaviour {
         offlineGoldEarned = time / 60;
         offlineTime = time / 60;
     }
+
+    void playerSpawnPos(float x , float y)
+    {
+        if(x == 0 || y == 0)
+        {
+            return;
+        }
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        player.transform.localPosition = new Vector3(x, y, player.transform.localPosition.z);
+    }
+    void playerSpawnPos(Vector3 pos)
+    {
+        if (pos.x == 0 || pos.y == 0)
+        {
+            return;
+        }
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        player.transform.localPosition = pos;
+    }
+
+    public void savePlayerPos()
+    {
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        playerPos = player.transform.localPosition; 
+    }
+
     #endregion /Save
     static void printLoop<T>(T arr) where T : IList
     {
         for (int i = 0; i < arr.Count; i++)
             Debug.Log("(Hangry)" + arr[i].ToString());
     }
+    
 }
+
 [System.Serializable]
 public class OverallStatsMultiplier
 {
