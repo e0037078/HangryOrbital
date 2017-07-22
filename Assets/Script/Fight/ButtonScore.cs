@@ -44,7 +44,7 @@ public class ButtonScore : TouchManager {
     }
     void again()
     {
-        
+        StartCoroutine(FadingIntoFightScene());
         if (ButtonShop.paused)
         {
             ButtonShop.togglePause();
@@ -53,12 +53,13 @@ public class ButtonScore : TouchManager {
         SaveManager.updateSave();
         PlayGamesScript.Instance.SaveData();
         //SaveManager.loadSave();
-        StartCoroutine(FadingIntoFightScene());
     }
 
     IEnumerator FadingIntoFightScene()
     {
         fadeAnim.SetBool("FadeOut", true);
+        ButtonShop.togglePause();
+
         yield return new WaitUntil(() => black.color.a == 1);
         //SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         if (gameObject.scene.name == "Fight scene")
@@ -73,6 +74,7 @@ public class ButtonScore : TouchManager {
 
     void backToMap()
     {
+        StartCoroutine(FadingIntoCityMap());
         if (ButtonShop.paused)
         {
             ButtonShop.togglePause();
@@ -80,12 +82,12 @@ public class ButtonScore : TouchManager {
         SaveManager.updateSave();
         PlayGamesScript.Instance.SaveData();
         //SaveManager.loadSave();
-        StartCoroutine(FadingIntoCityMap());
     }
 
     IEnumerator FadingIntoCityMap()
     {
         fadeAnim.SetBool("FadeOut", true);
+
         yield return new WaitUntil(() => black.color.a == 1);
         if (gameObject.scene.name == "Fight scene")
             SceneManager.LoadScene("City map");

@@ -89,6 +89,7 @@ public class GestureDamage : MonoBehaviour {
                     //Temp formula 
                     float damage =(float) SaveManager.Instance.gestureDMG[3];
                     FightManager.currEnemy.gameObject.GetComponent<enemyHealth>().addDamage(damage);
+
                     FloatingTextController.CreateFloatingText(damage.ToString(), FightManager.currEnemy.transform);
 
                 }
@@ -107,8 +108,8 @@ public class GestureDamage : MonoBehaviour {
                     //Temp formula 
                     float damage = (float)SaveManager.Instance.gestureDMG[2];
                     FightManager.currEnemy.gameObject.GetComponent<enemyHealth>().addDamage(damage);
-                    FloatingTextController.CreateFloatingText(damage.ToString(), FightManager.currEnemy.transform);
 
+                    FloatingTextController.CreateFloatingText(damage.ToString(), FightManager.currEnemy.transform);
                 }
                 Debug.Log(gestureClass + " " + gestureScore);
                 break;
@@ -127,8 +128,8 @@ public class GestureDamage : MonoBehaviour {
                     StartCoroutine(destroyAfterTime(0.5f, tempSlash));
                     float damage = (float)SaveManager.Instance.gestureDMG[1];
                     FightManager.currEnemy.gameObject.GetComponent<enemyHealth>().addDamage(damage);
-                    FloatingTextController.CreateFloatingText(damage.ToString(), FightManager.currEnemy.transform);
 
+                    FloatingTextController.CreateFloatingText(damage.ToString(), FightManager.currEnemy.transform);
                 }
                 Debug.Log(gestureClass + " " + gestureScore);
                 break;
@@ -144,8 +145,8 @@ public class GestureDamage : MonoBehaviour {
                     StartCoroutine(destroyAfterTime(0.2f, tempLine));
                     float damage = (float)SaveManager.Instance.gestureDMG[0];
                     FightManager.currEnemy.gameObject.GetComponent<enemyHealth>().addDamage(damage);
-                    FloatingTextController.CreateFloatingText(damage.ToString(), FightManager.currEnemy.transform);
 
+                    FloatingTextController.CreateFloatingText(damage.ToString(), FightManager.currEnemy.transform);
                 }
                 Debug.Log(gestureClass + " " + gestureScore);
                 break;

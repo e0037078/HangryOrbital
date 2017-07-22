@@ -298,7 +298,6 @@
     <Compile Include="Assets\Script\Map\ColorToPrefab.cs" />
     <Compile Include="Assets\Script\Map\ExitGame.cs" />
     <Compile Include="Assets\Script\Map\LevelGenerator.cs" />
-    <Compile Include="Assets\Script\Map\MeetMonster.cs" />
     <Compile Include="Assets\Script\Map\MonsterManager.cs" />
     <Compile Include="Assets\Script\Map\MusicManager.cs" />
     <Compile Include="Assets\Script\Map\PlatformGenerator.cs" />

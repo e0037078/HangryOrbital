@@ -90,7 +90,7 @@ public class PlayerManager : MonoBehaviour
     // for jump
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.gameObject.tag == "GROUND")
+        if(collision.gameObject.tag == "GROUND"&& rb.velocity.y == 0) 
         {
             ButtonMovement.isJumping = false;  // landed
             speed = 0;
@@ -116,6 +116,7 @@ public class PlayerManager : MonoBehaviour
     IEnumerator FadingIntoFightMap()
     {
         fadeAnim.SetBool("FadeOut", true);
+        ButtonShop.togglePause();
         yield return new WaitUntil(() => black.color.a == 1);
         if (gameObject.scene.name == "City map")
             SceneManager.LoadScene("Fight scene");

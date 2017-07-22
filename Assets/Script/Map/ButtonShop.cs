@@ -12,7 +12,6 @@ public class ButtonShop : TouchManager {
     public GameObject settingMenu = null;
     Animator settingAnim;
     public static bool paused = false;
-    static float originalTimeScale;
     static bool settingOn = false;
 
     public GameObject shopMenu = null;
@@ -168,14 +167,12 @@ public class ButtonShop : TouchManager {
         if (!paused)
         {
             paused = !paused;
-            if (Time.timeScale != 0)
-                originalTimeScale = Time.timeScale;
             Time.timeScale = 0f;
         }
         else if (paused)
         {
             paused = !paused;
-            Time.timeScale = originalTimeScale;
+            Time.timeScale = SaveManager.Instance.multipliers.GameSpeed;
         }
     }
 }

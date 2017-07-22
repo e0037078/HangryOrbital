@@ -41,7 +41,7 @@ public class MonsterManager : MonoBehaviour {
         if (index >= 0)
             monsterImage.sprite = monsterPic[index];
 
-        int monstersLeft = SaveManager.Instance.monsterToClear - SaveManager.Instance.monsterCleared;
+        int monstersLeft = SaveManager.Instance.monsterToClear;
         numMonstersLeft.text = monstersLeft.ToString() + " left";
 
         updateMonsters();
@@ -50,7 +50,7 @@ public class MonsterManager : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
     {
-        int monstersLeft = SaveManager.Instance.monsterToClear - SaveManager.Instance.monsterCleared;
+        int monstersLeft = SaveManager.Instance.monsterToClear;
 
         if (unlocked || monstersLeft <= 0)
         {
@@ -89,6 +89,9 @@ public class MonsterManager : MonoBehaviour {
 
     public void updateMonsters()
     {
+        //monsterToClear here is already after the deduction of monstersCleared
+        int monstersLeft = SaveManager.Instance.monsterToClear;
+        numMonstersLeft.text = monstersLeft.ToString() + " left";
         /*
         //Getting the Monsters Cleared 
         int cleared = SaveManager.Instance.monsterCleared;

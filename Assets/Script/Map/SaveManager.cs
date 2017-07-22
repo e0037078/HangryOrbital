@@ -40,7 +40,7 @@ public class SaveManager : MonoBehaviour {
     public int monsterLevel = 0;
 
     //Overall Multiplier
-    OverallStatsMultiplier multipliers = new OverallStatsMultiplier();
+    public OverallStatsMultiplier multipliers = new OverallStatsMultiplier();
 
     //SAVE DATA 
     [Header("Save Data")]
@@ -437,7 +437,7 @@ public class SaveManager : MonoBehaviour {
                     SAVE[i] = DateTime.Now.Day * 100 + DateTime.Now.Month;
                     break;
                 case 18:
-                    SAVE[i] = SaveManager.Instance.monsterToClear - SaveManager.Instance.monsterCleared;
+                    SAVE[i] = SaveManager.Instance.monsterToClear;
                     break;
                 
 
@@ -462,7 +462,6 @@ public class SaveManager : MonoBehaviour {
                     break;
                 case 14:
                     SaveManager.Instance.monsterCleared = SAVE[i];
-                    MonsterManager.Instance.updateMonsters();
                     break;
                 case 15:
                     SaveManager.Instance.calculateOfflineProgress(getTime() - SAVE[i]);
@@ -475,6 +474,7 @@ public class SaveManager : MonoBehaviour {
                     break;
                 case 18:
                     SaveManager.Instance.monsterToClear = SAVE[i];
+                    MonsterManager.Instance.updateMonsters();
                     break;
                 
 
@@ -542,7 +542,7 @@ public class SaveManager : MonoBehaviour {
         gold += time/60;
         if (time / 60 / 60 > 10000) 
         {
-            gold = 10f;
+            return;
         }
         offlineGoldEarned = time / 60;
         offlineTime = time / 60;
