@@ -14,8 +14,7 @@ public class enemyHealth : MonoBehaviour {
     //public GameObject theDrop;
 
     //public AudioClip deathKnell;
-
-    public static int deathCounter = 0;
+    
 
     public float currentHealth;
 
@@ -28,14 +27,11 @@ public class enemyHealth : MonoBehaviour {
         currentHealth = enemyMaxHealth;
         enemySlider.maxValue = currentHealth;
         enemySlider.value = currentHealth;
-
-        deathCounter = 0;
-
+        
     }
 
     // Update is called once per frame
     void Update () {
-        
         if (Input.GetKeyDown(KeyCode.LeftArrow)|| Input.GetMouseButtonUp(0))
         {
            // addDamage(1f);
@@ -70,7 +66,7 @@ public class enemyHealth : MonoBehaviour {
         this.GetComponent<Animator>().SetBool("isDead", true); //death animation
         this.GetComponent<Rigidbody2D>().AddForceAtPosition(new Vector2(5f, 3.75f), this.GetComponent<Transform>().position, ForceMode2D.Impulse);
 
-        deathCounter++;
+        FightManager.monsterDeathCounter++;
         AutoMove.playerContact = false;
         SaveManager.Instance.addGold();
 

@@ -23,6 +23,8 @@ public class FightManager : MonoBehaviour {
     public static bool winMap;
     public GameObject scoreScreen;
 
+    public static int monsterDeathCounter = 0;
+
     // Use this for initialization
     void Start () {
 
@@ -41,6 +43,7 @@ public class FightManager : MonoBehaviour {
 
 
         playerDamage = SaveManager.Instance.DPS;
+        monsterDeathCounter = 0;
     }
 
     void FixedUpdate()
@@ -73,7 +76,7 @@ public class FightManager : MonoBehaviour {
             currPlayer = GetClosestPlayer(currEnemy);
         }
 
-        if (!bossSpawned && enemyHealth.deathCounter >= killsToActivateBoss)
+        if (!bossSpawned && monsterDeathCounter >= killsToActivateBoss)
         {
             bossButton.SetActive(true);
         }
