@@ -414,7 +414,7 @@ public class PlayGamesScript : MonoBehaviour
             Debug.Log("(Hangry) Data writting success !");
         else
             Debug.Log("(Hangry) Data writting fail =( !");
-        LoadData();
+        //LoadData();
     }
         
     #endregion /Saved Games

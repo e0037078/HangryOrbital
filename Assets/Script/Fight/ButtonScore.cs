@@ -47,7 +47,6 @@ public class ButtonScore : TouchManager {
         
         SaveManager.updateSave();
         PlayGamesScript.Instance.SaveData();
-        //SaveManager.loadSave();
     }
 
     IEnumerator FadingIntoFightScene()
@@ -80,7 +79,6 @@ public class ButtonScore : TouchManager {
         }
         SaveManager.updateSave();
         PlayGamesScript.Instance.SaveData();
-        //SaveManager.loadSave();
     }
 
     IEnumerator FadingIntoCityMap()

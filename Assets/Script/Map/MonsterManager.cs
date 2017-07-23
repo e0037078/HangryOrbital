@@ -77,6 +77,7 @@ public class MonsterManager : MonoBehaviour {
 
     }
 
+    //Not used
     public void encounteredMonsterLevel(GameObject monster)
     {
         for( int i = 0; i < monsters.Length; i++)
@@ -84,7 +85,7 @@ public class MonsterManager : MonoBehaviour {
             if(monsters[i] == monster)
             {
                 //Found
-                SaveManager.Instance.monsterLevel = i + 1;
+                //SaveManager.Instance.monsterLevel = i + 1;
                 return;
             } 
         }

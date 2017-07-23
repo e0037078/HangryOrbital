@@ -34,6 +34,7 @@ public class FloatingTextController : MonoBehaviour
         }catch(System.Exception e )
         {
             Initialize();
+            instance.transform.SetParent(canvas.transform, false);
         }
 
         Vector2 screenPosition = Camera.main.WorldToScreenPoint(new Vector2(location.position.x + Random.Range(-.5f,.5f), location.position.y + Random.Range(-.5f, .5f)));

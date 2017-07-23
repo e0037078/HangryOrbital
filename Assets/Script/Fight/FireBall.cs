@@ -6,6 +6,14 @@ public class FireBall : MonoBehaviour {
 
     private bool damageShown = false;
 
+    private void Update()
+    {
+        if (FightManager.winMap)
+        {
+            Destroy(this);
+        }
+    }
+
     private void OnTriggerStay2D(Collider2D collision)
     {
         if(collision.tag == "Monster" || collision.tag == "Boss")

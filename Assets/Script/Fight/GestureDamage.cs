@@ -151,7 +151,7 @@ public class GestureDamage : MonoBehaviour {
                 Debug.Log(gestureClass + " " + gestureScore);
                 break;
 
-            case "pyro":
+            case "Fireball":
                 if (FightManager.currEnemy != null && FightManager.currEnemy.GetComponent<SpriteRenderer>().isVisible)
                 {
                     Vector3 offset = new Vector3(0.1f, -0.5f, 0);

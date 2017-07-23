@@ -193,10 +193,19 @@ public class FightManager : MonoBehaviour {
         allEnemies = GameObject.FindGameObjectsWithTag("Monster");
 
     }
-    void setEnemyStats(GameObject enemy)
+    static void setEnemyStats(GameObject enemy)
     {
-        enemy.GetComponent<enemyHealth>().enemyMaxHealth = SaveManager.Instance.monsterHP;
-        enemy.GetComponent<enemyDamage>().damage = SaveManager.Instance.monsterDPS;
+        SaveManager.Instance.calculateMonsterStats();
+        if (enemy.tag == "Boss")
+        {
+            enemy.GetComponent<enemyHealth>().enemyMaxHealth = SaveManager.Instance.monsterHP * 10;
+            enemy.GetComponent<enemyDamage>().damage = SaveManager.Instance.monsterDPS * 5;
+        }
+        else
+        {
+            enemy.GetComponent<enemyHealth>().enemyMaxHealth = SaveManager.Instance.monsterHP;
+            enemy.GetComponent<enemyDamage>().damage = SaveManager.Instance.monsterDPS;
+        }
     }
 
     void win()
@@ -217,14 +226,17 @@ public class FightManager : MonoBehaviour {
             }
         }
     }
-
+    
+    //Called in Button Boss
     public static void spawnBoss()
     {
+        if (bossSpawned)
+            return;
         bossSpawned = true;
 
         foreach (GameObject i in allEnemies)
         {
-            if (i == null)
+            if (i == null|| i.tag == "Boss")
                 continue;
             enemyHealth tempHealth = i.GetComponent<enemyHealth>();
             tempHealth.addDamage(tempHealth.currentHealth);
@@ -243,6 +255,7 @@ public class FightManager : MonoBehaviour {
                 break;
         }
         currEnemy = Instantiate(SaveManager.Instance.enemyBoss[index], (Vector2)currPlayer.transform.position + new Vector2(10f, 1f), currPlayer.transform.rotation);
+        setEnemyStats(currEnemy);
     }
     
 }

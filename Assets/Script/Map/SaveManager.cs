@@ -37,7 +37,6 @@ public class SaveManager : MonoBehaviour {
 
     public int monsterCleared = 0;
     public int monsterToClear = 0;
-    public int monsterLevel = 0;
 
     public Vector3 playerPos;
 
@@ -160,10 +159,8 @@ public class SaveManager : MonoBehaviour {
 
     public void addGold()
     {
-        //Debug.Log(gold+" "+goldDrop);
         gold += goldDrop;
         goldEarned += goldDrop;
-        //Debug.Log(gold);
 
     }
     #region Calc
@@ -225,12 +222,21 @@ public class SaveManager : MonoBehaviour {
         BaseHP = tempHP * multipliers.HP;
     }
 
-    void calculateMonsterStats()
+    public void calculateMonsterStats()
     {
+        //Get highest DPS gesture
+        float topGestureDPS = 0;
+        foreach(float i in gestureDMG)
+        {
+            if(topGestureDPS < i)
+            {
+                topGestureDPS = i;
+            }
+        }
         //Temp formula for goldDrop
-        goldDrop = (float)(10 + level * 0.8 + DPS * 0.5 + BaseHP * 0.5) * monsterLevel + 20;
-        monsterDPS = (float)(15 + level * 0.5 + DPS * 0.2 + BaseHP * 0.075) * monsterLevel + 20;
-        monsterHP = (float)(20 + level * 0.5 + DPS * 0.2 + BaseHP * 0.25) * monsterLevel + 20;
+        goldDrop = (float)(DPS * 0.5 + topGestureDPS + BaseHP * 0.5) * (level + 1) + 20;
+        monsterDPS = (float)(DPS * 0.2 + topGestureDPS + BaseHP * 0.075) * (level + 1) + 20;
+        monsterHP = (float)(DPS * 0.2 + topGestureDPS + BaseHP * 0.25) * (level+1) + 20;
     }
 
     void calculateMonsterToClear()
@@ -298,9 +304,9 @@ public class SaveManager : MonoBehaviour {
         {
             //temporary formula
             if (i == 0)
-                costs[i] = 100f * Mathf.Pow(1.08f, upgrades[i]);
+                costs[i] = 50f * Mathf.Pow(1.08f, upgrades[i]);
             else
-                costs[i] = i * i * 100 * Mathf.Pow(1.08f, upgrades[i]);
+                costs[i] = i * i * 50 * Mathf.Pow(1.08f, upgrades[i]);
         }
     }
 
@@ -339,7 +345,7 @@ public class SaveManager : MonoBehaviour {
 
     public void wonLevel()
     {
-        //monsterCleared += (int)Mathf.Pow(2f, (float)(monsterLevel - 1));
+        //monsterCleared += (int)Mathf.Pow(2f, (float)(Level - 1));
         monsterCleared++;
     }
     void DestroyAllCityMonsters()
@@ -599,10 +605,23 @@ public class SaveManager : MonoBehaviour {
             case 1:
                 if(currentScene.name == "City map")
                 {
-                    offlineShown = false;
                     SceneManager.LoadScene("Forest map");
                     yield return new WaitForSecondsRealtime(1f);
                     SaveManager.Instance.playerSpawnPos((float)(SAVE[16] + (float)(SAVE[17] / 1000)), (float)(SAVE[18] + (float)(SAVE[19] / 1000)));
+                    offlineShown = false;
+                    SaveManager.Instance.checkDaily(SAVE[21]);
+                    SaveManager.Instance.calculateOfflineProgress(getTime() - SAVE[22]);
+
+
+                }
+                break;
+            case 2:
+                if (currentScene.name == "City map")
+                {
+                    SceneManager.LoadScene("Snow map");
+                    yield return new WaitForSecondsRealtime(1f);
+                    SaveManager.Instance.playerSpawnPos((float)(SAVE[16] + (float)(SAVE[17] / 1000)), (float)(SAVE[18] + (float)(SAVE[19] / 1000)));
+                    offlineShown = false;
                     SaveManager.Instance.checkDaily(SAVE[21]);
                     SaveManager.Instance.calculateOfflineProgress(getTime() - SAVE[22]);
 
