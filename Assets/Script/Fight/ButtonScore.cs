@@ -53,6 +53,7 @@ public class ButtonScore : TouchManager {
     {
         fadeAnim.SetBool("FadeOut", true);
         ButtonShop.togglePause();
+        resetFight();
 
         yield return new WaitUntil(() => black.color.a == 1);
         //SceneManager.LoadScene(SceneManager.GetActiveScene().name);
@@ -84,6 +85,7 @@ public class ButtonScore : TouchManager {
     IEnumerator FadingIntoCityMap()
     {
         fadeAnim.SetBool("FadeOut", true);
+        resetFight();
 
         yield return new WaitUntil(() => black.color.a == 1);
         if (gameObject.scene.name == "Fight scene")
@@ -92,5 +94,10 @@ public class ButtonScore : TouchManager {
             SceneManager.LoadScene("Forest map");
         else if (gameObject.scene.name == "Fight scene 2")
             SceneManager.LoadScene("Snow map");
+    }
+
+    private void resetFight()
+    {
+        FightManager.winMap = false;
     }
 }

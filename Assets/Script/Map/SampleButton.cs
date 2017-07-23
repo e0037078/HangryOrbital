@@ -69,7 +69,7 @@ public class SampleButton : MonoBehaviour
         item = currentItem;
         nameLabel.text = item.itemName;
         iconImage.sprite = item.icon;
-        priceText.text = item.price.ToString("###.#") + " Lvl" + item.numOwned;
+        priceText.text = item.price.ToString("###.#") + " Lv" + item.numOwned;
         scrollList = currentScrollList;
 
     }

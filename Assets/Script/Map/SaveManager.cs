@@ -24,10 +24,10 @@ public class SaveManager : MonoBehaviour {
     public float monsterHP;
 
     public float goldDrop;
-
-    Scene currentScene;
     public float goldEarned;
 
+    public bool isFighting = false;
+    Scene currentScene;
 
     public GameObject[] enemy;
     public GameObject[] enemyBoss;
@@ -117,7 +117,16 @@ public class SaveManager : MonoBehaviour {
         //checks if Scene have Changed
         if (currentScene != SceneManager.GetActiveScene())
         {
-            if((SceneManager.GetActiveScene().name == "City map" || SceneManager.GetActiveScene().name == "Forest map" || SceneManager.GetActiveScene().name == "Snow map")&&(currentScene.name != "City map"))
+            if((SceneManager.GetActiveScene().name == "City map" || SceneManager.GetActiveScene().name == "Forest map" || SceneManager.GetActiveScene().name == "Snow map"))
+            {
+                isFighting = false;
+            }
+            else
+            {
+                isFighting = true;
+            }
+
+            if(!isFighting && (currentScene.name != "City map"))
             {
                 playerSpawnPos(playerPos);
             }

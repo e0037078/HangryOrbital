@@ -24,8 +24,17 @@ public class cameraFollow2DPlatformer : MonoBehaviour {
 	
 	// Update is called once per frame
 	void FixedUpdate () {
+        if (!(FightManager.winMap&&SaveManager.Instance.isFighting))
+        {
+            followPlayer();
+        }
+
+    }
+
+    void followPlayer()
+    {
         Vector3 targetCamPos = target.position + offset;
-        
+
         transform.position = Vector3.Lerp(transform.position, targetCamPos, smoothing * Time.deltaTime);
 
         if (transform.position.y < lowY)
@@ -34,6 +43,5 @@ public class cameraFollow2DPlatformer : MonoBehaviour {
             transform.position = new Vector3(left, transform.position.y, transform.position.z);
         if (transform.position.x > right)
             transform.position = new Vector3(right, transform.position.y, transform.position.z);
-
     }
 }
