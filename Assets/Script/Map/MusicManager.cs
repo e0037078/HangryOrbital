@@ -30,6 +30,7 @@ public class MusicManager : MonoBehaviour
         {
             case ("Fight scene"):
             case ("Fight scene 1"):
+            case ("Fight scene 2"):
                 MusicManager.PlayBGM("BGM2");
                 break;
             default:

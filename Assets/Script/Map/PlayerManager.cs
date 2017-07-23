@@ -123,5 +123,7 @@ public class PlayerManager : MonoBehaviour
             SceneManager.LoadScene("Fight scene");
         else if (gameObject.scene.name == "Forest map")
             SceneManager.LoadScene("Fight scene 1");
+        else if (gameObject.scene.name == "Snow map")
+            SceneManager.LoadScene("Fight scene 2"); 
     }
 }

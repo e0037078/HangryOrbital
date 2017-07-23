@@ -60,8 +60,11 @@ public class enemyHealth : MonoBehaviour {
         isDead = true;
         if (gameObject.scene.name == "Fight scene")
             SfxManager.PlaySound("EnemyDie2");
-        else
+        else if (gameObject.scene.name == "Fight scene 1")
             SfxManager.PlaySound("EnemyDie");
+        else if (gameObject.scene.name == "Fight scene 2")
+            SfxManager.PlaySound("EnemyDie3");
+
         Destroy(this.GetComponent<AutoMove>());
         this.GetComponent<enemyDamage>().isDead = true;
         this.GetComponent<Animator>().SetBool("isDead", true); //death animation

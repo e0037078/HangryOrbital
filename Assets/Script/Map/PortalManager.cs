@@ -2,26 +2,49 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
-public class PortalManager : MonoBehaviour {
+public class PortalManager : MonoBehaviour
+{
     public static bool passed = false;
     public static bool unlocked = false;
+
+    public Image black;
+    public Animator fadeAnim;
+
+    public GameObject endOfGame;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.tag == "Player")
         {
-            switch (gameObject.scene.name)
+            if (gameObject.scene.name == "Snow map")
             {
-                case ("City map"):
-                    SaveManager.Instance.resetMap();
-                    SaveManager.Instance.level++;
-                    SceneManager.LoadScene("Forest map");
-                    break;
-                case ("Forest map"):
-                    // SceneManager.LoadScene("Forest map"); // should be one more level
-                    break;
+                endOfGame.SetActive(true);
             }
+            else
+            {
+                StartCoroutine(FadingIntoCityMap());
+            }
+        }
+    }
+    IEnumerator FadingIntoCityMap()
+    {
+        fadeAnim.SetBool("FadeOut", true);
+
+        yield return new WaitUntil(() => black.color.a == 1);
+        switch (gameObject.scene.name)
+        {
+            case ("City map"):
+                SaveManager.Instance.resetMap();
+                SaveManager.Instance.level++;
+                SceneManager.LoadScene("Forest map");
+                break;
+            case ("Forest map"):
+                SaveManager.Instance.resetMap();
+                SaveManager.Instance.level++;
+                SceneManager.LoadScene("Snow map");
+                break;
         }
     }
 }

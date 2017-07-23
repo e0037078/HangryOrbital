@@ -115,7 +115,7 @@ public class SaveManager : MonoBehaviour {
         //checks if Scene have Changed
         if (currentScene != SceneManager.GetActiveScene())
         {
-            if((SceneManager.GetActiveScene().name == "City map" || SceneManager.GetActiveScene().name == "Forest map")&&(currentScene.name != "City map"))
+            if((SceneManager.GetActiveScene().name == "City map" || SceneManager.GetActiveScene().name == "Forest map" || SceneManager.GetActiveScene().name == "Snow map")&&(currentScene.name != "City map"))
             {
                 playerSpawnPos(playerPos);
             }

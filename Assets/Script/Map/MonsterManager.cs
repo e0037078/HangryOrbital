@@ -38,6 +38,9 @@ public class MonsterManager : MonoBehaviour {
             case ("Forest map"):
                 index = 1;
                 break;
+            case ("Snow map"):
+                index = 2;
+                break;
         }
         if (index >= 0)
             monsterImage.sprite = monsterPic[index];

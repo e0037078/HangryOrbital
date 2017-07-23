@@ -183,6 +183,9 @@ public class FightManager : MonoBehaviour {
             case ("Fight scene 1"):
                 index = 1;
                 break;
+            case ("Fight scene 2"):
+                index = 2;
+                break;
         }
         setEnemyStats(Instantiate(SaveManager.Instance.enemy[index], (Vector2)currPlayer.transform.position + new Vector2(10f, 1f), currPlayer.transform.rotation));
         setEnemyStats(Instantiate(SaveManager.Instance.enemy[index], (Vector2)currPlayer.transform.position + new Vector2(15f, 1f), currPlayer.transform.rotation));
@@ -234,6 +237,9 @@ public class FightManager : MonoBehaviour {
                 break;
             case ("Fight scene 1"):
                 index = 1;
+                break;
+            case ("Fight scene 2"):
+                index = 2;
                 break;
         }
         currEnemy = Instantiate(SaveManager.Instance.enemyBoss[index], (Vector2)currPlayer.transform.position + new Vector2(10f, 1f), currPlayer.transform.rotation);

@@ -1,1 +1,4 @@
-sceneSetups: []
+sceneSetups:
+- path: Assets/Scenes/Snow map.unity
+  isLoaded: 1
+  isActive: 1

@@ -14,11 +14,6 @@ public class ButtonScore : TouchManager {
     public Image black;
     public Animator fadeAnim;
 
-    // Use this for initialization
-    void Start () {
-		
-	}
-	
 	// Update is called once per frame
 	void Update () {
         checkMouseDown();
@@ -70,6 +65,10 @@ public class ButtonScore : TouchManager {
         {
             SceneManager.LoadScene("Fight scene 1");
         }
+        else if (gameObject.scene.name == "Fight scene 2")
+        {
+            SceneManager.LoadScene("Fight scene 2");
+        }
     }
 
     void backToMap()
@@ -93,5 +92,7 @@ public class ButtonScore : TouchManager {
             SceneManager.LoadScene("City map");
         else if (gameObject.scene.name == "Fight scene 1")
             SceneManager.LoadScene("Forest map");
+        else if (gameObject.scene.name == "Fight scene 2")
+            SceneManager.LoadScene("Snow map");
     }
 }
