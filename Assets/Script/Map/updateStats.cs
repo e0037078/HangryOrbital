@@ -23,6 +23,16 @@ public class updateStats : MonoBehaviour {
     public Text FireBallDMG;
     public Text FireBallProb;
 
+    public Image playerImage;
+
+    private void Start()
+    {
+        if (!SaveManager.isBoy)
+        {
+            gameObject.GetComponent<Image>().sprite = Resources.Load<Sprite>("girlhead");
+            playerImage.sprite = Resources.Load<Sprite>("girlSprite");
+        }
+    }
 
     public void update()
     {

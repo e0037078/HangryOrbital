@@ -67,6 +67,9 @@ public class SaveManager : MonoBehaviour {
     public static bool muteSfx;
     public static bool muteBGM;
 
+    [Header("Gender")]
+    public static bool isBoy = true;
+
     // Use this for initialization
     void Awake () {
 
@@ -134,6 +137,23 @@ public class SaveManager : MonoBehaviour {
         
         muteSfx = SfxManager.muteSfx;
         muteBGM = MusicManager.muteMusic;
+
+        if (!isBoy)
+            changeToGirl();
+    }
+
+    public void toggleGender()
+    {
+        isBoy = !isBoy;
+    }
+
+    void changeToGirl()
+    {
+        GameObject player = GameObject.Find("Boy");
+        Animator animator = player.GetComponent<Animator>();
+        animator.runtimeAnimatorController = Resources.Load<RuntimeAnimatorController>("Girl");
+        //Sprite playerSprite = gameObject.GetComponent<SpriteRenderer>().sprite;
+        //playerSprite = Resources.Load<Sprite>("girlSprite");
     }
 
     public bool buyUpgrade(int index)
