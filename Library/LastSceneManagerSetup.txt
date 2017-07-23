@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Scenes/Fight scene 1.unity
+- path: Assets/Scenes/Snow map.unity
   isLoaded: 1
   isActive: 1

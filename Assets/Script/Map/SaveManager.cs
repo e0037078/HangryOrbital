@@ -232,9 +232,9 @@ public class SaveManager : MonoBehaviour {
             //Temp upgrade 1 adds HP
             if(i == 0)
                 //Temp formula for DPS
-                tempDPS += (i+1) * upgrades[i]; 
+                tempDPS += 10 * Mathf.Pow(1.07f, upgrades[i]); 
         }
-        DPS = tempDPS * multipliers.DPS +5;
+        DPS = Mathf.Round(tempDPS * multipliers.DPS +5);
     }
 
     void calculateHP()
@@ -245,10 +245,10 @@ public class SaveManager : MonoBehaviour {
             if(i == 1)
             {
                 //Temp formula for HP
-                tempHP += 100 + i * upgrades[i];
+                tempHP += 100 * Mathf.Pow(1.07f, upgrades[i]);
             }
         }
-        BaseHP = tempHP * multipliers.HP;
+        BaseHP = Mathf.Round(tempHP * multipliers.HP);
     }
 
     public void calculateMonsterStats()
@@ -263,9 +263,9 @@ public class SaveManager : MonoBehaviour {
             }
         }
         //Temp formula for goldDrop
-        goldDrop = (float)(DPS * 0.5 + topGestureDPS + BaseHP * 0.5) * (level + 1) + 20;
-        monsterDPS = (float)(DPS * 0.2 + topGestureDPS + BaseHP * 0.075) * (level + 1) + 20;
-        monsterHP = (float)(DPS * 0.2 + topGestureDPS + BaseHP * 0.25) * (level+1) + 20;
+        goldDrop = Mathf.Round((float)(DPS * 0.5 + topGestureDPS + BaseHP * 0.5) * (level + 1) + 20);
+        monsterDPS = Mathf.Round((float)(DPS * 0.2 + topGestureDPS + BaseHP * 0.075) * (level + 1) + 20);
+        monsterHP = Mathf.Round((float)(DPS * 0.2 + topGestureDPS + BaseHP * 0.25) * (level+1) + 20);
     }
 
     void calculateMonsterToClear()
@@ -308,19 +308,19 @@ public class SaveManager : MonoBehaviour {
             {
                 case 0:
                     //Temp formula
-                    gestureDMG[i] = 6 + upgrades[2] * 1.6 * multipliers.GestureDMG;
+                    gestureDMG[i] = Mathf.Round(6 + upgrades[2] * 1.6f * multipliers.GestureDMG);
                     break;
                 case 1:
-                    gestureDMG[i] = 8 + upgrades[4] * 1.6 * multipliers.GestureDMG;
+                    gestureDMG[i] = Mathf.Round(8 + upgrades[4] * 1.6f * multipliers.GestureDMG);
                     break;
                 case 2:
-                    gestureDMG[i] = 8 + upgrades[6] * 1.8 * multipliers.GestureDMG;
+                    gestureDMG[i] = Mathf.Round(8 + upgrades[6] * 1.8f * multipliers.GestureDMG);
                     break;
                 case 3:
-                    gestureDMG[i] = 10 + upgrades[8] * 2.0 * multipliers.GestureDMG;
+                    gestureDMG[i] = Mathf.Round(10 + upgrades[8] * 2.0f * multipliers.GestureDMG);
                     break;
                 case 4:
-                    gestureDMG[i] = 12 + upgrades[10] * 2.4 * multipliers.GestureDMG;
+                    gestureDMG[i] = Mathf.Round(12 + upgrades[10] * 2.4f * multipliers.GestureDMG);
                     break;
             }
         }
@@ -333,9 +333,9 @@ public class SaveManager : MonoBehaviour {
         {
             //temporary formula
             if (i == 0)
-                costs[i] = 50f * Mathf.Pow(1.08f, upgrades[i]);
+                costs[i] = Mathf.Round(50f * Mathf.Pow(1.08f, upgrades[i]));
             else
-                costs[i] = i * i * 50 * Mathf.Pow(1.08f, upgrades[i]);
+                costs[i] = Mathf.Round(i * 50f * Mathf.Pow(1.08f, upgrades[i]));
         }
     }
 
@@ -467,13 +467,13 @@ public class SaveManager : MonoBehaviour {
                     SAVE[i] = (int)SaveManager.Instance.playerPos.x;
                     break;
                 case 17:
-                    SAVE[i] = (int)(SaveManager.Instance.playerPos.x * 1000 % 1000);
+                    SAVE[i] = (int)(SaveManager.Instance.playerPos.x * 1000000 % 1000000);
                     break;
                 case 18:    
                     SAVE[i] = (int)SaveManager.Instance.playerPos.y;
                     break;
                 case 19:
-                    SAVE[i] = (int)(SaveManager.Instance.playerPos.y * 1000 % 1000);
+                    SAVE[i] = (int)(SaveManager.Instance.playerPos.y * 1000000 % 1000000);
                     break;
                 case 20:
                     SAVE[i] = SaveManager.Instance.numChecked;
@@ -519,7 +519,7 @@ public class SaveManager : MonoBehaviour {
                     break;
                 case 19:
                     //Since Stored as int need convert back to float
-                    SaveManager.Instance.playerSpawnPos((float)(SAVE[16] + (float)(SAVE[17] / 1000)), (float)(SAVE[18] + (float)(SAVE[19] / 1000)));
+                    SaveManager.Instance.playerSpawnPos((float)(SAVE[16] + (float)(SAVE[17] / 1000000)), (float)(SAVE[18] + (float)(SAVE[19] / 1000000)));
                     break;
                 case 20:
                     SaveManager.Instance.numChecked = SAVE[i];
@@ -636,7 +636,7 @@ public class SaveManager : MonoBehaviour {
                 {
                     SceneManager.LoadScene("Forest map");
                     yield return new WaitForSecondsRealtime(1f);
-                    SaveManager.Instance.playerSpawnPos((float)(SAVE[16] + (float)(SAVE[17] / 1000)), (float)(SAVE[18] + (float)(SAVE[19] / 1000)));
+                    SaveManager.Instance.playerSpawnPos((float)(SAVE[16] + (float)(SAVE[17] / 1000000)), (float)(SAVE[18] + (float)(SAVE[19] / 1000000)));
                     offlineShown = false;
                     SaveManager.Instance.checkDaily(SAVE[21]);
                     SaveManager.Instance.calculateOfflineProgress(getTime() - SAVE[22]);
@@ -649,7 +649,7 @@ public class SaveManager : MonoBehaviour {
                 {
                     SceneManager.LoadScene("Snow map");
                     yield return new WaitForSecondsRealtime(1f);
-                    SaveManager.Instance.playerSpawnPos((float)(SAVE[16] + (float)(SAVE[17] / 1000)), (float)(SAVE[18] + (float)(SAVE[19] / 1000)));
+                    SaveManager.Instance.playerSpawnPos((float)(SAVE[16] + (float)(SAVE[17] / 1000000)), (float)(SAVE[18] + (float)(SAVE[19] / 1000000)));
                     offlineShown = false;
                     SaveManager.Instance.checkDaily(SAVE[21]);
                     SaveManager.Instance.calculateOfflineProgress(getTime() - SAVE[22]);
