@@ -608,10 +608,12 @@ public class SaveManager : MonoBehaviour {
     }
     public IEnumerator toFight()
     {
+        yield return new WaitForSecondsRealtime(2.2f);
         SceneManager.LoadScene("Fight scene");
     }
     public IEnumerator toCity()
     {
+        yield return new WaitForSecondsRealtime(2.2f);
         SceneManager.LoadScene("City map");
     }
     public static int getTime()
