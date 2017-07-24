@@ -69,6 +69,10 @@ public class CheckIn : MonoBehaviour {
             for (int i = 0; i < numCheck; i++)
             {
                 Rewards[i].GetComponent<Button>().onClick.AddListener(() => showGotten());
+                foreach(Transform child in Rewards[i].transform) {
+                    if (child.name == "Image")
+                        child.gameObject.SetActive(false);
+                }
             }
         }
 
