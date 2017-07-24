@@ -64,16 +64,16 @@ public class SaveManager : MonoBehaviour {
     public Button checkInButton;
 
     [Header("Music")]
-    public static bool muteSfx;
-    public static bool muteBGM;
+    public bool muteSfx;
+    public bool muteBGM;
 
     [Header("Gender")]
-    public static bool isBoy = true;
+    public bool isBoy = true;
 
     // Use this for initialization
     void Awake () {
 
-        SAVE = new int[23];
+        SAVE = new int[26];
         //Basically make sure that there is only one Instance of SaveManager
         if (Instance != null)
         {
@@ -485,6 +485,24 @@ public class SaveManager : MonoBehaviour {
                 case 22:
                     SAVE[i] = getTime();
                     break;
+                case 23: // gender
+                    if (SaveManager.Instance.isBoy == true)
+                        SAVE[i] = 1;
+                    else
+                        SAVE[i] = 0;
+                    break;
+                case 24: // muteSfx
+                    if (SaveManager.Instance.muteSfx == true)
+                        SAVE[i] = 1;
+                    else
+                        SAVE[i] = 0;
+                    break;
+                case 25: // muteMusic
+                    if (SaveManager.Instance.muteBGM == true)
+                        SAVE[i] = 1;
+                    else
+                        SAVE[i] = 0;
+                    break;
 
                 default:
                     SAVE[i] = SaveManager.Instance.upgrades[i];
@@ -530,7 +548,25 @@ public class SaveManager : MonoBehaviour {
                 case 22:                    
                     SaveManager.Instance.calculateOfflineProgress(getTime() - SAVE[i]);
                     break;
-                
+
+                case 23: // gender
+                    if (SAVE[i] == 1)
+                        SaveManager.Instance.isBoy = true;
+                    else
+                        SaveManager.Instance.isBoy = false;
+                    break;
+                case 24: // muteSfx
+                    if (SAVE[i] == 1)
+                        SaveManager.Instance.muteSfx = true;
+                    else
+                        SaveManager.Instance.muteSfx = false;
+                    break;
+                case 25: // muteMusic
+                    if (SAVE[i] == 1)
+                        SaveManager.Instance.muteBGM = true;
+                    else
+                        SaveManager.Instance.muteBGM = false;
+                    break;
 
                 default:
                     SaveManager.Instance.upgrades[i] = (int)SAVE[i];

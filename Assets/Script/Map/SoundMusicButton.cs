@@ -22,12 +22,12 @@ public class SoundMusicButton : MonoBehaviour {
         sfxOn.onClick.AddListener(ToggleSfx);
         sfxOff.onClick.AddListener(ToggleSfx);
         
-        if (SaveManager.muteBGM)
+        if (SaveManager.Instance.muteBGM)
         {
             MusicManager.muteMusic = false;
             ToggleMusic();
         }
-        else if (!SaveManager.muteBGM)
+        else if (!SaveManager.Instance.muteBGM)
         {
             MusicManager.muteMusic = true;
             ToggleMusic();
@@ -46,12 +46,12 @@ public class SoundMusicButton : MonoBehaviour {
             }
         }
 
-        if (SaveManager.muteSfx)
+        if (SaveManager.Instance.muteSfx)
         {
             SfxManager.muteSfx = false;
             ToggleSfx();
         }
-        else if (!SaveManager.muteSfx)
+        else if (!SaveManager.Instance.muteSfx)
         {
             SfxManager.muteSfx = true;
             ToggleSfx();
@@ -60,11 +60,11 @@ public class SoundMusicButton : MonoBehaviour {
 
     private void Update()
     {
-        if ((!SaveManager.muteBGM && MusicManager.muteMusic) || (SaveManager.muteBGM && !MusicManager.muteMusic))// supposed to play
+        if ((!SaveManager.Instance.muteBGM && MusicManager.muteMusic) || (SaveManager.Instance.muteBGM && !MusicManager.muteMusic))// supposed to play
         {
             ToggleMusic();
         }
-        if ((!SaveManager.muteSfx && SfxManager.muteSfx) || (SaveManager.muteSfx && !SfxManager.muteSfx)) // supposed to play
+        if ((!SaveManager.Instance.muteSfx && SfxManager.muteSfx) || (SaveManager.Instance.muteSfx && !SfxManager.muteSfx)) // supposed to play
         {
             ToggleSfx();
         }
@@ -78,7 +78,7 @@ public class SoundMusicButton : MonoBehaviour {
             musicSrc.Stop();
             musicSrc.volume = 0f;
             musicSrc.mute = true;
-            SaveManager.muteBGM = true;
+            SaveManager.Instance.muteBGM = true;
 
             musicOff.gameObject.SetActive(true);
             musicOn.gameObject.SetActive(false);
@@ -86,7 +86,7 @@ public class SoundMusicButton : MonoBehaviour {
         else
         {
             musicSrc.mute = false;
-            SaveManager.muteBGM = false;
+            SaveManager.Instance.muteBGM = false;
             musicSrc.volume = 0.5f;
 
             switch (gameObject.scene.name)
@@ -114,7 +114,7 @@ public class SoundMusicButton : MonoBehaviour {
             sfxSrc.Stop();
             sfxSrc.mute = true;
             sfxSrc.volume = 0f;
-            SaveManager.muteSfx = true;
+            SaveManager.Instance.muteSfx = true;
 
             sfxOff.gameObject.SetActive(true);
             sfxOn.gameObject.SetActive(false);
@@ -123,7 +123,7 @@ public class SoundMusicButton : MonoBehaviour {
         {
             sfxSrc.mute = false;
             sfxSrc.volume = 1f;
-            SaveManager.muteSfx = false;
+            SaveManager.Instance.muteSfx = false;
             sfxOn.gameObject.SetActive(true);
             sfxOff.gameObject.SetActive(false);
         }

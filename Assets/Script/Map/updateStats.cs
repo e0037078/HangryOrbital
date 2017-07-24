@@ -27,7 +27,7 @@ public class updateStats : MonoBehaviour {
 
     private void Start()
     {
-        if (!SaveManager.isBoy)
+        if (!SaveManager.Instance.isBoy)
         {
             gameObject.GetComponent<Image>().sprite = Resources.Load<Sprite>("girlhead");
             playerImage.sprite = Resources.Load<Sprite>("girlSprite");
