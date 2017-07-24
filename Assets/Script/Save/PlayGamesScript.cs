@@ -48,14 +48,14 @@ public class PlayGamesScript : MonoBehaviour
         DeleteSavedGame(SAVE_NAME);
         PlayerPrefs.SetString(SAVE_NAME, string.Empty);
         SaveManager.Instance.offlineShown = true;
-        SaveManager.Instance.toCity();
+        StartCoroutine(SaveManager.Instance.toCity());
     } 
 
 
     public void Load()
     {
         LoadData();
-        SaveManager.Instance.toCity();
+        StartCoroutine(SaveManager.Instance.toCity());
     }
     public void SignIn()
     {
@@ -449,7 +449,7 @@ public class PlayGamesScript : MonoBehaviour
     void printLoop<T>(T arr) where T : IList
     {
         for (int i = 0; i < arr.Count; i++)
-            Debug.Log("(Hangry)"+arr[i].ToString());
+            Debug.Log("(Hangry)"+i+":"+arr[i].ToString());
     }
 
 } 

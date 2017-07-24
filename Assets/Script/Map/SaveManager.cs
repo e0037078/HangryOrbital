@@ -176,6 +176,7 @@ public class SaveManager : MonoBehaviour {
             gold -= costs[index];
             upgrades[index]++;
             costs[index] *= 1.08f; //exponential 8% increase temp value
+            costs[index] = Mathf.Round(costs[index]);
         }
         calculateDPS();
         calculateHP();
@@ -605,11 +606,11 @@ public class SaveManager : MonoBehaviour {
             checkInButton.onClick.Invoke();
         }
     }
-    public void toFight()
+    public IEnumerator toFight()
     {
         SceneManager.LoadScene("Fight scene");
     }
-    public void toCity()
+    public IEnumerator toCity()
     {
         SceneManager.LoadScene("City map");
     }
