@@ -38,11 +38,15 @@ public class PortalManager : MonoBehaviour
             case ("City map"):
                 SaveManager.Instance.resetMap();
                 SaveManager.Instance.level++;
+                SaveManager.Instance.playerPos = Vector3.zero;
+                PlayGamesScript.Instance.SaveData();
                 SceneManager.LoadScene("Forest map");
                 break;
             case ("Forest map"):
                 SaveManager.Instance.resetMap();
                 SaveManager.Instance.level++;
+                SaveManager.Instance.playerPos = Vector3.zero;
+                PlayGamesScript.Instance.SaveData();
                 SceneManager.LoadScene("Snow map");
                 break;
         }

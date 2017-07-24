@@ -43,6 +43,11 @@ public class CheckIn : MonoBehaviour {
             for (int i = 0; i < numCheck ; i++)
             {
                 Rewards[i].GetComponent<Button>().onClick.AddListener(() => showGotten());
+                foreach (Transform child in Rewards[i].transform)
+                {
+                    if (child.name == "Image")
+                        child.gameObject.SetActive(false);
+                }
             }
 
         }
@@ -57,6 +62,11 @@ public class CheckIn : MonoBehaviour {
                 Rewards[numCheck].GetComponent<Button>().onClick.RemoveAllListeners();
                 Rewards[numCheck].GetComponent<Button>().onClick.AddListener(() => showGotten());
                 Rewards[numCheck].GetComponent<Image>().color = new Color(1, 1, 1, 0.5f);
+                foreach (Transform child in Rewards[numCheck].transform)
+                {
+                    if (child.name == "Image")
+                        child.gameObject.SetActive(false);
+                }
                 successfulDisplay.SetActive(true);
                 successfulDisplay.GetComponent<Button>().onClick.AddListener(() => successfulDisplay.SetActive(false));
                 StartCoroutine(closeDisplayAfterTime(1f, successfulDisplay));

@@ -7,6 +7,8 @@ using UnityEngine.UI;
 
 public class SaveManager : MonoBehaviour {
 
+    public bool debug = true;
+
     public static SaveManager Instance;
     public float BaseHP;
     public float DPS;
@@ -47,6 +49,9 @@ public class SaveManager : MonoBehaviour {
     [Header("Save Data")]
     public float[] SaveArray;
     public static int[] SAVE { get; set; }
+
+    //Load Data
+    bool loaded = false;
 
     //Offline Progress
     [Header("Offline Progress")]
@@ -158,11 +163,18 @@ public class SaveManager : MonoBehaviour {
 
     void changeToGirl()
     {
-        GameObject player = GameObject.Find("Boy");
-        Animator animator = player.GetComponent<Animator>();
-        animator.runtimeAnimatorController = Resources.Load<RuntimeAnimatorController>("Girl");
-        //Sprite playerSprite = gameObject.GetComponent<SpriteRenderer>().sprite;
-        //playerSprite = Resources.Load<Sprite>("girlSprite");
+        try
+        {
+            GameObject player = GameObject.Find("Boy");
+            Animator animator = player.GetComponent<Animator>();
+            animator.runtimeAnimatorController = Resources.Load<RuntimeAnimatorController>("Girl");
+            //Sprite playerSprite = gameObject.GetComponent<SpriteRenderer>().sprite;
+            //playerSprite = Resources.Load<Sprite>("girlSprite");
+        }catch(System.Exception e)
+        {
+
+        }
+
     }
 
     public bool buyUpgrade(int index)
@@ -267,12 +279,20 @@ public class SaveManager : MonoBehaviour {
         goldDrop = Mathf.Round((float)(DPS * 0.5 + topGestureDPS + BaseHP * 0.5) * (level + 1) + 20);
         monsterDPS = Mathf.Round((float)(DPS * 0.2 + topGestureDPS + BaseHP * 0.075) * (level + 1) + 20);
         monsterHP = Mathf.Round((float)(DPS * 0.2 + topGestureDPS + BaseHP * 0.25) * (level+1) + 20);
+        if (debug)
+        {
+            monsterHP = 40f;
+        }
     }
 
     void calculateMonsterToClear()
     {
         // temp formula;
         monsterToClear = level + 3;
+        if (debug)
+        {
+            monsterToClear = level + 1; 
+        }
     }
 
     void calculateGestureProbability()
@@ -530,7 +550,6 @@ public class SaveManager : MonoBehaviour {
                     break;
                 case 15:
                     SaveManager.Instance.monsterToClear = SAVE[i];
-                    MonsterManager.Instance.updateMonsters();
                     break;
                 case 16:
                 case 17:
@@ -573,6 +592,8 @@ public class SaveManager : MonoBehaviour {
                     SaveManager.Instance.upgrades[i] = (int)SAVE[i];
                     break;
             }
+            SaveManager.Instance.loaded = true;
+
         }
         //printLoop(SAVE);
 
@@ -608,13 +629,21 @@ public class SaveManager : MonoBehaviour {
     }
     public IEnumerator toFight()
     {
-        yield return new WaitForSecondsRealtime(2.2f);
+        Time.timeScale = 0f;
+        yield return new WaitForSecondsRealtime(3f);
         SceneManager.LoadScene("Fight scene");
     }
     public IEnumerator toCity()
     {
-        yield return new WaitForSecondsRealtime(2.2f);
+        yield return new WaitForSecondsRealtime(2f);
+        Time.timeScale = 0f;
+        Time.timeScale = SaveManager.Instance.multipliers.GameSpeed;
         SceneManager.LoadScene("City map");
+        while (!loaded)
+        {
+            yield return null;
+        }
+
     }
     public static int getTime()
     {
@@ -669,12 +698,15 @@ public class SaveManager : MonoBehaviour {
         switch (level)
         {
             case 0:
+                MonsterManager.Instance.updateMonsters();
                 break;
             case 1:
                 if(currentScene.name == "City map")
                 {
+                    yield return new WaitForSeconds(0.0001f);
                     SceneManager.LoadScene("Forest map");
-                    yield return new WaitForSecondsRealtime(1f);
+                    MonsterManager.Instance.updateMonsters();
+
                     SaveManager.Instance.playerSpawnPos((float)(SAVE[16] + (float)(SAVE[17] / 1000000)), (float)(SAVE[18] + (float)(SAVE[19] / 1000000)));
                     offlineShown = false;
                     SaveManager.Instance.checkDaily(SAVE[21]);
@@ -686,12 +718,15 @@ public class SaveManager : MonoBehaviour {
             case 2:
                 if (currentScene.name == "City map")
                 {
+                    yield return new WaitForSeconds(0.0001f);
                     SceneManager.LoadScene("Snow map");
-                    yield return new WaitForSecondsRealtime(1f);
+                    MonsterManager.Instance.updateMonsters();
+
                     SaveManager.Instance.playerSpawnPos((float)(SAVE[16] + (float)(SAVE[17] / 1000000)), (float)(SAVE[18] + (float)(SAVE[19] / 1000000)));
                     offlineShown = false;
                     SaveManager.Instance.checkDaily(SAVE[21]);
                     SaveManager.Instance.calculateOfflineProgress(getTime() - SAVE[22]);
+
 
 
                 }
