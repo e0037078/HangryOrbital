@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 public class SaveManager : MonoBehaviour {
 
-    public bool debug = true;
+    public bool debug = false;
 
     public static SaveManager Instance;
     public float BaseHP;
@@ -52,6 +52,8 @@ public class SaveManager : MonoBehaviour {
 
     //Load Data
     bool loaded = false;
+
+    public bool newGame = false;
 
     //Offline Progress
     [Header("Offline Progress")]
@@ -637,12 +639,12 @@ public class SaveManager : MonoBehaviour {
     {
         yield return new WaitForSecondsRealtime(2f);
         Time.timeScale = 0f;
-        Time.timeScale = SaveManager.Instance.multipliers.GameSpeed;
         SceneManager.LoadScene("City map");
-        while (!loaded)
+        while (!newGame&&!loaded)
         {
             yield return null;
         }
+        Time.timeScale = SaveManager.Instance.multipliers.GameSpeed;
 
     }
     public static int getTime()
