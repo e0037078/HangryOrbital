@@ -16,7 +16,8 @@ public class Item
 
 public class ShopScrollList : MonoBehaviour
 {
-
+	bool refreshLoaded = false;
+	
     public List<Item> itemList;
     public Transform contentPanel;
     // public ShopScrollList otherShop;
@@ -42,6 +43,10 @@ public class ShopScrollList : MonoBehaviour
 
     void Update()
     {
+		if(!refreshLoaded && SaveManager.Instance.loaded){
+			refreshLoaded = true;
+			RefreshDisplay();
+		}
         UpdateGold();
     }
 
@@ -52,6 +57,7 @@ public class ShopScrollList : MonoBehaviour
 
     void RefreshDisplay()
     {
+		SaveManager.Instance.calculateDesc();
         myGoldDisplay.text = "Gold:" + SaveManager.Instance.gold.ToString();
         RemoveButtons();  
         AddButtons();

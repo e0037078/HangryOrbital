@@ -72,7 +72,7 @@ public class GestureDamage : MonoBehaviour {
         switch (gestureClass)
         {
             case "Lightning":
-                if (FightManager.currEnemy != null && FightManager.currEnemy.GetComponent<SpriteRenderer>().isVisible)
+                if (SaveManager.Instance.upgrades[8] != 0 && FightManager.currEnemy != null && FightManager.currEnemy.GetComponent<SpriteRenderer>().isVisible)
                 {
                     SfxManager.PlaySound("Zap");
 
@@ -97,7 +97,7 @@ public class GestureDamage : MonoBehaviour {
                 break;
 
             case "forward slash":
-                if (FightManager.currEnemy != null && FightManager.currEnemy.GetComponent<SpriteRenderer>().isVisible)
+                if (SaveManager.Instance.upgrades[6] != 0 && FightManager.currEnemy != null && FightManager.currEnemy.GetComponent<SpriteRenderer>().isVisible)
                 {
                     GameObject tempSlash = Instantiate(slash, FightManager.currEnemy.transform.position, Quaternion.identity);
 
@@ -115,7 +115,7 @@ public class GestureDamage : MonoBehaviour {
                 break;
 
             case "back slash":
-                if (FightManager.currEnemy != null && FightManager.currEnemy.GetComponent<SpriteRenderer>().isVisible)
+                if (SaveManager.Instance.upgrades[4] != 0 && FightManager.currEnemy != null && FightManager.currEnemy.GetComponent<SpriteRenderer>().isVisible)
                 {
                     //Temp formula 
 
@@ -152,7 +152,7 @@ public class GestureDamage : MonoBehaviour {
                 break;
 
             case "Fireball":
-                if (FightManager.currEnemy != null && FightManager.currEnemy.GetComponent<SpriteRenderer>().isVisible)
+                if (SaveManager.Instance.upgrades[10] != 0 && FightManager.currEnemy != null && FightManager.currEnemy.GetComponent<SpriteRenderer>().isVisible)
                 {
                     Vector3 offset = new Vector3(0.1f, -0.5f, 0);
                     Vector3 spawnPos = FightManager.currPlayer.transform.position + offset;

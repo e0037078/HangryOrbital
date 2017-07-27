@@ -51,7 +51,7 @@ public class SaveManager : MonoBehaviour {
     public static int[] SAVE { get; set; }
 
     //Load Data
-    bool loaded = false;
+    public bool loaded = false;
 
     public bool newGame = false;
 
@@ -192,6 +192,7 @@ public class SaveManager : MonoBehaviour {
             costs[index] *= 1.08f; //exponential 8% increase temp value
             costs[index] = Mathf.Round(costs[index]);
         }
+		calculateDesc();
         calculateDPS();
         calculateHP();
         calculateGestureProbability();
@@ -213,32 +214,47 @@ public class SaveManager : MonoBehaviour {
         switch (index)
         {
             case 0:
-                return "This cake increases the player's health.";
+                return "This cake increases the Player's health.";
             case 1:
-                return "This cake increases the player's passive DPS.";
+                return "This cake increases the Player's passive DPS.";
             case 2:
-                return "This cake increases the player's line gesture Damage.";
+                return "This cake increases the Player's Line gesture Damage.";
             case 3:
-                return "This cake increases the player's line gesture autocast Probability.";
+                return "This cake increases the Player's Line gesture autocast Probability.";
             case 4:
-                return "This donut increases the player's backslash gesture Damage.";
+                if (upgrades[index] == 0)
+                    return "This donut unlocks the Back Slash Gesture.";
+                return "This donut increases the Player's Back Slash gesture Damage.";
             case 5:
-                return "This donut increases the player's backslash gesture autocast Probability.";
+                return "This donut increases the Player's Back Slash gesture autocast Probability.";
             case 6:
-                return "This donut increases the player's forward slash gesture Damage.";
+                if (upgrades[index] == 0)
+                    return "This drink unlocks the Forward Slash Gesture.";
+                return "This donut increases the Player's Forward Slash gesture Damage.";
             case 7:
-                return "This drink increases the player's forward slash gesture autocast Probability.";
+                return "This drink increases the Player's Forward Slash gesture autocast Probability.";
             case 8:
-                return "This drink increases the player's Lightning Damage.";
+                if (upgrades[index] == 0)
+                    return "This drink unlocks the Lightning Gesture.";
+                return "This drink increases the Player's Lightning Damage.";
             case 9:
-                return "This donut increases the player's Lightning autocast Probability.";
+                return "This donut increases the Player's Lightning autocast Probability.";
             case 10:
-                return "This donut increases the player's Fireball Damage.";
+                if (upgrades[index] == 0)
+                    return "This donut unlocks the Fireball Gesture.";
+                return "This donut increases the Player's Fireball Damage.";
             case 11:
-                return "This donut increases the player's Fireball autocast Probability.";
+                return "This donut increases the Player's Fireball autocast Probability.";
         }
         return "Error out of index";
     }
+	public void calculateDesc()
+	{
+		for (int i = 0; i < numOfUpgrades; i++)
+        {
+            upgradesDes[i] = desciption(i);
+        }
+	}
     void calculateDPS()
     {
         float tempDPS = 0;
@@ -323,27 +339,32 @@ public class SaveManager : MonoBehaviour {
         }
     }
 
+    //Temp formula
     void calculateGestureDMG()
     {
         for(int i=0; i < gestureDMG.Length;i++)
         {
             switch (i)
             {
+                //Line
                 case 0:
-                    //Temp formula
                     gestureDMG[i] = Mathf.Round(6 + upgrades[2] * 1.6f * multipliers.GestureDMG);
                     break;
+                //Back Slash
                 case 1:
-                    gestureDMG[i] = Mathf.Round(8 + upgrades[4] * 1.6f * multipliers.GestureDMG);
+                    gestureDMG[i] = Mathf.Round(12 + upgrades[4] * 1.6f * multipliers.GestureDMG);
                     break;
+                //Forward Slash
                 case 2:
-                    gestureDMG[i] = Mathf.Round(8 + upgrades[6] * 1.8f * multipliers.GestureDMG);
+                    gestureDMG[i] = Mathf.Round(18 + upgrades[6] * 1.8f * multipliers.GestureDMG);
                     break;
+                //Lightning
                 case 3:
-                    gestureDMG[i] = Mathf.Round(10 + upgrades[8] * 2.0f * multipliers.GestureDMG);
+                    gestureDMG[i] = Mathf.Round(25 + upgrades[8] * 2.0f * multipliers.GestureDMG);
                     break;
+                //Fireball
                 case 4:
-                    gestureDMG[i] = Mathf.Round(12 + upgrades[10] * 2.4f * multipliers.GestureDMG);
+                    gestureDMG[i] = Mathf.Round(30 + upgrades[10] * 2.4f * multipliers.GestureDMG);
                     break;
             }
         }
@@ -604,6 +625,8 @@ public class SaveManager : MonoBehaviour {
         SaveManager.Instance.calculateCost();
 
         SaveManager.Instance.calculateMonsterStats();
+		
+		SaveManager.Instance.calculateDesc();
     }
     //Checks whether the Date saved and load is different 
     //if so set check in avaiable to true.

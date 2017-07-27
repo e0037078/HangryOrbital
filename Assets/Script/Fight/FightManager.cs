@@ -123,7 +123,7 @@ public class FightManager : MonoBehaviour {
             }
             Vector3 directionToTarget = potentialTarget.transform.position - currentPosition;
             float dSqrToTarget = directionToTarget.sqrMagnitude;
-            if (dSqrToTarget < closestDistanceSqr)
+            if (potentialTarget.GetComponent<enemyHealth>().currentHealth > 0 && dSqrToTarget < closestDistanceSqr)
             {
                 closestDistanceSqr = dSqrToTarget;
                 bestTarget = potentialTarget.transform;
